@@ -54,8 +54,7 @@ export function Examples() {
                 className="relative rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-0.5"
                 style={{
                   background: "var(--bg-card)",
-                  boxShadow:
-                    "0 1px 2px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.03)",
+                  boxShadow: "var(--shadow-card)",
                   border: "1px solid var(--border-light)",
                 }}
               >
