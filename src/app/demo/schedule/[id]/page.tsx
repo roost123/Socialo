@@ -39,6 +39,7 @@ export default function ScheduleDashboard() {
   const [schedule, setSchedule] = useState<Schedule | null>(null);
   const [loading, setLoading] = useState(true);
   const [generating, setGenerating] = useState(false);
+  const [generateError, setGenerateError] = useState(false);
   const [copied, setCopied] = useState(false);
 
   const availabilityUrl =
@@ -62,6 +63,7 @@ export default function ScheduleDashboard() {
 
   const generateSchedule = async () => {
     setGenerating(true);
+    setGenerateError(false);
     try {
       const res = await fetch(`/api/schedule/${id}/generate`, {
         method: "POST",
@@ -71,6 +73,7 @@ export default function ScheduleDashboard() {
       setSchedule(result);
     } catch (error) {
       console.error("Generation failed:", error);
+      setGenerateError(true);
     }
     setGenerating(false);
   };
@@ -231,6 +234,18 @@ export default function ScheduleDashboard() {
                 </>
               )}
             </button>
+
+            {/* Generate error */}
+            {generateError && (
+              <div className="bg-red-50 border border-red-200 rounded-xl px-4 py-3 mb-4">
+                <p className="text-xs text-red-700 mb-1 font-medium">
+                  Schedule generation failed
+                </p>
+                <p className="text-xs text-red-600/70">
+                  Check that ANTHROPIC_API_KEY is set, then try again.
+                </p>
+              </div>
+            )}
 
             {/* Employee hours */}
             {schedule && (

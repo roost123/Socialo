@@ -3,7 +3,7 @@ import Anthropic from "@anthropic-ai/sdk";
 import { getMenu } from "@/lib/store";
 import { getTranslation, saveTranslation } from "@/lib/store";
 import { DEMO_MENUS } from "@/lib/demo-menus";
-import { SUPPORTED_LANGUAGES } from "@/lib/types";
+import { ALL_LANGUAGES } from "@/lib/types";
 import type { MenuTranslation } from "@/lib/types";
 
 const anthropic = new Anthropic();
@@ -31,9 +31,15 @@ export async function GET(
     return NextResponse.json(cached);
   }
 
-  // Find the language name for the prompt
-  const langInfo = SUPPORTED_LANGUAGES.find((l) => l.code === lang);
-  const langName = langInfo?.name ?? lang;
+  // Find the language name — check our list first, then use the code itself
+  const langInfo = ALL_LANGUAGES.find((l) => l.code === lang);
+  if (!langInfo) {
+    return NextResponse.json(
+      { error: `Unsupported language: ${lang}` },
+      { status: 400 }
+    );
+  }
+  const langName = `${langInfo.name} (${langInfo.native})`;
 
   try {
     const response = await anthropic.messages.create({
@@ -42,33 +48,21 @@ export async function GET(
       messages: [
         {
           role: "user",
-          content: `Translate this restaurant menu to ${langName} (${lang}).
+          content: `You are a professional restaurant menu translator. Translate this menu into ${langName}.
 
-Here is the menu data in JSON:
+Menu data (JSON):
 ${JSON.stringify(menu.categories, null, 2)}
 
-Return ONLY valid JSON in this exact format, no other text:
-{
-  "categories": [
-    {
-      "name": "<translated category name>",
-      "items": [
-        {
-          "name": "<translated dish name>",
-          "description": "<translated description or null>",
-          "price": "<KEEP ORIGINAL price, do not change>"
-        }
-      ]
-    }
-  ]
-}
+Return ONLY valid JSON in this exact format — no markdown, no explanation, no code block:
+{"categories":[{"name":"<translated category>","items":[{"name":"<translated dish name>","description":"<translated description or null>","price":"<UNCHANGED original price>","imageUrl":null}]}]}
 
-Rules:
-- Translate dish names and descriptions naturally (not too literal)
-- Keep the tone appropriate for a restaurant menu
-- NEVER change prices — keep them exactly as they are
+Critical rules:
+- Translate ALL text naturally — not word-by-word, but how a native speaker would write a menu
+- NEVER change prices — copy them exactly as they are
+- NEVER change imageUrl values — keep them as-is
 - Keep null values as null
-- Maintain the same structure and order`,
+- Maintain exact same structure and order
+- Use the appropriate script/characters for the target language`,
         },
       ],
     });
@@ -76,21 +70,30 @@ Rules:
     const text =
       response.content[0].type === "text" ? response.content[0].text : "";
 
-    const jsonMatch = text.match(/```(?:json)?\s*([\s\S]*?)```/) || [
-      null,
-      text,
-    ];
-    const translation = JSON.parse(jsonMatch[1]!.trim()) as MenuTranslation;
+    // Try to extract JSON — handle various response formats
+    let jsonStr = text.trim();
+    const codeBlockMatch = jsonStr.match(/```(?:json)?\s*([\s\S]*?)```/);
+    if (codeBlockMatch) {
+      jsonStr = codeBlockMatch[1]!.trim();
+    }
+
+    const translation = JSON.parse(jsonStr) as MenuTranslation;
 
     // Cache the translation
     saveTranslation(id, lang, translation);
 
     return NextResponse.json(translation);
   } catch (error) {
-    console.error("Translation failed:", error);
+    console.error(`Translation to ${lang} failed:`, error);
+
+    // Return original menu as fallback instead of just an error
     return NextResponse.json(
-      { error: "Failed to translate menu" },
-      { status: 500 }
+      {
+        categories: menu.categories,
+        _fallback: true,
+        _error: `Translation to ${langName} failed. Showing original menu.`,
+      },
+      { status: 200 }
     );
   }
 }

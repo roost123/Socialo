@@ -6,6 +6,9 @@ import type { MenuCategory } from "@/lib/types";
 
 const anthropic = new Anthropic();
 
+const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp", "image/gif"];
+const MAX_SIZE = 10 * 1024 * 1024; // 10MB
+
 export async function POST(request: NextRequest) {
   try {
     const formData = await request.formData();
@@ -13,6 +16,20 @@ export async function POST(request: NextRequest) {
 
     if (!file) {
       return NextResponse.json({ error: "No image provided" }, { status: 400 });
+    }
+
+    if (!ALLOWED_TYPES.includes(file.type)) {
+      return NextResponse.json(
+        { error: "Invalid image type. Use JPEG, PNG, WebP, or GIF." },
+        { status: 400 }
+      );
+    }
+
+    if (file.size > MAX_SIZE) {
+      return NextResponse.json(
+        { error: "Image too large. Maximum size is 10MB." },
+        { status: 400 }
+      );
     }
 
     const bytes = await file.arrayBuffer();
@@ -36,19 +53,21 @@ export async function POST(request: NextRequest) {
             },
             {
               type: "text",
-              text: `Analyze this restaurant menu photo. Extract all dishes organized by category.
+              text: `Analyze this restaurant menu photo. Extract ALL dishes organized by category.
 
 Return ONLY valid JSON in this exact format, no other text:
 {
-  "originalLanguage": "<ISO 639-1 language code>",
+  "restaurantName": "<restaurant name if visible, or 'My Restaurant'>",
+  "originalLanguage": "<ISO 639-1 language code of the menu>",
   "categories": [
     {
-      "name": "<category name>",
+      "name": "<category name in original language>",
       "items": [
         {
-          "name": "<dish name>",
-          "description": "<description or null if none>",
-          "price": "<price with currency symbol or null if not visible>"
+          "name": "<dish name exactly as written>",
+          "description": "<description or null if none visible>",
+          "price": "<price with currency symbol, or null if not visible>",
+          "imageUrl": null
         }
       ]
     }
@@ -56,10 +75,12 @@ Return ONLY valid JSON in this exact format, no other text:
 }
 
 Rules:
-- Keep the original language, do not translate
-- Include ALL items you can read
+- Keep EVERYTHING in the original language, do NOT translate anything
+- Extract ALL items you can read, do not skip any
 - Use null for missing descriptions or prices
-- Preserve the original category structure from the menu`,
+- Preserve the exact category structure from the menu
+- If no categories are visible, group items logically
+- Include appetizers, mains, desserts, drinks — everything`,
             },
           ],
         },
@@ -69,21 +90,30 @@ Rules:
     const text =
       response.content[0].type === "text" ? response.content[0].text : "";
 
-    // Extract JSON from response (handle markdown code blocks)
-    const jsonMatch = text.match(/```(?:json)?\s*([\s\S]*?)```/) || [
-      null,
-      text,
-    ];
+    const jsonMatch = text.match(/```(?:json)?\s*([\s\S]*?)```/) || [null, text];
     const parsed = JSON.parse(jsonMatch[1]!.trim()) as {
+      restaurantName: string;
       originalLanguage: string;
       categories: MenuCategory[];
     };
+
+    if (!parsed.categories || parsed.categories.length === 0) {
+      return NextResponse.json(
+        { error: "Could not read the menu. Try a clearer photo with good lighting." },
+        { status: 422 }
+      );
+    }
 
     const id = nanoid(10);
     const menu = {
       id,
       createdAt: new Date().toISOString(),
-      originalLanguage: parsed.originalLanguage,
+      originalLanguage: parsed.originalLanguage || "en",
+      branding: {
+        restaurantName: parsed.restaurantName || "My Restaurant",
+        logoUrl: null,
+        tagline: null,
+      },
       categories: parsed.categories,
     };
 
@@ -92,8 +122,16 @@ Rules:
     return NextResponse.json(menu);
   } catch (error) {
     console.error("Menu extraction failed:", error);
+
+    if (error instanceof SyntaxError) {
+      return NextResponse.json(
+        { error: "Could not read the menu. Try a clearer photo with better lighting." },
+        { status: 422 }
+      );
+    }
+
     return NextResponse.json(
-      { error: "Failed to extract menu from image" },
+      { error: "Something went wrong extracting the menu. Please try again." },
       { status: 500 }
     );
   }

@@ -2,8 +2,12 @@ node_modules/
 .next/
 out/
 dist/
+tsconfig.tsbuildinfo
 .env
 .env.local
+
+# Persistent data (menus, translations)
+data/
 
 # OpenNext
 .open-next
