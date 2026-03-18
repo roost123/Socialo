@@ -1,15 +1,26 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { nanoid } from "nanoid";
 import { saveMenu } from "@/lib/store";
 
-export async function POST() {
+export async function POST(request: NextRequest) {
+  let restaurantName = "My Restaurant";
+
+  try {
+    const body = await request.json();
+    if (body.restaurantName && typeof body.restaurantName === "string") {
+      restaurantName = body.restaurantName.trim();
+    }
+  } catch {
+    // No body or invalid JSON — that's fine, use defaults
+  }
+
   const id = nanoid(10);
   const menu = {
     id,
     createdAt: new Date().toISOString(),
     originalLanguage: "en",
     branding: {
-      restaurantName: "My Restaurant",
+      restaurantName,
       logoUrl: null,
       tagline: null,
     },

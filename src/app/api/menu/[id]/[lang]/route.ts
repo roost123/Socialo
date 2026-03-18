@@ -33,7 +33,13 @@ export async function GET(
 
   // Find the language name — check our list first, then use the code itself
   const langInfo = ALL_LANGUAGES.find((l) => l.code === lang);
-  const langName = langInfo ? `${langInfo.name} (${langInfo.native})` : lang;
+  if (!langInfo) {
+    return NextResponse.json(
+      { error: `Unsupported language: ${lang}` },
+      { status: 400 }
+    );
+  }
+  const langName = `${langInfo.name} (${langInfo.native})`;
 
   try {
     const response = await anthropic.messages.create({
@@ -78,10 +84,16 @@ Critical rules:
 
     return NextResponse.json(translation);
   } catch (error) {
-    console.error("Translation failed:", error);
+    console.error(`Translation to ${lang} failed:`, error);
+
+    // Return original menu as fallback instead of just an error
     return NextResponse.json(
-      { error: "Failed to translate menu" },
-      { status: 500 }
+      {
+        categories: menu.categories,
+        _fallback: true,
+        _error: `Translation to ${langName} failed. Showing original menu.`,
+      },
+      { status: 200 }
     );
   }
 }
