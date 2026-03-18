@@ -4,145 +4,106 @@ Laatste update: 2026-03-18
 
 ---
 
-## Status overzicht
+## Status overzicht (eerlijk)
 
-| Onderdeel | Status | Kwaliteit |
+| Onderdeel | Status | Wat mist |
 |---|---|---|
-| Landingspagina (one-pager) | ✅ Gebouwd | ⚡ Goed, maar mist video/scroll-animaties |
-| Why Socialo sectie | ✅ Gebouwd | ✅ Goed |
-| Demo 1: Menu Vertaler | ✅ Herbouwd | ✅ Full edit form, 80+ talen, zoek, AI prefill |
-| Demo 2: Rooster | ✅ Gebouwd | 🟡 Werkend maar ongetest met echte API |
-| Demo 3: WhatsApp Concierge | ✅ Gebouwd | 🟡 Werkend maar ongetest met echte API |
+| Landingspagina | ✅ Goed | Video content, screen recordings van demo's |
+| Demo 1: Menu Vertaler | 🟡 UI klaar | Niet getest met echte API. Heeft ANTHROPIC_API_KEY nodig om te werken. |
+| Demo 2: Rooster | 🟡 UI klaar | Niet getest met echte API. Schedule generatie ongetest. |
+| Demo 3: WhatsApp Concierge | 🟡 UI klaar | Niet getest met echte API. Chat flow ongetest. |
+
+**Kernprobleem:** Alle 3 demo's zijn afhankelijk van de Claude API (`ANTHROPIC_API_KEY`). Zonder die key werkt de vertaling, rooster-generatie, en concierge-chat niet.
 
 ---
 
-## WAT ER MOET GEBEUREN
+## WAT ER KLAAR IS
 
-### 1. MENU DEMO — Volledig herbouwen
+### Landingspagina
+- [x] Hero met animated gradient orbs en scroll indicator
+- [x] Problem sectie met 3 cards
+- [x] What is Socialo uitleg
+- [x] Examples met "Try the demo" knoppen op alle 3
+- [x] Stats sectie met animated counters
+- [x] Why Socialo (keten-visualisatie vs losse tools)
+- [x] FAQ sectie met 6 vragen
+- [x] CTA sectie
+- [x] Navbar met alle secties
+- [x] Footer
 
-De huidige menu demo is te simpel. Het moet een indrukwekkende end-to-end ervaring zijn.
+### Demo 1: Menu Vertaler
+- [x] Upload pagina (foto of handmatig)
+- [x] AI extractie API route
+- [x] Bewerkbaar formulier (restaurantnaam, tagline, categorieën, gerechten)
+- [x] QR code generatie + download
+- [x] Taalkeuze pagina met 80+ talen, zoek, vlaggen
+- [x] Vertaald menu weergave
+- [x] Vertaal API route met caching
+- [x] Demo menu's (Italiaans + Nederlands)
+- [x] Manual entry route (leeg menu aanmaken)
 
-#### Creator flow (restaurant-eigenaar)
+### Demo 2: Rooster
+- [x] Setup pagina (medewerkers + bezettingseisen)
+- [x] Beschikbaarheid pagina (mobiel weekgrid)
+- [x] Rooster generatie API (Claude + validatie)
+- [x] Validatie engine (Arbeidstijdenwet, Horeca CAO)
+- [x] Weekrooster weergave (grid met shift blocks)
+- [x] Uren tracking per medewerker
+- [x] Issues/warnings weergave
+- [x] Demo restaurant met 10 medewerkers
 
-**Stap 1: Keuze**
-- [ ] Landing page met twee opties: "Upload een foto" of "Vul handmatig in"
-- [ ] Demo-menu's als snelle start optie
-
-**Stap 2: Upload → AI prefill → Bewerkbaar formulier**
-- [ ] Foto uploaden → AI leest menu uit → vult formulier in
-- [ ] Formulier met ALLE velden bewerkbaar:
-  - Restaurantnaam
-  - Logo upload (optioneel)
-  - Tagline (optioneel)
-  - Per categorie: naam, gerechten
-  - Per gerecht: naam, beschrijving, prijs, foto upload (optioneel)
-  - Categorieën toevoegen/verwijderen
-  - Gerechten toevoegen/verwijderen
-  - Drag & drop volgorde (nice to have)
-- [ ] "Alles klopt? Publiceer!" knop
-
-**Stap 3: Dashboard**
-- [ ] QR code generatie
-- [ ] Link kopiëren
-- [ ] Preview knop
-- [ ] QR code download (PNG, print-ready)
-
-#### Guest flow (restaurantgast)
-
-**Stap 1: Taalkeuze (het eerste wat je ziet)**
-- [ ] Full-screen taalkeuze pagina
-- [ ] ALLE talen ter wereld (80+) met vlaggen
-- [ ] Zoekbalk: typ "Jap" → "Japanese 🇯🇵" verschijnt
-- [ ] Populaire talen bovenaan (EN, DE, FR, ES, IT, ZH, JA, AR)
-- [ ] Gegroepeerd per regio (Europa, Azië, Midden-Oosten, Afrika, Amerika)
-- [ ] Scroll door alle talen OF zoek
-- [ ] Na keuze: smooth transitie naar het menu
-
-**Stap 2: Het menu**
-- [ ] Restaurant naam + logo bovenaan
-- [ ] Mooie typografie, mobiel-first
-- [ ] Categorieën met sticky headers
-- [ ] Gerecht foto's (als beschikbaar)
-- [ ] Prijzen rechts uitgelijnd
-- [ ] Taal-switch knop in de header (om te wisselen)
-- [ ] "Powered by Socialo" footer
-- [ ] Loading skeleton tijdens vertaling
-
-#### Vertaling — MOET WERKEN
-- [ ] API route gefixt (betere JSON parsing, betere prompt)
-- [ ] 80+ talen ondersteund
-- [ ] Caching: vertaling wordt opgeslagen, niet elke keer opnieuw
-- [ ] Fallback bij fout: toon originele taal met melding
+### Demo 3: WhatsApp Concierge
+- [x] WhatsApp-style chat UI
+- [x] Hotel data (kamers, faciliteiten, roomservice, omgeving)
+- [x] Chat API route met hotel system prompt
+- [x] Typing indicator
+- [x] Suggestion chips
+- [x] Welcome message
 
 ---
 
-### 2. ROOSTER DEMO — Review en polish
+## WAT ER NOG MOET GEBEUREN
 
-- [ ] Testen met echte Claude API
-- [ ] Check of validation engine correct werkt
-- [ ] Loading states verbeteren
-- [ ] Pre-loaded demo: automatisch beschikbaarheid ingevuld
-- [ ] Foutafhandeling bij API failures
-- [ ] Responsive check (mobiel)
+### Prioriteit 1: Demo's werkend krijgen
+- [ ] `ANTHROPIC_API_KEY` instellen als environment variable
+- [ ] Demo 1 end-to-end testen: upload foto → AI extractie → edit → vertaling
+- [ ] Demo 2 end-to-end testen: beschikbaarheid → generatie → validatie
+- [ ] Demo 3 end-to-end testen: chat → antwoorden → roomservice bestellen
 
----
+### Prioriteit 2: Demo's verbeteren
+- [ ] Demo 1: Loading skeletons tijdens vertaling
+- [ ] Demo 1: Error states met retry knoppen
+- [ ] Demo 2: Skeleton loader voor rooster generatie
+- [ ] Demo 2: Drag & drop shifts (dnd-kit)
+- [ ] Demo 3: Contextual suggestion chips na elk antwoord
+- [ ] Demo 3: Inline rich content (kamer info cards, etc.)
 
-### 3. WHATSAPP CONCIERGE DEMO — Review en polish
+### Prioriteit 3: Landingspagina
+- [ ] Screen recordings van werkende demo's als video/GIF
+- [ ] Testimonials sectie (kan fictief zijn voor demo)
 
-- [ ] Testen met echte Claude API
-- [ ] Scroll naar laatste bericht verbeteren
-- [ ] Suggestion chips na elk antwoord (contextual)
-- [ ] Foutafhandeling bij API failures
-- [ ] Responsive check
-
----
-
-### 4. LANDINGSPAGINA — Naar next level
-
-De site moet er niet alleen "goed" uitzien — die moet WOW zijn.
-
-#### Scroll-animaties verbeteren
-- [ ] GSAP ScrollTrigger integratie voor complexe scroll sequences
-- [ ] Video element dat afspeelt/pauzet bij scrollen
-- [ ] Parallax effecten op de hero gradient orbs
-- [ ] Number counter animatie (bv "50+ talen" telt op)
-- [ ] Card hover micro-interactions
-
-#### Video/media toevoegen
-- [ ] Hero: subtiele achtergrond video of animated gradient
-- [ ] Demo sectie: screen recordings van de 3 demo's
-- [ ] Before/after animatie (het verschil zichtbaar maken)
-
-#### Content verbeteren
-- [ ] Testimonials/social proof sectie (kan fake zijn voor demo)
-- [ ] Pricing preview ("Vanaf €X/maand")
-- [ ] FAQ sectie onderaan
+### Prioriteit 4: Deployment
+- [ ] Cloudflare Workers deployment fixen (output: standalone)
+- [ ] Environment variables instellen op Cloudflare
+- [ ] Custom domain (socialo.nl)
+- [ ] SSL/HTTPS
 
 ---
 
-## PRIORITEIT
+## TECHNISCHE NOTITIES
 
-1. **Menu demo herbouwen** — dit is het eerste wat mensen zien, moet perfect zijn
-2. **Alle demo's testen** — met echte API calls, edge cases, foutafhandeling
-3. **Landingspagina upgraden** — scroll-animaties, video, polish
+### Environment variables nodig:
+```
+ANTHROPIC_API_KEY=sk-ant-...
+```
 
----
+### Deploy commando:
+```bash
+npm run build  # Next.js build
+# Deploy naar Cloudflare via dashboard of wrangler
+```
 
-## BESTANDEN DIE MOETEN VERANDEREN
-
-### Menu demo (herbouw)
-- `src/lib/types.ts` ✅ Updated (80+ talen, branding, imageUrl)
-- `src/lib/store.ts` ✅ Updated (updateMenu, clearTranslations)
-- `src/lib/demo-menus.ts` ✅ Updated (branding, imageUrl)
-- `src/app/api/menu/extract/route.ts` ✅ Updated (betere prompt)
-- `src/app/api/menu/[id]/route.ts` ✅ Updated (PUT voor edits, POST voor manual)
-- `src/app/api/menu/[id]/[lang]/route.ts` ✅ Updated (betere JSON parsing)
-- `src/app/demo/menu/page.tsx` — HERBOUWEN (upload + handmatig + demo keuze)
-- `src/app/demo/menu/[id]/page.tsx` — HERBOUWEN (edit form + dashboard)
-- `src/app/menu/[id]/page.tsx` — HERBOUWEN (taalkeuze + vertaald menu)
-
-### Landingspagina (upgrade)
-- `src/components/hero.tsx` — Video/animated background toevoegen
-- `src/components/examples.tsx` — Screen recording previews
-- `src/app/globals.css` — GSAP scroll animatie styles
-- Nieuwe component: `src/components/scroll-video.tsx`
+### Bekende issues:
+1. In-memory store: alle data verdwijnt bij restart. OK voor demo, niet voor productie.
+2. Geen rate limiting op API routes — bij veel gebruik gaat de API-rekening omhoog.
+3. Translation cache is in-memory — verdwijnt bij restart.
