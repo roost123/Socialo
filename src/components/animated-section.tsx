@@ -1,8 +1,14 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { ReactNode } from "react";
+import { ReactNode, useRef, useEffect, useState } from "react";
 
+/**
+ * SSR-safe scroll animation.
+ * - Server render: fully visible (no opacity:0 in HTML)
+ * - After hydration: elements below viewport get hidden
+ * - When scrolled into view: animate in
+ * - Elements already in viewport on load: stay visible, no flash
+ */
 export function FadeIn({
   children,
   className = "",
@@ -12,65 +18,56 @@ export function FadeIn({
   className?: string;
   delay?: number;
 }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [state, setState] = useState<"ssr" | "hidden" | "visible">("ssr");
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    // Check if element is already in viewport
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight + 80) {
+      // Already visible — keep it visible, don't animate
+      setState("visible");
+      return;
+    }
+
+    // Below viewport — hide it, then animate on scroll
+    setState("hidden");
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setState("visible");
+          observer.unobserve(el);
+        }
+      },
+      { rootMargin: "-80px" }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  const style: React.CSSProperties =
+    state === "hidden"
+      ? {
+          opacity: 0,
+          transform: "translateY(20px)",
+          transition: `opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1) ${delay}s, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) ${delay}s`,
+        }
+      : state === "visible"
+        ? {
+            opacity: 1,
+            transform: "translateY(0)",
+            transition: `opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1) ${delay}s, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) ${delay}s`,
+          }
+        : {}; // "ssr" — no inline styles, content is naturally visible
+
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] }}
-      className={className}
-    >
+    <div ref={ref} className={className} style={style}>
       {children}
-    </motion.div>
-  );
-}
-
-const staggerContainer = {
-  hidden: {},
-  show: {
-    transition: { staggerChildren: 0.1 },
-  },
-};
-
-const staggerItem = {
-  hidden: { opacity: 0, y: 20 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const },
-  },
-};
-
-export function StaggerContainer({
-  children,
-  className = "",
-}: {
-  children: ReactNode;
-  className?: string;
-}) {
-  return (
-    <motion.div
-      variants={staggerContainer}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, margin: "-60px" }}
-      className={className}
-    >
-      {children}
-    </motion.div>
-  );
-}
-
-export function StaggerItem({
-  children,
-  className = "",
-}: {
-  children: ReactNode;
-  className?: string;
-}) {
-  return (
-    <motion.div variants={staggerItem} className={className}>
-      {children}
-    </motion.div>
+    </div>
   );
 }

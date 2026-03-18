@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { FadeIn } from "./animated-section";
 import {
   Translate,
@@ -51,11 +50,7 @@ export function Examples() {
         <div className="mt-14 space-y-5">
           {examples.map((item, i) => (
             <FadeIn key={i} delay={i * 0.08}>
-              <motion.div
-                whileHover={{ y: -2 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                className="bg-white rounded-2xl border border-[#EAEAEA] shadow-[0_1px_2px_rgba(0,0,0,0.04),0_4px_16px_rgba(0,0,0,0.03)] hover:shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_rgba(0,0,0,0.06)] transition-shadow duration-300 overflow-hidden"
-              >
+              <div className="bg-white rounded-2xl border border-[#EAEAEA] shadow-[0_1px_2px_rgba(0,0,0,0.04),0_4px_16px_rgba(0,0,0,0.03)] hover:translate-y-[-2px] hover:shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_rgba(0,0,0,0.06)] transition-all duration-300 overflow-hidden">
                 <div className="p-8 md:p-10">
                   {/* Header row */}
                   <div className="flex items-center justify-between gap-4 flex-wrap mb-8">
@@ -93,7 +88,7 @@ export function Examples() {
                     </div>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             </FadeIn>
           ))}
         </div>

@@ -1,15 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
-
 export function Navbar() {
   return (
-    <motion.nav
-      initial={{ opacity: 0, y: -8 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-      className="fixed top-0 left-0 right-0 z-50 bg-[#F8F7F4]/80 backdrop-blur-xl border-b border-[#EAEAEA]"
-    >
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-[#F8F7F4]/80 backdrop-blur-xl border-b border-[#EAEAEA] animate-fade-in">
       <div className="max-w-[1200px] mx-auto px-6 md:px-10 h-16 flex items-center justify-between">
         <span className="text-[15px] font-semibold tracking-[-0.02em] text-[#111]">
           socialo
@@ -21,6 +14,6 @@ export function Navbar() {
           Get in touch
         </a>
       </div>
-    </motion.nav>
+    </nav>
   );
 }
