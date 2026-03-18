@@ -27,6 +27,7 @@ export default function MenuPage() {
   const [selectedLang, setSelectedLang] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [translating, setTranslating] = useState(false);
+  const [translationError, setTranslationError] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [search, setSearch] = useState("");
 
@@ -69,17 +70,24 @@ export default function MenuPage() {
     if (!menu) return;
     setSelectedLang(langCode);
     setTranslating(true);
+    setTranslationError(false);
 
     try {
       const res = await fetch(`/api/menu/${id}/${langCode}`);
       if (!res.ok) throw new Error("Translation failed");
       const data = await res.json();
+      if (data.error) throw new Error(data.error);
       setCategories(data.categories);
     } catch {
-      // Fallback to original language
+      // Show error but still display original menu
       setCategories(menu.categories);
+      setTranslationError(true);
     }
     setTranslating(false);
+  };
+
+  const retryTranslation = () => {
+    if (selectedLang) selectLanguage(selectedLang);
   };
 
   const goBackToLanguages = () => {
@@ -280,17 +288,46 @@ export default function MenuPage() {
         </div>
       </header>
 
-      {/* Translating overlay */}
+      {/* Translating skeleton */}
       {translating && (
-        <div className="fixed inset-0 z-20 bg-cream/70 backdrop-blur-sm flex items-center justify-center">
-          <div className="bg-white rounded-2xl shadow-lg px-8 py-6 flex flex-col items-center gap-3">
-            <div className="w-6 h-6 rounded-full border-2 border-sage border-t-transparent animate-spin" />
-            <span className="text-sm font-medium text-charcoal">
+        <div className="max-w-lg mx-auto px-4 pt-8">
+          <div className="text-center mb-8">
+            <div className="w-6 h-6 rounded-full border-2 border-sage border-t-transparent animate-spin mx-auto mb-3" />
+            <p className="text-sm text-charcoal font-medium">
               Translating to {selectedLangInfo?.name ?? selectedLang}...
-            </span>
-            <span className="text-xs text-warm-gray/50">
-              This may take a few seconds
-            </span>
+            </p>
+          </div>
+          {/* Skeleton items */}
+          {[1, 2, 3].map((cat) => (
+            <div key={cat} className="mb-8 animate-pulse">
+              <div className="h-3 w-24 bg-charcoal/[0.06] rounded mb-4" />
+              {[1, 2, 3].map((item) => (
+                <div key={item} className="py-3 border-b border-charcoal/[0.04]">
+                  <div className="flex justify-between">
+                    <div className="h-4 bg-charcoal/[0.06] rounded w-40" />
+                    <div className="h-4 bg-charcoal/[0.06] rounded w-14" />
+                  </div>
+                  <div className="h-3 bg-charcoal/[0.04] rounded w-64 mt-2" />
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Translation error banner */}
+      {translationError && !translating && (
+        <div className="max-w-lg mx-auto px-4 pt-4">
+          <div className="bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 flex items-center justify-between">
+            <p className="text-xs text-amber-700">
+              Translation unavailable. Showing original menu.
+            </p>
+            <button
+              onClick={retryTranslation}
+              className="text-xs font-medium text-amber-700 underline hover:no-underline flex-shrink-0 ml-3"
+            >
+              Retry
+            </button>
           </div>
         </div>
       )}

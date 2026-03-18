@@ -1,6 +1,6 @@
 # Socialo — Masterplan
 
-Laatste update: 2026-03-18
+Laatste update: 2026-03-18 (v3)
 
 ---
 
@@ -71,12 +71,12 @@ Laatste update: 2026-03-18
 - [ ] Demo 3 end-to-end testen: chat → antwoorden → roomservice bestellen
 
 ### Prioriteit 2: Demo's verbeteren
-- [ ] Demo 1: Loading skeletons tijdens vertaling
-- [ ] Demo 1: Error states met retry knoppen
-- [ ] Demo 2: Skeleton loader voor rooster generatie
-- [ ] Demo 2: Drag & drop shifts (dnd-kit)
-- [ ] Demo 3: Contextual suggestion chips na elk antwoord
-- [ ] Demo 3: Inline rich content (kamer info cards, etc.)
+- [x] Demo 1: Loading skeletons tijdens vertaling (skeleton menu items)
+- [x] Demo 1: Error states met retry knoppen (translation error banner)
+- [x] Demo 2: Error state bij generatie falen
+- [ ] Demo 2: Drag & drop shifts (dnd-kit) — nice to have
+- [x] Demo 3: Contextual suggestion chips na elk antwoord (5 contexten)
+- [ ] Demo 3: Inline rich content (kamer info cards, etc.) — nice to have
 
 ### Prioriteit 3: Landingspagina
 - [ ] Screen recordings van werkende demo's als video/GIF
