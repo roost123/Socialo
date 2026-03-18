@@ -4,7 +4,6 @@ import { useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { useDropzone } from "react-dropzone";
 import {
-  UploadSimple,
   Image as ImageIcon,
   SpinnerGap,
   ArrowRight,
@@ -37,13 +36,18 @@ export default function MenuDemoPage() {
           body: formData,
         });
 
-        if (!res.ok) throw new Error("Extraction failed");
+        const data = await res.json();
 
-        const menu = await res.json();
-        router.push(`/demo/menu/${menu.id}`);
+        if (!res.ok) {
+          setError(data.error || "Something went wrong. Please try again.");
+          setUploading(false);
+          return;
+        }
+
+        router.push(`/demo/menu/${data.id}`);
       } catch {
         setError(
-          "Could not read the menu from this image. Try a clearer photo with good lighting."
+          "Could not connect to the server. Check your connection and try again."
         );
         setUploading(false);
       }
@@ -59,17 +63,22 @@ export default function MenuDemoPage() {
   });
 
   const createManual = async () => {
-    // Create a blank menu and go to the editor
-    const res = await fetch("/api/menu/new", {
-      method: "POST",
-    });
+    setError(null);
+    try {
+      const res = await fetch("/api/menu/new", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({}),
+      });
 
-    if (res.ok) {
-      const menu = await res.json();
-      router.push(`/demo/menu/${menu.id}`);
-    } else {
-      // Fallback: just go to editor with a temp state
-      router.push("/demo/menu/new");
+      if (res.ok) {
+        const menu = await res.json();
+        router.push(`/demo/menu/${menu.id}`);
+      } else {
+        setError("Could not create a new menu. Please try again.");
+      }
+    } catch {
+      setError("Could not connect to the server. Check your connection and try again.");
     }
   };
 
