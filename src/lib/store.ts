@@ -12,6 +12,14 @@ export function getMenu(id: string): MenuData | undefined {
   return menus.get(id);
 }
 
+export function updateMenu(id: string, updates: Partial<MenuData>): MenuData | undefined {
+  const menu = menus.get(id);
+  if (!menu) return undefined;
+  const updated = { ...menu, ...updates };
+  menus.set(id, updated);
+  return updated;
+}
+
 export function saveTranslation(
   menuId: string,
   lang: string,
@@ -25,4 +33,12 @@ export function getTranslation(
   lang: string
 ): MenuTranslation | undefined {
   return translations.get(`${menuId}:${lang}`);
+}
+
+export function clearTranslations(menuId: string): void {
+  for (const key of translations.keys()) {
+    if (key.startsWith(`${menuId}:`)) {
+      translations.delete(key);
+    }
+  }
 }

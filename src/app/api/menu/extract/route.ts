@@ -36,19 +36,21 @@ export async function POST(request: NextRequest) {
             },
             {
               type: "text",
-              text: `Analyze this restaurant menu photo. Extract all dishes organized by category.
+              text: `Analyze this restaurant menu photo. Extract ALL dishes organized by category.
 
 Return ONLY valid JSON in this exact format, no other text:
 {
-  "originalLanguage": "<ISO 639-1 language code>",
+  "restaurantName": "<restaurant name if visible, or 'My Restaurant'>",
+  "originalLanguage": "<ISO 639-1 language code of the menu>",
   "categories": [
     {
-      "name": "<category name>",
+      "name": "<category name in original language>",
       "items": [
         {
-          "name": "<dish name>",
-          "description": "<description or null if none>",
-          "price": "<price with currency symbol or null if not visible>"
+          "name": "<dish name exactly as written>",
+          "description": "<description or null if none visible>",
+          "price": "<price with currency symbol, or null if not visible>",
+          "imageUrl": null
         }
       ]
     }
@@ -56,10 +58,12 @@ Return ONLY valid JSON in this exact format, no other text:
 }
 
 Rules:
-- Keep the original language, do not translate
-- Include ALL items you can read
+- Keep EVERYTHING in the original language, do NOT translate anything
+- Extract ALL items you can read, do not skip any
 - Use null for missing descriptions or prices
-- Preserve the original category structure from the menu`,
+- Preserve the exact category structure from the menu
+- If no categories are visible, group items logically
+- Include appetizers, mains, desserts, drinks — everything`,
             },
           ],
         },
@@ -69,12 +73,9 @@ Rules:
     const text =
       response.content[0].type === "text" ? response.content[0].text : "";
 
-    // Extract JSON from response (handle markdown code blocks)
-    const jsonMatch = text.match(/```(?:json)?\s*([\s\S]*?)```/) || [
-      null,
-      text,
-    ];
+    const jsonMatch = text.match(/```(?:json)?\s*([\s\S]*?)```/) || [null, text];
     const parsed = JSON.parse(jsonMatch[1]!.trim()) as {
+      restaurantName: string;
       originalLanguage: string;
       categories: MenuCategory[];
     };
@@ -84,6 +85,11 @@ Rules:
       id,
       createdAt: new Date().toISOString(),
       originalLanguage: parsed.originalLanguage,
+      branding: {
+        restaurantName: parsed.restaurantName || "My Restaurant",
+        logoUrl: null,
+        tagline: null,
+      },
       categories: parsed.categories,
     };
 
