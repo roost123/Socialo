@@ -51,9 +51,6 @@ We zijn klaar met de voorbereiding en beginnen aan de **one-pager** — een land
 2. **3 demo's bouwen** — werkend, indrukwekkend, laat het probleem én de oplossing zien
 3. **Valideren** — kloppen onze aannames? Willen mensen dit?
 
-### Eerdere poging:
-Er was een eerste poging met Next.js die niet werkte. Die code is verwijderd. Technologiekeuze voor de one-pager staat open — kies wat het snelst tot een werkend resultaat leidt.
-
 ## Jouw rol, Claude
 
 Je bent een partner in dit project, niet alleen een uitvoerder. Dat betekent:
