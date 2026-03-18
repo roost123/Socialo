@@ -23,7 +23,7 @@ const examples = [
     problem:
       "Every week, someone spends hours building a staff schedule by hand. Contracts, availability, preferences, labor laws — it's a puzzle that resets every Monday.",
     fix: "Staff submit their availability through a simple link. The system builds the schedule automatically — respecting contracts, rest periods, peak hours, and preferences. Someone calls in sick? It finds a replacement.",
-    demoUrl: null,
+    demoUrl: "/demo/schedule",
   },
   {
     icon: WhatsappLogo,
@@ -31,7 +31,7 @@ const examples = [
     problem:
       "Your front desk answers the same questions 50 times a day. Checkout time, parking, room service, local restaurants. Meanwhile, the phone keeps ringing.",
     fix: "A WhatsApp assistant that knows your hotel inside out. Guests ask questions, browse rooms, order room service, even pay — all in one conversation. Your staff handles the things that actually need a human.",
-    demoUrl: null,
+    demoUrl: "/demo/concierge",
   },
 ];
 
