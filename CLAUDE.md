@@ -23,7 +23,7 @@ We verkopen geen AI. We verkopen geen "digitale medewerkers." We pakken een conc
 
 ## Demo's
 
-Drie demo's die we bouwen om het concept tastbaar te maken. Elk lost een andere irritatie op, met andere technologie.
+Drie demo's die we willen bouwen om het concept tastbaar te maken. Elk lost een andere irritatie op, met andere technologie.
 
 ### Demo 1: Menu QR Vertaler
 **Irritatie:** Toeristisch restaurant, menukaart alleen in het Nederlands. Gasten snappen het niet, personeel staat elke avond gerechten uit te leggen.
@@ -37,13 +37,22 @@ Drie demo's die we bouwen om het concept tastbaar te maken. Elk lost een andere 
 **Irritatie:** Hotelgasten bellen of mailen constant met dezelfde vragen. Receptie is druk, telefoon wordt niet opgenomen, gasten raken gefrustreerd.
 **Oplossing:** WhatsApp-bot waarmee gasten vragen kunnen stellen, kamerfoto's bekijken, boeken, roomservice bestellen en betalen. Alles in één gesprek. Verdere scope bepalen we later.
 
-## Fase
+## Waar staan we nu?
 
-We zitten in de demofase. Volgende stappen:
+We zijn klaar met de voorbereiding en beginnen aan de **one-pager** — een landingspagina die het verhaal van Socialo vertelt.
 
-1. **One-pager maken** — voor onszelf, om het verhaal scherp te krijgen
+### Wat er al is:
+- **Content voor de one-pager** staat klaar in `docs/onepager-content.md` (alle secties uitgeschreven)
+- **Ideeën backlog** met branche-onderzoek in `docs/ideeen-backlog.md`
+- **Design skills** in `.claude/skills/` (soft-premium-design, scroll-animations, output-complete)
+
+### Volgende stap:
+1. **One-pager bouwen** — de content staat klaar, nu moet het een werkende website worden
 2. **3 demo's bouwen** — werkend, indrukwekkend, laat het probleem én de oplossing zien
 3. **Valideren** — kloppen onze aannames? Willen mensen dit?
+
+### Eerdere poging:
+Er was een eerste poging met Next.js die niet werkte. Die code is verwijderd. Technologiekeuze voor de one-pager staat open — kies wat het snelst tot een werkend resultaat leidt.
 
 ## Jouw rol, Claude
 
