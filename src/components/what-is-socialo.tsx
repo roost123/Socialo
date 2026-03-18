@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatedSection, ScaleOnScroll } from "./animated-section";
+import { AnimatedSection } from "./animated-section";
 import { Lightning, Eye, Package } from "@phosphor-icons/react";
 
 const pillars = [
@@ -62,43 +62,41 @@ export function WhatIsSocialo() {
           </AnimatedSection>
         </div>
 
-        <ScaleOnScroll>
-          <div className="mt-20 grid gap-5 md:grid-cols-3">
-            {pillars.map((pillar, i) => (
-              <AnimatedSection key={i} delay={i * 0.1}>
+        <div className="mt-16 grid gap-6 md:grid-cols-3">
+          {pillars.map((pillar, i) => (
+            <AnimatedSection key={i} delay={i * 0.1}>
+              <div
+                className="glass-card relative p-8 md:p-9 h-full text-center transition-all duration-500 hover:-translate-y-1 group"
+              >
                 <div
-                  className="glass-card relative p-8 md:p-9 h-full text-center transition-all duration-500 hover:-translate-y-1 group"
+                  className="inline-flex items-center justify-center w-14 h-14 rounded-2xl mb-6 transition-transform duration-500 group-hover:scale-110"
+                  style={{
+                    background: "var(--accent-soft)",
+                    boxShadow: "var(--shadow-glow)",
+                  }}
                 >
-                  <div
-                    className="inline-flex items-center justify-center w-14 h-14 rounded-2xl mb-6 transition-transform duration-500 group-hover:scale-110"
-                    style={{
-                      background: "var(--accent-soft)",
-                      boxShadow: "var(--shadow-glow)",
-                    }}
-                  >
-                    <pillar.icon
-                      size={26}
-                      weight="duotone"
-                      style={{ color: "var(--accent)" }}
-                    />
-                  </div>
-                  <h3
-                    className="text-lg font-semibold tracking-[-0.02em] mb-3"
-                    style={{ color: "var(--text-primary)" }}
-                  >
-                    {pillar.title}
-                  </h3>
-                  <p
-                    className="text-[15px] leading-relaxed"
-                    style={{ color: "var(--text-secondary)" }}
-                  >
-                    {pillar.description}
-                  </p>
+                  <pillar.icon
+                    size={26}
+                    weight="duotone"
+                    style={{ color: "var(--accent)" }}
+                  />
                 </div>
-              </AnimatedSection>
-            ))}
-          </div>
-        </ScaleOnScroll>
+                <h3
+                  className="text-lg font-semibold tracking-[-0.02em] mb-3"
+                  style={{ color: "var(--text-primary)" }}
+                >
+                  {pillar.title}
+                </h3>
+                <p
+                  className="text-[15px] leading-relaxed"
+                  style={{ color: "var(--text-secondary)" }}
+                >
+                  {pillar.description}
+                </p>
+              </div>
+            </AnimatedSection>
+          ))}
+        </div>
       </div>
     </section>
   );
