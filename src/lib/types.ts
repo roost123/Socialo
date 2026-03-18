@@ -28,6 +28,32 @@ export interface MenuTranslation {
   categories: MenuCategory[];
 }
 
+// Validation helpers
+export function validateMenuItem(item: MenuItem): string[] {
+  const errors: string[] = [];
+  if (!item.name || item.name.trim() === "") errors.push("Dish name is required");
+  return errors;
+}
+
+export function validateMenuData(menu: MenuData): string[] {
+  const errors: string[] = [];
+  if (!menu.branding.restaurantName || menu.branding.restaurantName.trim() === "") {
+    errors.push("Restaurant name is required");
+  }
+  if (!menu.categories || menu.categories.length === 0) {
+    errors.push("Menu must have at least one category");
+  }
+  for (const cat of menu.categories) {
+    if (!cat.name || cat.name.trim() === "") {
+      errors.push("Category name is required");
+    }
+    for (const item of cat.items) {
+      errors.push(...validateMenuItem(item));
+    }
+  }
+  return errors;
+}
+
 // Every language in the world that matters — grouped by region
 export const ALL_LANGUAGES = [
   // Europe - Western

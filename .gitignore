@@ -5,6 +5,9 @@ dist/
 .env
 .env.local
 
+# Persistent data (menus, translations)
+data/
+
 # OpenNext
 .open-next
 
