@@ -126,3 +126,11 @@
     animation: none;
   }
 }
+
+/* Print-friendly for guest menu */
+@media print {
+  body { background: white !important; }
+  .noise-overlay::after { display: none; }
+  header, footer { display: none !important; }
+  main { padding: 0 !important; }
+}

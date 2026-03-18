@@ -79,11 +79,11 @@ Focus: **Eén demo, perfect.** De rest komt later.
 
 | Stap | Status |
 |---|---|
-| 1. Data laag fixen | ⏳ Volgende |
-| 2. API routes solide maken | — |
-| 3. Creator landing page | — |
-| 4. Menu editor | — |
-| 5. Gastpagina taalkeuze | — |
-| 6. Gastpagina menu | — |
-| 7. End-to-end testen | — |
-| 8. Polish en deploy | — |
+| 1. Data laag fixen | Done |
+| 2. API routes solide maken | Done |
+| 3. Creator landing page | Done |
+| 4. Menu editor | Done |
+| 5. Gastpagina taalkeuze | Done |
+| 6. Gastpagina menu | Done |
+| 7. End-to-end testen | Done |
+| 8. Polish en deploy | Done |
