@@ -1,101 +1,74 @@
 "use client";
 
-import { AnimatedSection } from "./animated-section";
+import { FadeIn } from "./animated-section";
 import { Lightning, Eye, Package } from "@phosphor-icons/react";
 
 const pillars = [
   {
     icon: Lightning,
     title: "Start with the frustration",
-    description: "We don\u2019t sell technology. We find the thing that eats your time and make it disappear.",
+    description:
+      "We don\u2019t sell technology. We find the thing that eats your time and make it disappear.",
   },
   {
     icon: Eye,
     title: "You don\u2019t need to understand it",
-    description: "No dashboards, no training, no setup calls. It just works — like it should have from the start.",
+    description:
+      "No dashboards, no training, no setup calls. It just works — like it should have from the start.",
   },
   {
     icon: Package,
     title: "Small and concrete",
-    description: "One problem, one solution. No bloated platforms. We solve the thing you\u2019re actually tired of.",
+    description:
+      "One problem, one solution. No bloated platforms. We solve the thing you\u2019re actually tired of.",
   },
 ];
 
 export function WhatIsSocialo() {
   return (
-    <section className="py-28 md:py-40 px-6 relative overflow-hidden">
-      {/* Background accent */}
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.03]"
-        style={{
-          background: "radial-gradient(ellipse 80% 50% at 50% 50%, var(--accent), transparent)",
-        }}
-      />
+    <section className="py-24 md:py-36 px-6 md:px-10">
+      <div className="max-w-[1200px] mx-auto">
+        {/* Editorial split: text left, pillars right */}
+        <div className="grid md:grid-cols-[1fr_1.2fr] gap-16 md:gap-24 items-start">
+          {/* Left — sticky headline */}
+          <div className="md:sticky md:top-32">
+            <FadeIn>
+              <p className="text-[13px] font-semibold uppercase tracking-[0.1em] text-[#2d5abe] mb-4">
+                Our approach
+              </p>
+              <h2 className="text-[clamp(1.75rem,4vw,3.25rem)] font-bold tracking-[-0.03em] leading-[1.12] text-[#111]">
+                We take repetitive work and make it disappear.
+              </h2>
+              <p className="mt-5 text-[17px] leading-[1.7] text-[#666]">
+                Socialo builds automations for small and medium businesses. Not
+                big enterprise software. Not chatbots pretending to be people.
+                Just clean, simple solutions.
+              </p>
+            </FadeIn>
+          </div>
 
-      <div className="relative max-w-6xl mx-auto">
-        <div className="text-center max-w-3xl mx-auto">
-          <AnimatedSection>
-            <p
-              className="text-[13px] font-semibold uppercase tracking-[0.12em] mb-5"
-              style={{ color: "var(--accent)" }}
-            >
-              Our approach
-            </p>
-          </AnimatedSection>
-          <AnimatedSection delay={0.08}>
-            <h2
-              className="text-4xl md:text-6xl font-bold tracking-[-0.03em] leading-[1.1]"
-              style={{ color: "var(--text-primary)" }}
-            >
-              We take repetitive work and make it disappear.
-            </h2>
-          </AnimatedSection>
-          <AnimatedSection delay={0.16}>
-            <p
-              className="mt-6 text-lg leading-relaxed max-w-2xl mx-auto"
-              style={{ color: "var(--text-secondary)" }}
-            >
-              Socialo builds automations for small and medium businesses. Not big
-              enterprise software. Not chatbots pretending to be people. Just
-              clean, simple solutions.
-            </p>
-          </AnimatedSection>
-        </div>
-
-        <div className="mt-16 grid gap-6 md:grid-cols-3">
-          {pillars.map((pillar, i) => (
-            <AnimatedSection key={i} delay={i * 0.1}>
-              <div
-                className="glass-card relative p-8 md:p-9 h-full text-center transition-all duration-500 hover:-translate-y-1 group"
-              >
-                <div
-                  className="inline-flex items-center justify-center w-14 h-14 rounded-2xl mb-6 transition-transform duration-500 group-hover:scale-110"
-                  style={{
-                    background: "var(--accent-soft)",
-                    boxShadow: "var(--shadow-glow)",
-                  }}
-                >
-                  <pillar.icon
-                    size={26}
-                    weight="duotone"
-                    style={{ color: "var(--accent)" }}
-                  />
+          {/* Right — pillar cards */}
+          <div className="space-y-4">
+            {pillars.map((pillar, i) => (
+              <FadeIn key={i} delay={i * 0.1}>
+                <div className="bg-white rounded-2xl border border-[#EAEAEA] p-7 md:p-8 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_4px_16px_rgba(0,0,0,0.03)] hover:translate-y-[-2px] hover:shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_rgba(0,0,0,0.06)] transition-all duration-300">
+                  <div className="flex items-start gap-5">
+                    <div className="shrink-0 w-11 h-11 rounded-xl bg-[#F8F7F4] border border-[#EAEAEA] flex items-center justify-center">
+                      <pillar.icon size={20} weight="duotone" className="text-[#2d5abe]" />
+                    </div>
+                    <div>
+                      <h3 className="text-[16px] font-semibold tracking-[-0.02em] text-[#111] mb-1.5">
+                        {pillar.title}
+                      </h3>
+                      <p className="text-[15px] leading-[1.7] text-[#666]">
+                        {pillar.description}
+                      </p>
+                    </div>
+                  </div>
                 </div>
-                <h3
-                  className="text-lg font-semibold tracking-[-0.02em] mb-3"
-                  style={{ color: "var(--text-primary)" }}
-                >
-                  {pillar.title}
-                </h3>
-                <p
-                  className="text-[15px] leading-relaxed"
-                  style={{ color: "var(--text-secondary)" }}
-                >
-                  {pillar.description}
-                </p>
-              </div>
-            </AnimatedSection>
-          ))}
+              </FadeIn>
+            ))}
+          </div>
         </div>
       </div>
     </section>
