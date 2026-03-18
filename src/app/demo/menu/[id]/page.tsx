@@ -24,6 +24,8 @@ export default function MenuDashboard() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [hasChanges, setHasChanges] = useState(false);
+  const [saveError, setSaveError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
   const [tab, setTab] = useState<Tab>("edit");
   const qrRef = useRef<HTMLDivElement>(null);
@@ -49,30 +51,35 @@ export default function MenuDashboard() {
   const saveMenu = async () => {
     if (!menu) return;
     setSaving(true);
+    setSaveError(null);
     try {
       const res = await fetch(`/api/menu/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(menu),
       });
+      const data = await res.json();
       if (res.ok) {
-        const updated = await res.json();
-        setMenu(updated);
+        setMenu(data);
         setSaved(true);
+        setHasChanges(false);
         setTimeout(() => setSaved(false), 2000);
+      } else {
+        setSaveError(data.error || "Could not save. Please try again.");
       }
     } catch {
-      // silently fail for demo
+      setSaveError("Could not connect to the server.");
     }
     setSaving(false);
   };
 
-  const updateBranding = (field: string, value: string) => {
+  const updateBranding = (field: string, value: string | null) => {
     if (!menu) return;
     setMenu({
       ...menu,
       branding: { ...menu.branding, [field]: value },
     });
+    setHasChanges(true);
     setSaved(false);
   };
 
@@ -81,6 +88,7 @@ export default function MenuDashboard() {
     const cats = [...menu.categories];
     cats[index] = { ...cats[index], name };
     setMenu({ ...menu, categories: cats });
+    setHasChanges(true);
     setSaved(false);
   };
 
@@ -93,15 +101,21 @@ export default function MenuDashboard() {
         { name: "New Category", items: [] },
       ],
     });
+    setHasChanges(true);
     setSaved(false);
   };
 
   const removeCategory = (index: number) => {
     if (!menu) return;
+    const cat = menu.categories[index];
+    if (cat.items.length > 0 && !window.confirm(`Delete "${cat.name}" and all its dishes?`)) {
+      return;
+    }
     setMenu({
       ...menu,
       categories: menu.categories.filter((_, i) => i !== index),
     });
+    setHasChanges(true);
     setSaved(false);
   };
 
@@ -117,6 +131,7 @@ export default function MenuDashboard() {
     items[itemIndex] = { ...items[itemIndex], [field]: value };
     cats[catIndex] = { ...cats[catIndex], items };
     setMenu({ ...menu, categories: cats });
+    setHasChanges(true);
     setSaved(false);
   };
 
@@ -131,6 +146,7 @@ export default function MenuDashboard() {
       ],
     };
     setMenu({ ...menu, categories: cats });
+    setHasChanges(true);
     setSaved(false);
   };
 
@@ -142,6 +158,7 @@ export default function MenuDashboard() {
       items: cats[catIndex].items.filter((_, i) => i !== itemIndex),
     };
     setMenu({ ...menu, categories: cats });
+    setHasChanges(true);
     setSaved(false);
   };
 
@@ -247,7 +264,9 @@ export default function MenuDashboard() {
               className={`inline-flex items-center gap-2 rounded-full px-5 py-2 text-xs font-medium transition-all duration-300 active:scale-[0.98] ${
                 saved
                   ? "bg-sage text-white"
-                  : "bg-charcoal text-cream hover:shadow-[0_4px_20px_rgba(0,0,0,0.1)]"
+                  : hasChanges
+                    ? "bg-charcoal text-cream hover:shadow-[0_4px_20px_rgba(0,0,0,0.1)] ring-2 ring-sage/30"
+                    : "bg-charcoal text-cream hover:shadow-[0_4px_20px_rgba(0,0,0,0.1)]"
               }`}
             >
               {saving ? (
@@ -257,13 +276,20 @@ export default function MenuDashboard() {
               ) : (
                 <FloppyDisk size={14} weight="bold" />
               )}
-              {saved ? "Saved" : "Save"}
+              {saved ? "Saved" : hasChanges ? "Save changes" : "Save"}
             </button>
           </div>
         </div>
       </header>
 
       <main className="max-w-5xl mx-auto px-4 py-8">
+        {saveError && (
+          <div className="max-w-3xl mx-auto mb-4">
+            <p className="text-sm text-red-600/80 bg-red-50 rounded-xl px-4 py-3">
+              {saveError}
+            </p>
+          </div>
+        )}
         {tab === "edit" ? (
           <div className="max-w-3xl mx-auto">
             {/* Branding */}
@@ -294,7 +320,7 @@ export default function MenuDashboard() {
                       type="text"
                       value={menu.branding.tagline ?? ""}
                       onChange={(e) =>
-                        updateBranding("tagline", e.target.value || null as unknown as string)
+                        updateBranding("tagline", e.target.value || null)
                       }
                       placeholder="e.g. Traditional Italian since 1987"
                       className="w-full px-3 py-2.5 rounded-xl bg-cream border border-charcoal/[0.08] text-sm text-charcoal placeholder:text-warm-gray/30 focus:outline-none focus:ring-2 focus:ring-sage/20 transition-all"
@@ -341,6 +367,11 @@ export default function MenuDashboard() {
 
                   {/* Items */}
                   <div className="space-y-3">
+                    {category.items.length === 0 && (
+                      <p className="text-xs text-warm-gray/40 text-center py-4">
+                        No dishes yet — add your first one below
+                      </p>
+                    )}
                     {category.items.map((item, itemIndex) => (
                       <div
                         key={itemIndex}
