@@ -1,7 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { ReactNode } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { ReactNode, useRef } from "react";
 
 interface AnimatedSectionProps {
   children: ReactNode;
@@ -16,11 +16,11 @@ export function AnimatedSection({
 }: AnimatedSectionProps) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 24 }}
+      initial={{ opacity: 0, y: 32 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
+      viewport={{ once: true, margin: "-100px" }}
       transition={{
-        duration: 0.7,
+        duration: 0.8,
         delay,
         ease: [0.16, 1, 0.3, 1],
       }}
@@ -42,12 +42,12 @@ export function StaggerContainer({
     <motion.div
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true, margin: "-60px" }}
+      viewport={{ once: true, margin: "-80px" }}
       variants={{
         hidden: {},
         show: {
           transition: {
-            staggerChildren: 0.12,
+            staggerChildren: 0.15,
           },
         },
       }}
@@ -68,18 +68,65 @@ export function StaggerItem({
   return (
     <motion.div
       variants={{
-        hidden: { opacity: 0, y: 20 },
+        hidden: { opacity: 0, y: 28 },
         show: {
           opacity: 1,
           y: 0,
           transition: {
-            duration: 0.6,
+            duration: 0.7,
             ease: [0.16, 1, 0.3, 1],
           },
         },
       }}
       className={className}
     >
+      {children}
+    </motion.div>
+  );
+}
+
+export function ParallaxSection({
+  children,
+  className = "",
+  offset = 40,
+}: {
+  children: ReactNode;
+  className?: string;
+  offset?: number;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], [offset, -offset]);
+
+  return (
+    <motion.div ref={ref} style={{ y }} className={className}>
+      {children}
+    </motion.div>
+  );
+}
+
+export function ScaleOnScroll({
+  children,
+  className = "",
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+
+  const scale = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.95, 1, 1, 0.98]);
+  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.3, 1, 1, 0.5]);
+
+  return (
+    <motion.div ref={ref} style={{ scale, opacity }} className={className}>
       {children}
     </motion.div>
   );
