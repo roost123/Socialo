@@ -1,109 +1,89 @@
-# Socialo — Masterplan
+# Menu Translator Demo — Stap-voor-stap plan
 
-Laatste update: 2026-03-18 (v3)
-
----
-
-## Status overzicht (eerlijk)
-
-| Onderdeel | Status | Wat mist |
-|---|---|---|
-| Landingspagina | ✅ Goed | Video content, screen recordings van demo's |
-| Demo 1: Menu Vertaler | 🟡 UI klaar | Niet getest met echte API. Heeft ANTHROPIC_API_KEY nodig om te werken. |
-| Demo 2: Rooster | 🟡 UI klaar | Niet getest met echte API. Schedule generatie ongetest. |
-| Demo 3: WhatsApp Concierge | 🟡 UI klaar | Niet getest met echte API. Chat flow ongetest. |
-
-**Kernprobleem:** Alle 3 demo's zijn afhankelijk van de Claude API (`ANTHROPIC_API_KEY`). Zonder die key werkt de vertaling, rooster-generatie, en concierge-chat niet.
+Focus: **Eén demo, perfect.** De rest komt later.
 
 ---
 
-## WAT ER KLAAR IS
+## De 8 stappen
 
-### Landingspagina
-- [x] Hero met animated gradient orbs en scroll indicator
-- [x] Problem sectie met 3 cards
-- [x] What is Socialo uitleg
-- [x] Examples met "Try the demo" knoppen op alle 3
-- [x] Stats sectie met animated counters
-- [x] Why Socialo (keten-visualisatie vs losse tools)
-- [x] FAQ sectie met 6 vragen
-- [x] CTA sectie
-- [x] Navbar met alle secties
-- [x] Footer
+### Stap 1: Data laag fixen
+**Probleem:** In-memory store verliest alles bij restart. Type safety heeft gaten.
+**Doen:**
+- Verplaats naar file-based JSON storage (simpel, persistent, geen database nodig)
+- Fix alle type issues (null handling, loose types)
+- Validatie toevoegen: geen lege dish names, geen lege categorieën
+- `imageUrl` en `logoUrl` velden verwijderen (gebruiken we niet, is misleidend)
 
-### Demo 1: Menu Vertaler
-- [x] Upload pagina (foto of handmatig)
-- [x] AI extractie API route
-- [x] Bewerkbaar formulier (restaurantnaam, tagline, categorieën, gerechten)
-- [x] QR code generatie + download
-- [x] Taalkeuze pagina met 80+ talen, zoek, vlaggen
-- [x] Vertaald menu weergave
-- [x] Vertaal API route met caching
-- [x] Demo menu's (Italiaans + Nederlands)
-- [x] Manual entry route (leeg menu aanmaken)
+### Stap 2: API routes solide maken
+**Probleem:** Geen timeouts, vage errors, geen input validatie.
+**Doen:**
+- Extract route: image validatie (max 10MB, alleen image types), timeout na 30s
+- Translate route: timeout, betere foutmelding, fallback response bij falen
+- Menu CRUD: input validatie, proper error responses
+- New route: accepteer optionele restaurantnaam uit body
+- Alle routes: consistente error format `{ error: string, details?: string }`
 
-### Demo 2: Rooster
-- [x] Setup pagina (medewerkers + bezettingseisen)
-- [x] Beschikbaarheid pagina (mobiel weekgrid)
-- [x] Rooster generatie API (Claude + validatie)
-- [x] Validatie engine (Arbeidstijdenwet, Horeca CAO)
-- [x] Weekrooster weergave (grid met shift blocks)
-- [x] Uren tracking per medewerker
-- [x] Issues/warnings weergave
-- [x] Demo restaurant met 10 medewerkers
+### Stap 3: Creator landing page (`/demo/menu`)
+**Probleem:** Manual entry fallback is dood, error state is basic.
+**Doen:**
+- Fix manual entry flow (POST naar /api/menu/new met optionele naam)
+- Betere error state bij upload falen (specifieke tips: "foto te donker", "geen menu gevonden")
+- Upload progress indicator
+- Camera capture optie voor mobiel
 
-### Demo 3: WhatsApp Concierge
-- [x] WhatsApp-style chat UI
-- [x] Hotel data (kamers, faciliteiten, roomservice, omgeving)
-- [x] Chat API route met hotel system prompt
-- [x] Typing indicator
-- [x] Suggestion chips
-- [x] Welcome message
+### Stap 4: Menu editor (`/demo/menu/[id]`)
+**Probleem:** Null type hack, geen validatie, geen unsaved changes warning.
+**Doen:**
+- Fix tagline null handling proper
+- Validatie: markeer lege velden rood, blokkeer save bij kritieke fouten
+- "Unsaved changes" indicator
+- Bevestiging bij verwijderen van categorie/gerecht
+- Auto-save of duidelijke save feedback
+- Betere empty states ("Voeg je eerste gerecht toe")
 
----
+### Stap 5: Gastpagina taalkeuze (`/menu/[id]` — eerste scherm)
+**Probleem:** Werkt maar kan beter. Skeleton matcht niet met echt menu.
+**Doen:**
+- Browser language detection: stel automatisch de taal voor
+- Onthoud laatst gekozen taal in localStorage
+- Dynamische skeleton gebaseerd op het echte menu (aantal categorieën/items)
+- Snellere perceived performance: toon origineel menu direct, vertaal op achtergrond
 
-## WAT ER NOG MOET GEBEUREN
+### Stap 6: Gastpagina menu (`/menu/[id]` — na taalkeuze)
+**Probleem:** Translation error is onduidelijk, geen client-side caching.
+**Doen:**
+- Client-side translation cache (localStorage)
+- Duidelijker error: "Vertaling naar [taal] is niet gelukt. Je ziet het menu in [originele taal]."
+- Smooth animatie bij wisselen van taal (fade out/in)
+- Print-friendly styling (@media print)
 
-### Prioriteit 1: Demo's werkend krijgen
-- [ ] `ANTHROPIC_API_KEY` instellen als environment variable
-- [ ] Demo 1 end-to-end testen: upload foto → AI extractie → edit → vertaling
-- [ ] Demo 2 end-to-end testen: beschikbaarheid → generatie → validatie
-- [ ] Demo 3 end-to-end testen: chat → antwoorden → roomservice bestellen
+### Stap 7: End-to-end testen en edge cases
+**Doen:**
+- Test met demo menu's: elke taal in de "Popular" lijst
+- Test met lege menu's, menu's met 1 item, menu's met 50 items
+- Test op mobiel viewport
+- Test error states: API key missing, rate limit, netwerk error
+- Performance check: hoe snel laadt het menu, hoe snel vertaalt het
 
-### Prioriteit 2: Demo's verbeteren
-- [x] Demo 1: Loading skeletons tijdens vertaling (skeleton menu items)
-- [x] Demo 1: Error states met retry knoppen (translation error banner)
-- [x] Demo 2: Error state bij generatie falen
-- [ ] Demo 2: Drag & drop shifts (dnd-kit) — nice to have
-- [x] Demo 3: Contextual suggestion chips na elk antwoord (5 contexten)
-- [ ] Demo 3: Inline rich content (kamer info cards, etc.) — nice to have
-
-### Prioriteit 3: Landingspagina
-- [ ] Screen recordings van werkende demo's als video/GIF
-- [ ] Testimonials sectie (kan fictief zijn voor demo)
-
-### Prioriteit 4: Deployment
-- [ ] Cloudflare Workers deployment fixen (output: standalone)
-- [ ] Environment variables instellen op Cloudflare
-- [ ] Custom domain (socialo.nl)
-- [ ] SSL/HTTPS
+### Stap 8: Polish en deploy
+**Doen:**
+- Final responsive check alle viewports
+- Accessibility check (aria labels, keyboard nav, screen reader)
+- Meta tags voor social sharing (og:image, og:title)
+- Deploy naar Cloudflare
+- Test op productie URL
 
 ---
 
-## TECHNISCHE NOTITIES
+## Huidige status
 
-### Environment variables nodig:
-```
-ANTHROPIC_API_KEY=sk-ant-...
-```
-
-### Deploy commando:
-```bash
-npm run build  # Next.js build
-# Deploy naar Cloudflare via dashboard of wrangler
-```
-
-### Bekende issues:
-1. In-memory store: alle data verdwijnt bij restart. OK voor demo, niet voor productie.
-2. Geen rate limiting op API routes — bij veel gebruik gaat de API-rekening omhoog.
-3. Translation cache is in-memory — verdwijnt bij restart.
+| Stap | Status |
+|---|---|
+| 1. Data laag fixen | ⏳ Volgende |
+| 2. API routes solide maken | — |
+| 3. Creator landing page | — |
+| 4. Menu editor | — |
+| 5. Gastpagina taalkeuze | — |
+| 6. Gastpagina menu | — |
+| 7. End-to-end testen | — |
+| 8. Polish en deploy | — |
