@@ -5,6 +5,7 @@ import {
   CalendarCheck,
   WhatsappLogo,
   ArrowRight,
+  Play,
 } from "@phosphor-icons/react";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "./scroll-reveal";
 
@@ -14,6 +15,7 @@ const examples = [
     label: "Menu Translator",
     problem: "Your menu is in one language. Your guests speak twenty.",
     fix: "Take a photo of your menu. We turn it into a mobile-friendly page in any language. Put a QR code on the table. Done. Guests scan, pick their language, read your menu. No app, no download, no awkward pointing at dishes.",
+    demoUrl: "/demo/menu",
   },
   {
     icon: CalendarCheck,
@@ -21,6 +23,7 @@ const examples = [
     problem:
       "Every week, someone spends hours building a staff schedule by hand. Contracts, availability, preferences, labor laws — it's a puzzle that resets every Monday.",
     fix: "Staff submit their availability through a simple link. The system builds the schedule automatically — respecting contracts, rest periods, peak hours, and preferences. Someone calls in sick? It finds a replacement.",
+    demoUrl: null,
   },
   {
     icon: WhatsappLogo,
@@ -28,6 +31,7 @@ const examples = [
     problem:
       "Your front desk answers the same questions 50 times a day. Checkout time, parking, room service, local restaurants. Meanwhile, the phone keeps ringing.",
     fix: "A WhatsApp assistant that knows your hotel inside out. Guests ask questions, browse rooms, order room service, even pay — all in one conversation. Your staff handles the things that actually need a human.",
+    demoUrl: null,
   },
 ];
 
@@ -72,7 +76,7 @@ export function Examples() {
                       </h3>
                     </div>
 
-                    {/* Right: Fix */}
+                    {/* Right: Fix + Demo link */}
                     <div className="md:w-3/5">
                       <div className="flex items-center gap-2 mb-4">
                         <ArrowRight
@@ -87,6 +91,15 @@ export function Examples() {
                       <p className="text-base md:text-lg leading-relaxed text-warm-gray font-light">
                         {example.fix}
                       </p>
+                      {example.demoUrl && (
+                        <a
+                          href={example.demoUrl}
+                          className="group inline-flex items-center gap-2 mt-6 rounded-full bg-sage/10 text-sage px-5 py-2.5 text-sm font-medium transition-all duration-300 hover:bg-sage/20 active:scale-[0.98]"
+                        >
+                          <Play size={14} weight="fill" />
+                          <span>Try the demo</span>
+                        </a>
+                      )}
                     </div>
                   </div>
                 </div>
