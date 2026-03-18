@@ -80,7 +80,7 @@ export function Examples() {
                   style={{ background: item.accent }}
                 />
 
-                <div className="p-8 md:p-10 pl-10 md:pl-12">
+                <div className="p-8 md:p-10 !pl-10 md:!pl-14">
                   {/* Header */}
                   <div className="flex items-center justify-between gap-4 flex-wrap">
                     <div className="flex items-center gap-4">

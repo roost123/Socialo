@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatedSection, StaggerContainer, StaggerItem, ParallaxSection } from "./animated-section";
+import { AnimatedSection, StaggerContainer, StaggerItem } from "./animated-section";
 import { Quotes } from "@phosphor-icons/react";
 
 const frustrations = [
@@ -57,49 +57,47 @@ export function Problem() {
           </AnimatedSection>
         </div>
 
-        <ParallaxSection offset={20}>
-          <StaggerContainer className="mt-20 grid gap-5 md:grid-cols-3">
-            {frustrations.map((item, i) => (
-              <StaggerItem key={i}>
+        <StaggerContainer className="mt-16 grid gap-6 md:grid-cols-3">
+          {frustrations.map((item, i) => (
+            <StaggerItem key={i}>
+              <div
+                className="glass-card relative p-8 md:p-9 h-full transition-all duration-500 hover:-translate-y-1 group"
+              >
+                {/* Accent line */}
                 <div
-                  className="glass-card relative p-8 md:p-9 h-full transition-all duration-500 hover:-translate-y-1 group"
+                  className="absolute top-0 left-8 right-8 h-[2px] rounded-full opacity-40 group-hover:opacity-80 transition-opacity duration-500"
+                  style={{ background: item.accent }}
+                />
+                <Quotes
+                  size={28}
+                  weight="fill"
+                  className="mb-6 opacity-[0.15]"
+                  style={{ color: item.accent }}
+                />
+                <p
+                  className="text-[15px] md:text-base leading-[1.75]"
+                  style={{ color: "var(--text-primary)" }}
                 >
-                  {/* Accent line */}
+                  &ldquo;{item.quote}&rdquo;
+                </p>
+                <div className="mt-6 flex items-center gap-3">
                   <div
-                    className="absolute top-0 left-8 right-8 h-[2px] rounded-full opacity-40 group-hover:opacity-80 transition-opacity duration-500"
+                    className="w-8 h-8 rounded-full flex items-center justify-center text-[11px] font-bold text-white"
                     style={{ background: item.accent }}
-                  />
-                  <Quotes
-                    size={28}
-                    weight="fill"
-                    className="mb-6 opacity-[0.15]"
-                    style={{ color: item.accent }}
-                  />
-                  <p
-                    className="text-[15px] md:text-base leading-[1.75]"
-                    style={{ color: "var(--text-primary)" }}
                   >
-                    &ldquo;{item.quote}&rdquo;
-                  </p>
-                  <div className="mt-6 flex items-center gap-3">
-                    <div
-                      className="w-8 h-8 rounded-full flex items-center justify-center text-[11px] font-bold text-white"
-                      style={{ background: item.accent }}
-                    >
-                      {item.role[0]}
-                    </div>
-                    <p
-                      className="text-[13px] font-semibold"
-                      style={{ color: "var(--text-muted)" }}
-                    >
-                      {item.role}
-                    </p>
+                    {item.role[0]}
                   </div>
+                  <p
+                    className="text-[13px] font-semibold"
+                    style={{ color: "var(--text-muted)" }}
+                  >
+                    {item.role}
+                  </p>
                 </div>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
-        </ParallaxSection>
+              </div>
+            </StaggerItem>
+          ))}
+        </StaggerContainer>
       </div>
     </section>
   );
