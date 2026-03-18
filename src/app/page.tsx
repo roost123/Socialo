@@ -9,12 +9,10 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <main className="overflow-x-hidden">
+      <main>
         <Hero />
-        <div className="h-px w-full max-w-5xl mx-auto" style={{ background: "var(--border)" }} />
         <Problem />
         <WhatIsSocialo />
-        <div className="h-px w-full max-w-5xl mx-auto" style={{ background: "var(--border)" }} />
         <Examples />
         <CTA />
       </main>

@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatedSection, StaggerContainer, StaggerItem } from "./animated-section";
+import { FadeIn, StaggerContainer, StaggerItem } from "./animated-section";
 import { Quotes } from "@phosphor-icons/react";
 
 const frustrations = [
@@ -8,95 +8,70 @@ const frustrations = [
     quote:
       "Every evening, our waitstaff explains the same menu to tourists who don\u2019t speak the language. Over and over. Table after table.",
     role: "Restaurant owner",
-    accent: "#3b6eff",
+    size: "large" as const,
   },
   {
     quote:
-      "Every Monday I spend two hours building the weekly schedule. Texting people, shuffling shifts, checking contracts. It\u2019s the same puzzle every week.",
+      "Every Monday I spend two hours building the weekly schedule. Texting people, shuffling shifts, checking contracts. Same puzzle every week.",
     role: "Hospitality manager",
-    accent: "#a78bfa",
+    size: "small" as const,
   },
   {
     quote:
-      "Guests message us the same 15 questions every single day. What time is checkout? Is there parking? Can I get a late check-in? We answer them all by hand.",
+      "Guests message us the same 15 questions every single day. Checkout time, parking, late check-in. We answer them all by hand.",
     role: "Hotel front desk",
-    accent: "#34d399",
+    size: "small" as const,
   },
 ];
 
 export function Problem() {
   return (
-    <section className="py-28 md:py-40 px-6">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center max-w-3xl mx-auto">
-          <AnimatedSection>
-            <p
-              className="text-[13px] font-semibold uppercase tracking-[0.12em] mb-5"
-              style={{ color: "var(--accent)" }}
-            >
-              The problem
-            </p>
-          </AnimatedSection>
-          <AnimatedSection delay={0.08}>
-            <h2
-              className="text-4xl md:text-6xl font-bold tracking-[-0.03em] leading-[1.1]"
-              style={{ color: "var(--text-primary)" }}
-            >
-              Every business has
-              <br />
-              that one thing.
-            </h2>
-          </AnimatedSection>
-          <AnimatedSection delay={0.16}>
-            <p
-              className="mt-6 text-lg leading-relaxed max-w-xl mx-auto"
-              style={{ color: "var(--text-secondary)" }}
-            >
-              The task you do every week that makes you think: &ldquo;It&apos;s 2026, why am I still doing this?&rdquo;
-            </p>
-          </AnimatedSection>
-        </div>
+    <section className="py-24 md:py-36 px-6 md:px-10">
+      <div className="max-w-[1200px] mx-auto">
+        <FadeIn>
+          <p className="text-[13px] font-semibold uppercase tracking-[0.1em] text-[#2d5abe] mb-4">
+            The problem
+          </p>
+          <h2 className="text-[clamp(1.75rem,4vw,3.25rem)] font-bold tracking-[-0.03em] leading-[1.12] text-[#111] max-w-[560px]">
+            Every business has that one thing.
+          </h2>
+          <p className="mt-4 text-[17px] leading-[1.7] text-[#666] max-w-[480px]">
+            The task you do every week that makes you think:
+            &ldquo;It&apos;s 2026, why am I still doing this?&rdquo;
+          </p>
+        </FadeIn>
 
-        <StaggerContainer className="mt-16 grid gap-6 md:grid-cols-3">
-          {frustrations.map((item, i) => (
-            <StaggerItem key={i}>
-              <div
-                className="glass-card relative p-8 md:p-9 h-full transition-all duration-500 hover:-translate-y-1 group"
-              >
-                {/* Accent line */}
-                <div
-                  className="absolute top-0 left-8 right-8 h-[2px] rounded-full opacity-40 group-hover:opacity-80 transition-opacity duration-500"
-                  style={{ background: item.accent }}
-                />
-                <Quotes
-                  size={28}
-                  weight="fill"
-                  className="mb-6 opacity-[0.15]"
-                  style={{ color: item.accent }}
-                />
-                <p
-                  className="text-[15px] md:text-base leading-[1.75]"
-                  style={{ color: "var(--text-primary)" }}
-                >
-                  &ldquo;{item.quote}&rdquo;
-                </p>
-                <div className="mt-6 flex items-center gap-3">
-                  <div
-                    className="w-8 h-8 rounded-full flex items-center justify-center text-[11px] font-bold text-white"
-                    style={{ background: item.accent }}
-                  >
-                    {item.role[0]}
-                  </div>
-                  <p
-                    className="text-[13px] font-semibold"
-                    style={{ color: "var(--text-muted)" }}
-                  >
+        {/* Bento grid — 1 large card left, 2 stacked small cards right */}
+        <StaggerContainer className="mt-14 grid md:grid-cols-[1.3fr_1fr] gap-4">
+          {/* Large card */}
+          <StaggerItem>
+            <div className="bg-white rounded-2xl border border-[#EAEAEA] p-8 md:p-10 h-full shadow-[0_1px_2px_rgba(0,0,0,0.04),0_4px_16px_rgba(0,0,0,0.03)] hover:translate-y-[-2px] hover:shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_rgba(0,0,0,0.06)] transition-all duration-300">
+              <Quotes size={24} weight="fill" className="text-[#ddd] mb-6" />
+              <p className="text-[18px] md:text-[20px] leading-[1.7] text-[#111] font-medium">
+                &ldquo;{frustrations[0].quote}&rdquo;
+              </p>
+              <p className="mt-8 text-[13px] font-medium text-[#999] uppercase tracking-[0.05em]">
+                {frustrations[0].role}
+              </p>
+            </div>
+          </StaggerItem>
+
+          {/* Two stacked small cards */}
+          <div className="flex flex-col gap-4">
+            {frustrations.slice(1).map((item, i) => (
+              <StaggerItem key={i}>
+                <div className="bg-white rounded-2xl border border-[#EAEAEA] p-7 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_4px_16px_rgba(0,0,0,0.03)] hover:translate-y-[-2px] hover:shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_rgba(0,0,0,0.06)] transition-all duration-300">
+                  <Quotes size={20} weight="fill" className="text-[#ddd] mb-4" />
+                  <p className="text-[15px] leading-[1.7] text-[#111]">
+                    &ldquo;{item.quote}&rdquo;
+                  </p>
+                  <p className="mt-5 text-[13px] font-medium text-[#999] uppercase tracking-[0.05em]">
                     {item.role}
                   </p>
                 </div>
-              </div>
-            </StaggerItem>
-          ))}
+              </StaggerItem>
+            ))}
+          </div>
         </StaggerContainer>
       </div>
     </section>
