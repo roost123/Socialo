@@ -28,10 +28,9 @@ export function WhatIsSocialo() {
   return (
     <section className="py-24 md:py-36 px-6 md:px-10">
       <div className="max-w-[1200px] mx-auto">
-        {/* Editorial split: text left, pillars right */}
         <div className="grid md:grid-cols-[1fr_1.2fr] gap-16 md:gap-24 items-start">
-          {/* Left — sticky headline */}
-          <div className="md:sticky md:top-32">
+          {/* Left — headline */}
+          <div>
             <FadeIn>
               <p className="text-[13px] font-semibold uppercase tracking-[0.1em] text-[#2d5abe] mb-4">
                 Our approach

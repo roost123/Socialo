@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { ArrowRight } from "@phosphor-icons/react";
 
 export function Hero() {
@@ -9,46 +8,26 @@ export function Hero() {
       <div className="max-w-[1200px] mx-auto w-full grid md:grid-cols-[1.2fr_0.8fr] gap-16 md:gap-20 items-center py-24 md:py-0">
         {/* Left — Content */}
         <div>
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="inline-flex items-center gap-2.5 border border-[#EAEAEA] rounded-full px-4 py-2 mb-8"
-          >
+          <div className="animate-fade-in-up inline-flex items-center gap-2.5 border border-[#EAEAEA] rounded-full px-4 py-2 mb-8">
             <span className="w-1.5 h-1.5 rounded-full bg-[#2d5abe]" />
             <span className="text-[13px] font-medium text-[#666]">
               Automations for SMB
             </span>
-          </motion.div>
+          </div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
-            className="text-[clamp(2.25rem,5.5vw,4.5rem)] font-bold tracking-[-0.04em] leading-[1.08] text-[#111]"
-          >
+          <h1 className="animate-fade-in-up delay-100 text-[clamp(2.25rem,5.5vw,4.5rem)] font-bold tracking-[-0.04em] leading-[1.08] text-[#111]">
             That should be
             <br />
             automatic by now.
-          </motion.h1>
+          </h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-6 text-[17px] leading-[1.7] text-[#666] max-w-[480px]"
-          >
+          <p className="animate-fade-in-up delay-200 mt-6 text-[17px] leading-[1.7] text-[#666] max-w-[480px]">
             You know that one thing you do every week — the same clicks, the same
             calls, the same copy-paste. You&apos;ve thought it before: &ldquo;Why am I
             still doing this manually?&rdquo; We build the fix.
-          </motion.p>
+          </p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-10 flex flex-wrap gap-3"
-          >
+          <div className="animate-fade-in-up delay-300 mt-10 flex flex-wrap gap-3">
             <a
               href="#examples"
               className="group inline-flex items-center gap-2 bg-[#111] text-white text-[15px] font-medium px-6 py-3 rounded-lg hover:scale-[1.02] hover:shadow-[0_4px_16px_rgba(0,0,0,0.12)] transition-all duration-200"
@@ -66,16 +45,11 @@ export function Hero() {
             >
               Get in touch
             </a>
-          </motion.div>
+          </div>
         </div>
 
         {/* Right — Visual element */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.96 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          className="hidden md:block"
-        >
+        <div className="hidden md:block animate-fade-in-up delay-300">
           <div className="relative">
             {/* Outer bezel */}
             <div className="bg-white rounded-2xl border border-[#EAEAEA] p-6 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_4px_16px_rgba(0,0,0,0.03)]">
@@ -89,16 +63,13 @@ export function Hero() {
                 </div>
                 <div className="space-y-3">
                   {["Manually translating menus every season", "2+ hours building weekly schedules", "Answering the same 15 guest questions daily"].map((text, i) => (
-                    <motion.div
+                    <div
                       key={i}
-                      initial={{ opacity: 0, x: -8 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.4, delay: 0.5 + i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                      className="flex items-start gap-3 text-[14px] text-[#999] leading-[1.5]"
+                      className={`animate-fade-in-up delay-${5 + i}00 flex items-start gap-3 text-[14px] text-[#999] leading-[1.5]`}
                     >
                       <span className="mt-1.5 w-1 h-1 rounded-full bg-[#ccc] shrink-0" />
                       <span className="line-through decoration-[#ddd]">{text}</span>
-                    </motion.div>
+                    </div>
                   ))}
                 </div>
 
@@ -111,23 +82,20 @@ export function Hero() {
                   </div>
                   <div className="space-y-3">
                     {["QR code scanned, menu in any language", "Schedule builds itself every Sunday", "WhatsApp handles it — instantly"].map((text, i) => (
-                      <motion.div
+                      <div
                         key={i}
-                        initial={{ opacity: 0, x: -8 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.4, delay: 0.8 + i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                        className="flex items-start gap-3 text-[14px] text-[#111] leading-[1.5]"
+                        className={`animate-fade-in-up delay-${7 + i}00 flex items-start gap-3 text-[14px] text-[#111] leading-[1.5]`}
                       >
                         <span className="mt-1.5 w-1 h-1 rounded-full bg-emerald-500 shrink-0" />
                         {text}
-                      </motion.div>
+                      </div>
                     ))}
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
