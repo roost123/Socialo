@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import {
   PaperPlaneRight,
   DotsThree,
@@ -17,14 +17,82 @@ interface Message {
   time: string;
 }
 
-const SUGGESTIONS = [
+const INITIAL_SUGGESTIONS = [
   "What time is checkout?",
   "What's the WiFi password?",
   "I'd like to order room service",
-  "Any restaurant recommendations nearby?",
+  "Any restaurant recommendations?",
   "Can I get a late checkout?",
   "How do I get to the Rijksmuseum?",
+  "Tell me about the spa",
+  "Is there parking available?",
 ];
+
+// Contextual suggestions based on what was discussed
+const FOLLOW_UP_SUGGESTIONS: Record<string, string[]> = {
+  room_service: [
+    "What else is on the menu?",
+    "Can I add a bottle of wine?",
+    "How long will delivery take?",
+    "Cancel my order",
+  ],
+  restaurant: [
+    "Can you make a reservation?",
+    "What about something more casual?",
+    "Any vegetarian options nearby?",
+    "How do I get there?",
+  ],
+  checkout: [
+    "Can I get a late checkout?",
+    "Where do I leave my luggage?",
+    "Can you book me a taxi to the airport?",
+    "How much is late checkout?",
+  ],
+  spa: [
+    "Can I book a massage?",
+    "Is the sauna included?",
+    "What treatments do you offer?",
+    "What are the opening hours?",
+  ],
+  general: [
+    "What's there to do nearby?",
+    "I'd like to order room service",
+    "Tell me about the hotel restaurant",
+    "Can you recommend a museum?",
+    "What time is breakfast?",
+    "How do I connect to WiFi?",
+  ],
+};
+
+function detectContext(messages: Message[]): string {
+  const lastAssistant = [...messages]
+    .reverse()
+    .find((m) => m.role === "assistant");
+  if (!lastAssistant) return "general";
+
+  const text = lastAssistant.content.toLowerCase();
+  if (
+    text.includes("room service") ||
+    text.includes("order") ||
+    text.includes("delivery")
+  )
+    return "room_service";
+  if (
+    text.includes("restaurant") ||
+    text.includes("dining") ||
+    text.includes("michelin")
+  )
+    return "restaurant";
+  if (text.includes("checkout") || text.includes("check-out"))
+    return "checkout";
+  if (
+    text.includes("spa") ||
+    text.includes("massage") ||
+    text.includes("sauna")
+  )
+    return "spa";
+  return "general";
+}
 
 function formatTime(): string {
   return new Date().toLocaleTimeString("en-US", {
@@ -40,7 +108,7 @@ export default function ConciergeDemoPage() {
       id: "welcome",
       role: "assistant",
       content:
-        "Welcome to Hotel de Gouden Leeuw! 🏨\n\nI'm your digital concierge. I can help with room service, restaurant reservations, local tips, or anything else during your stay.\n\nHow can I help you?",
+        "Welcome to Hotel de Gouden Leeuw! 🏨\n\nI'm your digital concierge. I can help with:\n\n🛎 Room service\n🍽 Restaurant reservations\n🗺 Local tips & directions\n💆 Spa bookings\n🚕 Transport\n\nWhat can I help you with?",
       time: formatTime(),
     },
   ]);
@@ -55,6 +123,12 @@ export default function ConciergeDemoPage() {
 
   useEffect(() => {
     scrollToBottom();
+  }, [messages, sending]);
+
+  const suggestions = useMemo(() => {
+    if (messages.length <= 1) return INITIAL_SUGGESTIONS;
+    const context = detectContext(messages);
+    return FOLLOW_UP_SUGGESTIONS[context] ?? FOLLOW_UP_SUGGESTIONS.general;
   }, [messages]);
 
   const sendMessage = async (text: string) => {
@@ -77,9 +151,10 @@ export default function ConciergeDemoPage() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          messages: newMessages
-            .filter((m) => m.id !== "welcome" || m.role === "assistant")
-            .map((m) => ({ role: m.role, content: m.content })),
+          messages: newMessages.map((m) => ({
+            role: m.role,
+            content: m.content,
+          })),
         }),
       });
 
@@ -113,11 +188,9 @@ export default function ConciergeDemoPage() {
     inputRef.current?.focus();
   };
 
-  const showSuggestions = messages.length <= 2 && !sending;
-
   return (
     <div className="min-h-[100dvh] flex flex-col bg-[#efeae2]">
-      {/* WhatsApp-style header */}
+      {/* WhatsApp header */}
       <header className="bg-[#075e54] text-white px-4 py-3 flex items-center gap-3 flex-shrink-0">
         <a
           href="/"
@@ -152,36 +225,42 @@ export default function ConciergeDemoPage() {
       {/* Demo badge */}
       <div className="bg-[#fdf8e4] text-center py-1.5 px-4 flex-shrink-0">
         <p className="text-[11px] text-[#8a7e5a]">
-          This is a Socialo demo. Try asking questions about the hotel.
+          Socialo demo — Ask anything about the hotel, order room service, or
+          get local tips
         </p>
       </div>
 
       {/* Messages */}
       <div className="flex-1 overflow-y-auto px-3 py-4 space-y-1">
+        {/* Date chip */}
+        <div className="flex justify-center mb-3">
+          <span className="bg-white/80 rounded-lg px-3 py-1 text-[11px] text-[#667781] shadow-sm">
+            Today
+          </span>
+        </div>
+
         {messages.map((msg) => (
           <div
             key={msg.id}
-            className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
+            className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"} mb-0.5`}
           >
             <div
-              className={`max-w-[85%] rounded-lg px-3 py-2 shadow-sm relative ${
+              className={`max-w-[85%] rounded-lg px-3 py-2 shadow-sm ${
                 msg.role === "user"
                   ? "bg-[#dcf8c6] rounded-tr-none"
                   : "bg-white rounded-tl-none"
               }`}
             >
-              <p className="text-sm text-[#111b21] whitespace-pre-wrap leading-relaxed">
+              <p className="text-[14.5px] text-[#111b21] whitespace-pre-wrap leading-[1.45]">
                 {msg.content}
               </p>
-              <div
-                className={`flex items-center gap-1 mt-1 ${
-                  msg.role === "user" ? "justify-end" : "justify-end"
-                }`}
-              >
-                <span className="text-[10px] text-[#667781]">{msg.time}</span>
+              <div className="flex items-center gap-1 mt-0.5 justify-end">
+                <span className="text-[10.5px] text-[#667781]">
+                  {msg.time}
+                </span>
                 {msg.role === "user" && (
                   <Checks
-                    size={14}
+                    size={15}
                     weight="bold"
                     className="text-[#53bdeb]"
                   />
@@ -193,12 +272,27 @@ export default function ConciergeDemoPage() {
 
         {/* Typing indicator */}
         {sending && (
-          <div className="flex justify-start">
+          <div className="flex justify-start mb-0.5">
             <div className="bg-white rounded-lg rounded-tl-none px-4 py-3 shadow-sm">
-              <div className="flex gap-1">
-                <div className="w-2 h-2 rounded-full bg-[#667781]/40 animate-bounce" style={{ animationDelay: "0ms" }} />
-                <div className="w-2 h-2 rounded-full bg-[#667781]/40 animate-bounce" style={{ animationDelay: "150ms" }} />
-                <div className="w-2 h-2 rounded-full bg-[#667781]/40 animate-bounce" style={{ animationDelay: "300ms" }} />
+              <div className="flex gap-1.5">
+                <div
+                  className="w-2 h-2 rounded-full bg-[#667781]/50 animate-bounce"
+                  style={{ animationDelay: "0ms", animationDuration: "0.8s" }}
+                />
+                <div
+                  className="w-2 h-2 rounded-full bg-[#667781]/50 animate-bounce"
+                  style={{
+                    animationDelay: "150ms",
+                    animationDuration: "0.8s",
+                  }}
+                />
+                <div
+                  className="w-2 h-2 rounded-full bg-[#667781]/50 animate-bounce"
+                  style={{
+                    animationDelay: "300ms",
+                    animationDuration: "0.8s",
+                  }}
+                />
               </div>
             </div>
           </div>
@@ -207,15 +301,15 @@ export default function ConciergeDemoPage() {
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Suggestion chips */}
-      {showSuggestions && (
+      {/* Suggestion chips — always visible when not sending */}
+      {!sending && (
         <div className="px-3 pb-2 flex-shrink-0">
           <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-none">
-            {SUGGESTIONS.map((suggestion) => (
+            {suggestions.map((suggestion) => (
               <button
                 key={suggestion}
                 onClick={() => sendMessage(suggestion)}
-                className="flex-shrink-0 bg-white rounded-full px-4 py-2 text-xs font-medium text-[#075e54] shadow-sm hover:bg-[#f0f0f0] transition-colors active:scale-95"
+                className="flex-shrink-0 bg-white rounded-full px-4 py-2 text-[13px] font-medium text-[#075e54] shadow-sm hover:bg-[#f0f0f0] transition-colors active:scale-95 border border-[#075e54]/10"
               >
                 {suggestion}
               </button>
@@ -226,7 +320,7 @@ export default function ConciergeDemoPage() {
 
       {/* Input bar */}
       <div className="bg-[#f0f0f0] px-3 py-2 flex items-center gap-2 flex-shrink-0">
-        <div className="flex-1 bg-white rounded-full px-4 py-2.5 flex items-center">
+        <div className="flex-1 bg-white rounded-full px-4 py-2.5 flex items-center shadow-sm">
           <input
             ref={inputRef}
             type="text"
@@ -235,15 +329,15 @@ export default function ConciergeDemoPage() {
             onKeyDown={(e) => e.key === "Enter" && sendMessage(input)}
             placeholder="Type a message"
             disabled={sending}
-            className="flex-1 text-sm text-[#111b21] bg-transparent outline-none placeholder:text-[#667781]"
+            className="flex-1 text-[15px] text-[#111b21] bg-transparent outline-none placeholder:text-[#667781]"
           />
         </div>
         <button
           onClick={() => sendMessage(input)}
           disabled={!input.trim() || sending}
-          className="w-10 h-10 rounded-full bg-[#075e54] flex items-center justify-center text-white transition-all hover:bg-[#064e47] active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
+          className="w-11 h-11 rounded-full bg-[#075e54] flex items-center justify-center text-white transition-all hover:bg-[#064e47] active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed shadow-sm"
         >
-          <PaperPlaneRight size={18} weight="fill" />
+          <PaperPlaneRight size={20} weight="fill" />
         </button>
       </div>
     </div>
