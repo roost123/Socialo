@@ -20,6 +20,31 @@ const POPULAR_CODES = [
   "pl", "tr", "th", "hi", "vi", "id",
 ];
 
+function getBrowserLanguage(): string | null {
+  if (typeof navigator === "undefined") return null;
+  const browserLang = navigator.language?.split("-")[0];
+  if (!browserLang) return null;
+  const match = ALL_LANGUAGES.find((l) => l.code === browserLang);
+  return match ? match.code : null;
+}
+
+function getStoredLanguage(menuId: string): string | null {
+  if (typeof localStorage === "undefined") return null;
+  try {
+    return localStorage.getItem(`menu-lang-${menuId}`);
+  } catch {
+    return null;
+  }
+}
+
+function storeLanguage(menuId: string, lang: string): void {
+  try {
+    localStorage.setItem(`menu-lang-${menuId}`, lang);
+  } catch {
+    // Ignore localStorage errors
+  }
+}
+
 export default function MenuPage() {
   const { id } = useParams<{ id: string }>();
   const [menu, setMenu] = useState<MenuData | null>(null);
@@ -27,9 +52,10 @@ export default function MenuPage() {
   const [selectedLang, setSelectedLang] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [translating, setTranslating] = useState(false);
-  const [translationError, setTranslationError] = useState(false);
+  const [translationError, setTranslationError] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [search, setSearch] = useState("");
+  const [suggestedLang, setSuggestedLang] = useState<string | null>(null);
 
   // Load the menu data
   useEffect(() => {
@@ -41,6 +67,14 @@ export default function MenuPage() {
       .then((data: MenuData) => {
         setMenu(data);
         setLoading(false);
+
+        // Check for stored or browser language
+        const stored = getStoredLanguage(id);
+        const browser = getBrowserLanguage();
+        const suggestion = stored || browser;
+        if (suggestion && suggestion !== data.originalLanguage) {
+          setSuggestedLang(suggestion);
+        }
       })
       .catch(() => {
         setError("Menu not found");
@@ -70,18 +104,29 @@ export default function MenuPage() {
     if (!menu) return;
     setSelectedLang(langCode);
     setTranslating(true);
-    setTranslationError(false);
+    setTranslationError(null);
+    storeLanguage(id, langCode);
 
     try {
       const res = await fetch(`/api/menu/${id}/${langCode}`);
-      if (!res.ok) throw new Error("Translation failed");
       const data = await res.json();
-      if (data.error) throw new Error(data.error);
+
       setCategories(data.categories);
+
+      // Check if API returned a fallback (translation failed, showing original)
+      if (data._fallback) {
+        const langInfo = ALL_LANGUAGES.find((l) => l.code === langCode);
+        setTranslationError(
+          `Translation to ${langInfo?.name ?? langCode} failed. Showing menu in original language.`
+        );
+      }
     } catch {
-      // Show error but still display original menu
+      // Network error — show original menu
       setCategories(menu.categories);
-      setTranslationError(true);
+      const langInfo = ALL_LANGUAGES.find((l) => l.code === langCode);
+      setTranslationError(
+        `Could not load ${langInfo?.name ?? langCode} translation. Showing original menu.`
+      );
     }
     setTranslating(false);
   };
@@ -94,6 +139,7 @@ export default function MenuPage() {
     setSelectedLang(null);
     setCategories(null);
     setSearch("");
+    setTranslationError(null);
   };
 
   if (loading) {
@@ -125,6 +171,10 @@ export default function MenuPage() {
   // LANGUAGE SELECTION SCREEN
   // ==========================================
   if (!selectedLang) {
+    const suggestedLangInfo = suggestedLang
+      ? ALL_LANGUAGES.find((l) => l.code === suggestedLang)
+      : null;
+
     return (
       <div className="min-h-[100dvh] bg-cream flex flex-col">
         {/* Header */}
@@ -146,6 +196,24 @@ export default function MenuPage() {
             </h2>
           </div>
 
+          {/* Suggested language */}
+          {suggestedLangInfo && (
+            <button
+              onClick={() => selectLanguage(suggestedLangInfo.code)}
+              className="mx-auto mb-6 flex items-center gap-3 px-5 py-3.5 rounded-2xl bg-sage/10 ring-1 ring-sage/20 hover:ring-sage/30 transition-all active:scale-[0.98]"
+            >
+              <span className="text-xl">{suggestedLangInfo.flag}</span>
+              <div className="text-left">
+                <div className="text-sm font-medium text-charcoal">
+                  {suggestedLangInfo.native}
+                </div>
+                <div className="text-[10px] text-sage">
+                  {getStoredLanguage(id) ? "Last used" : "Detected"}
+                </div>
+              </div>
+            </button>
+          )}
+
           {/* Search bar */}
           <div className="max-w-sm mx-auto relative">
             <MagnifyingGlass
@@ -159,7 +227,6 @@ export default function MenuPage() {
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search languages..."
               className="w-full pl-11 pr-4 py-3 rounded-2xl bg-white ring-1 ring-charcoal/[0.08] text-sm text-charcoal placeholder:text-warm-gray/40 focus:outline-none focus:ring-2 focus:ring-sage/30 transition-all"
-              autoFocus
             />
           </div>
         </header>
@@ -288,7 +355,7 @@ export default function MenuPage() {
         </div>
       </header>
 
-      {/* Translating skeleton */}
+      {/* Translating skeleton — matches real menu structure */}
       {translating && (
         <div className="max-w-lg mx-auto px-4 pt-8">
           <div className="text-center mb-8">
@@ -297,12 +364,11 @@ export default function MenuPage() {
               Translating to {selectedLangInfo?.name ?? selectedLang}...
             </p>
           </div>
-          {/* Skeleton items */}
-          {[1, 2, 3].map((cat) => (
-            <div key={cat} className="mb-8 animate-pulse">
-              <div className="h-3 w-24 bg-charcoal/[0.06] rounded mb-4" />
-              {[1, 2, 3].map((item) => (
-                <div key={item} className="py-3 border-b border-charcoal/[0.04]">
+          {menu.categories.map((cat, i) => (
+            <div key={i} className="mb-8 animate-pulse">
+              <div className="h-3 bg-charcoal/[0.06] rounded mb-4" style={{ width: `${Math.min(cat.name.length * 8, 120)}px` }} />
+              {cat.items.map((_, j) => (
+                <div key={j} className="py-3 border-b border-charcoal/[0.04]">
                   <div className="flex justify-between">
                     <div className="h-4 bg-charcoal/[0.06] rounded w-40" />
                     <div className="h-4 bg-charcoal/[0.06] rounded w-14" />
@@ -320,7 +386,7 @@ export default function MenuPage() {
         <div className="max-w-lg mx-auto px-4 pt-4">
           <div className="bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 flex items-center justify-between">
             <p className="text-xs text-amber-700">
-              Translation unavailable. Showing original menu.
+              {translationError}
             </p>
             <button
               onClick={retryTranslation}
@@ -333,7 +399,7 @@ export default function MenuPage() {
       )}
 
       {/* Menu content */}
-      {categories && (
+      {categories && !translating && (
         <main className="max-w-lg mx-auto px-4 pt-6">
           {/* Restaurant header */}
           {(menu.branding.restaurantName || menu.branding.tagline) && (
