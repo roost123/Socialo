@@ -43,9 +43,10 @@
   --text-secondary: #555555;
   --text-muted: #888888;
   --border: #eaeaea;
-  --border-light: rgba(0, 0, 0, 0.04);
+  --border-light: rgba(0, 0, 0, 0.08);
   --accent: #2563eb;
-  --accent-soft: rgba(37, 99, 235, 0.08);
+  --accent-soft: rgba(37, 99, 235, 0.1);
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.08), 0 8px 24px rgba(0,0,0,0.06);
 }
 
 * {
