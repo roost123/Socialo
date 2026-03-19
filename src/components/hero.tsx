@@ -13,21 +13,22 @@ export function Hero() {
       <div className="relative z-10 max-w-3xl mx-auto text-center">
         {/* Eyebrow */}
         <div className="hero-animate inline-flex items-center rounded-full px-4 py-1.5 text-[11px] uppercase tracking-[0.2em] font-medium text-warm-gray bg-charcoal/[0.03] ring-1 ring-charcoal/[0.06] mb-10">
-          Automation for business
+          Automatisering voor bedrijven
         </div>
 
         {/* Headline */}
         <h1 className="hero-animate-delay-1 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-[-0.035em] leading-[1.05] text-charcoal">
-          That should be
+          Dat moet toch
           <br />
-          automatic by now.
+          automatisch kunnen.
         </h1>
 
         {/* Subline */}
         <p className="hero-animate-delay-2 mt-8 text-lg sm:text-xl text-warm-gray leading-relaxed max-w-xl mx-auto font-light">
-          You know that one thing you do every week — the same clicks, the same
-          calls, the same copy-paste. You&apos;ve said it before: &ldquo;Why am I
-          still doing this manually?&rdquo; We build the fix.
+          Je kent het wel — elke week dezelfde klikken, dezelfde telefoontjes,
+          hetzelfde kopieer-en-plak werk. Je hebt het zelf al gezegd:
+          &ldquo;Waarom doe ik dit nog steeds met de hand?&rdquo; Wij bouwen de
+          oplossing.
         </p>
 
         {/* CTA */}
@@ -36,16 +37,18 @@ export function Hero() {
             href="#examples"
             className="group inline-flex items-center gap-3 rounded-full bg-charcoal text-cream px-7 py-3.5 text-sm font-medium transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.12)] active:scale-[0.98]"
           >
-            <span>See what we automate</span>
+            <span>Bekijk wat we automatiseren</span>
             <span className="flex items-center justify-center w-7 h-7 rounded-full bg-white/10 transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-y-0.5">
               <ArrowDown size={14} weight="bold" />
             </span>
           </a>
           <a
-            href="#contact"
+            href="https://calendly.com/socialo/demo"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-sm font-medium text-warm-gray hover:text-charcoal transition-colors duration-300"
           >
-            Get in touch
+            Plan een gratis demo
           </a>
         </div>
       </div>

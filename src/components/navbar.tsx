@@ -5,9 +5,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { List, X } from "@phosphor-icons/react";
 
 const navLinks = [
-  { label: "Problem", href: "#problem" },
-  { label: "What we do", href: "#what" },
-  { label: "Examples", href: "#examples" },
+  { label: "Probleem", href: "#problem" },
+  { label: "Wat we doen", href: "#what" },
+  { label: "Voorbeelden", href: "#examples" },
   { label: "FAQ", href: "#faq" },
   { label: "Contact", href: "#contact" },
 ];

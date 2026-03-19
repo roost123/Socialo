@@ -6,34 +6,34 @@ import { ScrollReveal, StaggerContainer, StaggerItem } from "./scroll-reveal";
 
 const faqs = [
   {
-    question: "Do I need any technical knowledge?",
+    question: "Heb ik technische kennis nodig?",
     answer:
-      "None at all. If you can take a photo and click a button, you can use Socialo. We handle all the technology — you just tell us what problem you want solved.",
+      "Helemaal niet. Als je een foto kunt maken en op een knop kunt drukken, kun je Socialo gebruiken. Wij regelen alle techniek — jij vertelt ons alleen welk probleem je opgelost wilt hebben.",
   },
   {
-    question: "How is this different from ChatGPT or a standard chatbot?",
+    question: "Hoe verschilt dit van ChatGPT of een standaard chatbot?",
     answer:
-      "A chatbot answers questions and stops there. Socialo handles the full chain: a customer message becomes a booking, a confirmation, a reminder, a follow-up. The difference isn't the bot — it's everything that happens after the conversation.",
+      "Een chatbot beantwoordt vragen en stopt daar. Socialo regelt de hele keten: een klantbericht wordt een boeking, een bevestiging, een herinnering, een opvolging. Het verschil zit niet in de bot — het zit in alles wat er na het gesprek gebeurt.",
   },
   {
-    question: "What languages does the Menu Translator support?",
+    question: "Welke talen ondersteunt de Menuvertaler?",
     answer:
-      "Over 80 languages, covering every major language in the world — from English and French to Japanese, Arabic, Hindi, Swahili, and everything in between. Your guests pick their language, and the menu appears translated.",
+      "Meer dan 80 talen, waarmee je elke grote taal ter wereld dekt — van Engels en Frans tot Japans, Arabisch, Hindi, Swahili en alles ertussenin. Je gast kiest een taal en het menu verschijnt vertaald.",
   },
   {
-    question: "Does the schedule builder comply with Dutch labor law?",
+    question: "Houdt de roostermaker zich aan de Nederlandse arbeidswet?",
     answer:
-      "Yes. It checks against the Arbeidstijdenwet (Working Hours Act) and the Horeca CAO: maximum hours per day and week, minimum rest periods, rules for minors, minimum call-in hours for on-call workers, and contract hour compliance.",
+      "Ja. Het systeem checkt tegen de Arbeidstijdenwet en de Horeca CAO: maximale uren per dag en week, minimale rusttijden, regels voor minderjarigen, minimale oproepuren voor oproepkrachten en naleving van contracturen.",
   },
   {
-    question: "How much does Socialo cost?",
+    question: "Wat kost Socialo?",
     answer:
-      "We're currently in the demo phase and working with early adopters. Pricing will depend on which solution you need and the size of your business. Get in touch and we'll figure out what makes sense for you.",
+      "We zitten momenteel in de demofase en werken met early adopters. De prijs hangt af van welke oplossing je nodig hebt en de grootte van je bedrijf. Neem contact op en we kijken samen wat logisch is.",
   },
   {
-    question: "Can I try it before committing?",
+    question: "Kan ik het uitproberen zonder verplichtingen?",
     answer:
-      "Absolutely. Every solution on this page has a working demo you can try right now — no account needed, no credit card, no strings attached.",
+      "Absoluut. Elke oplossing op deze pagina heeft een werkende demo die je nu meteen kunt proberen — geen account nodig, geen creditcard, geen kleine lettertjes.",
   },
 ];
 
@@ -83,10 +83,10 @@ export function FAQ() {
         <ScrollReveal>
           <div className="text-center mb-16">
             <span className="inline-flex rounded-full px-4 py-1.5 text-[11px] uppercase tracking-[0.2em] font-medium text-warm-gray bg-charcoal/[0.03] ring-1 ring-charcoal/[0.06] mb-6">
-              FAQ
+              Veelgestelde vragen
             </span>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-[-0.03em] leading-[1.1] text-charcoal">
-              Questions you might have.
+              Vragen die je misschien hebt.
             </h2>
           </div>
         </ScrollReveal>

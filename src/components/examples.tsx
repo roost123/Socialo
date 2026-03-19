@@ -18,31 +18,35 @@ interface Example {
   label: string;
   problem: string;
   fix: string;
+  result: string;
   Showcase: ComponentType;
 }
 
 const examples: Example[] = [
   {
     icon: Translate,
-    label: "Menu Translator",
-    problem: "Your menu is in one language. Your guests speak twenty.",
-    fix: "QR code on the table. Guest scans, picks their language, reads the menu. No app, no download. Click a flag to see it work.",
+    label: "Menuvertaler",
+    problem: "Je menu is in één taal. Je gasten spreken er twintig.",
+    fix: "QR-code op tafel. Gast scant, kiest een taal, leest het menu. Geen app, geen download. Klik op een vlag om het te zien.",
+    result: "Bespaart gemiddeld 4 uur per week",
     Showcase: MenuShowcase,
   },
   {
     icon: CalendarCheck,
-    label: "Self-Making Schedule",
+    label: "Zelf-makend Rooster",
     problem:
-      "Every week, someone spends hours building a staff schedule by hand.",
-    fix: "Staff submit availability through a link. The system builds the schedule — respecting contracts, rest periods, and preferences. Watch it fill itself in.",
+      "Elke week zit iemand uren te puzzelen met het personeelsrooster.",
+    fix: "Medewerkers geven beschikbaarheid op via een link. Het systeem maakt het rooster — rekening houdend met contracten, rusttijden en voorkeuren. Kijk hoe het zichzelf vult.",
+    result: "Bespaart 2+ uur per week",
     Showcase: ScheduleShowcase,
   },
   {
     icon: WhatsappLogo,
     label: "Hotel WhatsApp Concierge",
     problem:
-      "Your front desk answers the same questions 50 times a day. Meanwhile, the phone keeps ringing.",
-    fix: "A WhatsApp assistant that knows your hotel inside out. Click a question or type your own — it answers instantly.",
+      "Je receptie beantwoordt dezelfde vragen 50 keer per dag. En de telefoon blijft rinkelen.",
+    fix: "Een WhatsApp-assistent die je hotel van binnen en buiten kent. Klik op een vraag of typ er zelf een — je krijgt meteen antwoord.",
+    result: "24/7 beschikbaar, direct antwoord",
     Showcase: ConciergeShowcase,
   },
 ];
@@ -54,10 +58,10 @@ export function Examples() {
         <ScrollReveal>
           <div className="text-center mb-16 md:mb-20">
             <span className="inline-flex rounded-full px-4 py-1.5 text-[11px] uppercase tracking-[0.2em] font-medium text-warm-gray bg-charcoal/[0.03] ring-1 ring-charcoal/[0.06] mb-6">
-              Examples
+              Voorbeelden
             </span>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-[-0.03em] leading-[1.1] text-charcoal">
-              Here&apos;s what that looks like.
+              Dit is hoe dat eruitziet.
             </h2>
           </div>
         </ScrollReveal>
@@ -93,12 +97,19 @@ export function Examples() {
                           className="text-sage"
                         />
                         <span className="text-xs font-semibold uppercase tracking-[0.15em] text-sage">
-                          The fix
+                          De oplossing
                         </span>
                       </div>
                       <p className="text-sm md:text-base leading-relaxed text-warm-gray font-light">
                         {example.fix}
                       </p>
+                      {/* Result indicator */}
+                      <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-sage/[0.08] px-3 py-1.5 self-start">
+                        <div className="w-1.5 h-1.5 rounded-full bg-sage" />
+                        <span className="text-xs font-medium text-sage">
+                          {example.result}
+                        </span>
+                      </div>
                     </div>
 
                     {/* Right: Interactive showcase */}

@@ -14,26 +14,26 @@ export function Stats() {
                 <AnimatedCounter
                   target={80}
                   suffix="+"
-                  label="Languages supported"
+                  label="Talen ondersteund"
                   duration={1.5}
                 />
                 <AnimatedCounter
                   target={10}
                   suffix="sec"
-                  label="Menu ready in"
+                  label="Menu klaar in"
                   duration={1}
                 />
                 <AnimatedCounter
                   target={0}
                   suffix=""
                   prefix="€"
-                  label="Setup costs"
+                  label="Opstartkosten"
                   duration={0.5}
                 />
                 <AnimatedCounter
                   target={24}
                   suffix="/7"
-                  label="Always available"
+                  label="Altijd beschikbaar"
                   duration={1.2}
                 />
               </div>

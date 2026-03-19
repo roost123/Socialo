@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Socialo — That should be automatic by now.",
+  title: "Socialo — Dat moet toch automatisch kunnen.",
   description:
-    "Socialo builds automations for small and medium businesses. We take repetitive work and make it disappear.",
+    "Socialo bouwt automatiseringen voor het MKB. We pakken herhalend werk en laten het verdwijnen.",
 };
 
 export default function RootLayout({
@@ -13,7 +13,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="nl">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link

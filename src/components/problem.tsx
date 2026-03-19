@@ -11,17 +11,17 @@ const problems = [
   {
     icon: ForkKnife,
     quote:
-      "Every evening, our waitstaff explains the same menu to tourists who don't speak the language. Over and over. Table after table.",
+      "Elke avond staat ons personeel dezelfde gerechten uit te leggen aan toeristen die de taal niet spreken. Steeds opnieuw. Tafel na tafel.",
   },
   {
     icon: CalendarBlank,
     quote:
-      "Every Monday I spend two hours building the weekly schedule. Texting people, shuffling shifts, checking contracts. It's the same puzzle every week.",
+      "Elke maandag zit ik twee uur aan het weekrooster. Appjes sturen, diensten schuiven, contracturen checken. Elke week dezelfde puzzel.",
   },
   {
     icon: ChatCircleDots,
     quote:
-      "Guests message us the same 15 questions every single day. What time is checkout? Is there parking? Can I get a late check-in? We answer them all by hand.",
+      "Gasten sturen ons elke dag dezelfde 15 vragen. Hoe laat is uitchecken? Is er parkeerruimte? Kan ik later inchecken? We beantwoorden ze allemaal met de hand.",
   },
 ];
 
@@ -32,12 +32,12 @@ export function Problem() {
         <ScrollReveal>
           <div className="text-center mb-16 md:mb-20">
             <span className="inline-flex rounded-full px-4 py-1.5 text-[11px] uppercase tracking-[0.2em] font-medium text-warm-gray bg-charcoal/[0.03] ring-1 ring-charcoal/[0.06] mb-6">
-              The problem
+              Het probleem
             </span>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-[-0.03em] leading-[1.1] text-charcoal">
-              Every business has
+              Elk bedrijf heeft
               <br />
-              that one thing.
+              dat ene ding.
             </h2>
           </div>
         </ScrollReveal>
