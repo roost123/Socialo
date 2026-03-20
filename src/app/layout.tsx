@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import { GeistSans } from "geist/font/sans";
+import { LenisProvider } from "@/components/lenis-provider";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Socialo — Dat moet toch automatisch kunnen.",
+  title: "Socialo — Dat moet toch automatisch kunnen?",
   description:
-    "Socialo bouwt automatiseringen voor het MKB. We pakken herhalend werk en laten het verdwijnen.",
+    "Socialo bouwt maatwerk AI-automatisering voor het MKB. Wij zoeken uit waar jij tijd verliest — en bouwen precies wat jij nodig hebt.",
 };
 
 export default function RootLayout({
@@ -13,21 +15,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="nl">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap"
-          rel="stylesheet"
-        />
-      </head>
-      <body className="noise-overlay">
-        {children}
+    <html lang="nl" className={GeistSans.className}>
+      <body>
+        <LenisProvider>
+          {children}
+        </LenisProvider>
       </body>
     </html>
   );

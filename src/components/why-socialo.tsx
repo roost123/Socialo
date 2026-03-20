@@ -1,138 +1,173 @@
 "use client";
 
-import { ScrollReveal, StaggerContainer, StaggerItem } from "./scroll-reveal";
-
-const looseToolSteps = [
-  { text: "Klant stuurt een bericht", active: true },
-  { text: "Bot geeft een antwoord", active: true },
-  { text: "...en dan?", active: false },
-];
-
-const socialoSteps = [
-  "Klant stuurt een WhatsApp",
-  "AI begrijpt de vraag",
-  "Checkt beschikbaarheid",
-  "Boekt in het systeem",
-  "Bevestigt aan de klant",
-  "Keuken krijgt dieetwensen",
-  "Herinnering de dag ervoor",
-  "Review-verzoek na het bezoek",
-];
-
-function ChainDot({ active, faded }: { active?: boolean; faded?: boolean }) {
-  if (faded) {
-    return (
-      <div className="w-3 h-3 rounded-full border-2 border-dashed border-cream/20" />
-    );
-  }
-  return (
-    <div
-      className={`w-3 h-3 rounded-full ${
-        active ? "bg-sage ring-4 ring-sage/20" : "bg-cream/20"
-      }`}
-    />
-  );
-}
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export function WhySocialo() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const bodyRefs = useRef<(HTMLParagraphElement | null)[]>([]);
+  const quoteRef = useRef<HTMLDivElement>(null);
+  const photoRef = useRef<HTMLDivElement>(null);
+  const terenceRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+
+    const ctx = gsap.context(() => {
+      // Header
+      gsap.from(headerRef.current, {
+        y: 40,
+        opacity: 0,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: headerRef.current,
+          start: "top 85%",
+          toggleActions: "play none none none",
+        },
+      });
+
+      // Body paragraphs with stagger
+      bodyRefs.current.forEach((el, i) => {
+        if (!el) return;
+        gsap.from(el, {
+          y: 40,
+          opacity: 0,
+          duration: 1,
+          ease: "power3.out",
+          delay: i * 0.15,
+          scrollTrigger: {
+            trigger: el,
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+        });
+      });
+
+      // Quote block slides from right
+      gsap.from(quoteRef.current, {
+        x: 40,
+        opacity: 0,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: quoteRef.current,
+          start: "top 85%",
+          toggleActions: "play none none none",
+        },
+      });
+
+      // Photo scales in
+      gsap.from(photoRef.current, {
+        scale: 0.9,
+        opacity: 0,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: photoRef.current,
+          start: "top 85%",
+          toggleActions: "play none none none",
+        },
+      });
+
+      // Terence text
+      gsap.from(terenceRef.current, {
+        y: 30,
+        opacity: 0,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: terenceRef.current,
+          start: "top 85%",
+          toggleActions: "play none none none",
+        },
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section id="why" className="px-0 py-28 md:py-40 bg-charcoal text-cream">
-      <div className="max-w-5xl mx-auto px-4">
-        {/* Heading */}
-        <ScrollReveal>
-          <div className="text-center mb-16 md:mb-20">
-            <span className="inline-flex rounded-full px-4 py-1.5 text-[11px] uppercase tracking-[0.2em] font-medium text-cream/50 bg-cream/[0.06] ring-1 ring-cream/[0.1] mb-6">
-              Waarom Socialo
-            </span>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-[-0.03em] leading-[1.1] text-cream">
-              Losse tools beantwoorden vragen.
+    <section ref={sectionRef} id="waarom" className="gradient-from-dark">
+      {/* Part 1: Differentiator */}
+      <div className="py-32 md:py-44 px-6">
+        <div className="section-content">
+          <div ref={headerRef} className="mb-12 gsap-reveal">
+            <p className="text-label mb-6">Waarom Socialo</p>
+            <h2 className="text-h2 text-text-primary">
+              Wij verkopen geen tools.
               <br />
-              Socialo regelt het.
+              Wij lossen problemen op.
             </h2>
           </div>
-        </ScrollReveal>
 
-        {/* Chain comparison card */}
-        <ScrollReveal delay={0.1}>
-          <div className="rounded-[2rem] bg-cream/[0.06] ring-1 ring-cream/[0.08] p-1.5">
-            <div className="rounded-[calc(2rem-0.375rem)] bg-charcoal-light/80 shadow-[inset_0_1px_1px_rgba(255,255,255,0.04)] p-8 md:p-12">
-              <div className="flex flex-col md:flex-row gap-12 md:gap-16">
-                {/* Left: Loose tool chain */}
-                <div className="md:w-2/5">
-                  <span className="text-xs font-semibold uppercase tracking-[0.15em] text-cream/30 mb-6 block">
-                    Een losse tool
-                  </span>
-                  <div className="flex flex-col">
-                    {looseToolSteps.map((step, i) => (
-                      <div key={i} className="flex items-start gap-4">
-                        <div className="flex flex-col items-center">
-                          <ChainDot
-                            active={false}
-                            faded={!step.active}
-                          />
-                          {i < looseToolSteps.length - 1 && (
-                            <div className="w-px h-8 bg-cream/10" />
-                          )}
-                        </div>
-                        <p
-                          className={`text-sm pb-1 ${
-                            step.active
-                              ? "text-cream/60"
-                              : "text-cream/25 italic"
-                          }`}
-                        >
-                          {step.text}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+          <div className="space-y-6 mb-12">
+            <p
+              ref={(el) => { bodyRefs.current[0] = el; }}
+              className="text-body-lg text-text-secondary gsap-reveal"
+            >
+              Andere partijen vragen: &ldquo;Welke module wil je?&rdquo;
+              <br />
+              Wij vragen: &ldquo;Waar verlies je tijd?&rdquo;
+            </p>
+            <p
+              ref={(el) => { bodyRefs.current[1] = el; }}
+              className="text-body-lg text-text-secondary gsap-reveal"
+            >
+              En dan bouwen we precies wat nodig is. Geen standaard pakket.
+              Geen 20 losse abonnementen. Eén oplossing die doet wat jij
+              nodig hebt.
+            </p>
+          </div>
 
-                {/* Right: Socialo chain */}
-                <div className="md:w-3/5">
-                  <span className="text-xs font-semibold uppercase tracking-[0.15em] text-sage mb-6 block">
-                    Socialo
-                  </span>
-                  <StaggerContainer className="flex flex-col">
-                    {socialoSteps.map((step, i) => (
-                      <StaggerItem key={i}>
-                        <div className="flex items-start gap-4">
-                          <div className="flex flex-col items-center">
-                            <ChainDot active />
-                            {i < socialoSteps.length - 1 && (
-                              <div className="w-px h-8 bg-sage/30" />
-                            )}
-                          </div>
-                          <p className="text-sm text-cream pb-1">
-                            {step}
-                          </p>
-                        </div>
-                      </StaggerItem>
-                    ))}
-                  </StaggerContainer>
-                </div>
-              </div>
+          {/* Quote block */}
+          <div
+            ref={quoteRef}
+            className="rounded-2xl bg-accent/[0.08] border border-accent/10 p-8 md:p-10 gsap-reveal"
+          >
+            <p className="text-body-lg text-text-primary italic">
+              &ldquo;Als iets beter handmatig blijft, zeggen we dat.
+              We verkopen geen AI om de AI.&rdquo;
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Part 2: Terence */}
+      <div className="pb-32 md:pb-44 px-6">
+        <div className="section-content">
+          <div className="flex flex-col md:flex-row items-start gap-8 md:gap-12">
+            {/* Photo placeholder */}
+            <div
+              ref={photoRef}
+              className="shrink-0 w-32 h-32 md:w-40 md:h-40 rounded-2xl bg-text-primary/[0.04] border border-text-primary/[0.06] flex items-center justify-center gsap-reveal"
+            >
+              <span className="text-4xl md:text-5xl text-text-secondary/30 font-light">T</span>
+            </div>
+
+            <div ref={terenceRef} className="gsap-reveal">
+              <h3 className="text-h3 text-text-primary mb-4">
+                Hoi, ik ben Terence.
+              </h3>
+              <p className="text-body-lg text-text-secondary mb-6">
+                Ondernemer, bouwer, en de persoon die je aan de lijn krijgt
+                als je belt. Geen salesteam, geen wachtrij — gewoon ik.
+              </p>
+              <a
+                href="https://wa.me/31612345678?text=Hoi%20Terence%2C%20ik%20heb%20een%20vraag%20over%20Socialo"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-base font-medium text-accent hover:text-accent-hover transition-colors duration-300"
+              >
+                Stuur me een bericht
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M1 13L13 1M13 1H5M13 1v8" />
+                </svg>
+              </a>
             </div>
           </div>
-        </ScrollReveal>
-
-        {/* Honest take */}
-        <div className="max-w-2xl mx-auto text-center mt-16 md:mt-20">
-          <ScrollReveal delay={0.2}>
-            <p className="text-lg text-cream/60 leading-relaxed font-light">
-              Heb je alleen een simpele FAQ-bot nodig? Dan is een standaard tool
-              prima. We helpen je er zelfs eentje kiezen. Maar als je wilt dat
-              klanten ook echt dingen <em className="text-cream/80">doen</em> &mdash; boeken, betalen,
-              plannen &mdash; dan bouwen wij dat.
-            </p>
-          </ScrollReveal>
-          <ScrollReveal delay={0.3}>
-            <p className="mt-6 text-base text-cream/35 italic font-light">
-              Je kunt zelf naar de bouwmarkt voor buizen en kranen. Maar als je
-              een werkende badkamer wilt, bel je een loodgieter. Niet omdat je
-              het niet kunt &mdash; maar omdat je betere dingen te doen hebt.
-            </p>
-          </ScrollReveal>
         </div>
       </div>
     </section>

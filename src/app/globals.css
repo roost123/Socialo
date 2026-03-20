@@ -1,136 +1,158 @@
 @import "tailwindcss";
 
 @theme {
-  --color-cream: #FDFBF7;
-  --color-cream-dark: #F5F0E8;
-  --color-warm-gray: #8A8578;
-  --color-charcoal: #1A1A18;
-  --color-charcoal-light: #2D2D2A;
-  --color-sage: #7C8C6E;
-  --color-sage-light: #E8ECE4;
-  --color-accent: #C4A882;
+  --color-bg-primary: #FAFAFA;
+  --color-bg-dark: #0F0F0F;
+  --color-text-primary: #1A1A1A;
+  --color-text-secondary: #6B6B6B;
+  --color-text-light: #F5F5F5;
+  --color-accent: #0EA5E9;
+  --color-accent-hover: #0284C7;
+  --color-accent-subtle: #E0F2FE;
+  --color-gradient-1: #F0F0F8;
+  --color-gradient-2: #E8EDE8;
+  --color-gradient-3: #E8E4F0;
 
-  --font-heading: "Plus Jakarta Sans", system-ui, sans-serif;
-  --font-body: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-sans: "Geist", system-ui, -apple-system, sans-serif;
 }
 
 @layer base {
   html {
-    scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
   body {
-    font-family: var(--font-body);
-    background-color: var(--color-cream);
-    color: var(--color-charcoal);
+    font-family: var(--font-sans);
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    overflow-x: hidden;
   }
 
   ::selection {
-    background-color: var(--color-sage-light);
-    color: var(--color-charcoal);
+    background-color: rgba(14, 165, 233, 0.15);
+    color: var(--color-text-primary);
   }
 }
 
-/* Hero above-fold animation — CSS only for SSR compatibility */
-@keyframes hero-fade-up {
-  from {
-    opacity: 0;
-    transform: translateY(24px);
+/* Typography system */
+.text-h1 {
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+.text-h2 {
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.text-h3 {
+  font-size: clamp(24px, 3vw, 32px);
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+/* Problem sentences — distinct from H2 */
+.text-problem {
+  font-size: clamp(28px, 3.5vw, 40px);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.text-body-lg {
+  font-size: clamp(16px, 1.5vw, 18px);
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.text-body {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.text-label {
+  font-size: 13px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #999999;
+}
+
+/* Section layout */
+.section-full {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+.section-content {
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+@media (min-width: 768px) {
+  .section-content {
+    padding-left: 48px;
+    padding-right: 48px;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+}
+
+@media (min-width: 1024px) {
+  .section-content {
+    padding-left: 80px;
+    padding-right: 80px;
   }
 }
 
-.hero-animate {
-  animation: hero-fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+/* Gradient transitions — SUBTLE */
+.gradient-hero-to-problem {
+  background: linear-gradient(180deg, var(--color-bg-primary) 0%, #F0F0F8 100%);
 }
 
-.hero-animate-delay-1 {
-  animation: hero-fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+.gradient-problem-internal {
+  background: linear-gradient(180deg, #F0F0F8 0%, #E8EDE8 25%, #E8E4F0 50%, #EDE8F0 75%, #F0F0F8 100%);
 }
 
-.hero-animate-delay-2 {
-  animation: hero-fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+.gradient-to-white {
+  background: linear-gradient(180deg, #F0F0F8 0%, var(--color-bg-primary) 100%);
 }
 
-.hero-animate-delay-3 {
-  animation: hero-fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.45s both;
+.gradient-to-dark {
+  background: linear-gradient(180deg, var(--color-bg-primary) 0%, var(--color-bg-dark) 100%);
 }
 
-/* Noise texture overlay */
-.noise-overlay::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 50;
-  pointer-events: none;
-  opacity: 0.03;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+.gradient-from-dark {
+  background: linear-gradient(180deg, var(--color-bg-dark) 0%, var(--color-bg-primary) 100%);
 }
 
-/* Floating orb animations */
-@keyframes float-slow {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(30px, -20px) scale(1.05); }
-  66% { transform: translate(-20px, 15px) scale(0.95); }
+.gradient-contact-to-footer {
+  background: linear-gradient(180deg, var(--color-bg-primary) 0%, #F0F0F8 40%, var(--color-text-primary) 100%);
 }
 
-@keyframes float-slow-reverse {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(-25px, 20px) scale(0.95); }
-  66% { transform: translate(15px, -25px) scale(1.05); }
+/* GSAP helpers */
+.gsap-reveal {
+  will-change: transform, opacity;
 }
 
-@keyframes pulse-slow {
-  0%, 100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-  50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.1); }
-}
-
-.animate-float-slow {
-  animation: float-slow 20s ease-in-out infinite;
-}
-
-.animate-float-slow-reverse {
-  animation: float-slow-reverse 25s ease-in-out infinite;
-}
-
-.animate-pulse-slow {
-  animation: pulse-slow 15s ease-in-out infinite;
-}
-
-/* Scroll indicator dot */
-@keyframes scroll-dot {
-  0% { transform: translateY(0); opacity: 1; }
-  50% { transform: translateY(8px); opacity: 0.3; }
-  100% { transform: translateY(0); opacity: 1; }
-}
-
-.animate-scroll-dot {
-  animation: scroll-dot 2s ease-in-out infinite;
-}
-
-/* Scrollbar hide utility */
+/* Scrollbar hide */
 .scrollbar-none::-webkit-scrollbar { display: none; }
 .scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .hero-animate,
-  .hero-animate-delay-1,
-  .hero-animate-delay-2,
-  .hero-animate-delay-3 {
-    animation: none;
+  .gsap-reveal {
+    will-change: auto;
   }
-}
-
-/* Print-friendly for guest menu */
-@media print {
-  body { background: white !important; }
-  .noise-overlay::after { display: none; }
-  header, footer { display: none !important; }
-  main { padding: 0 !important; }
 }

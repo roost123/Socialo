@@ -1,64 +1,89 @@
 "use client";
 
-import {
-  ForkKnife,
-  CalendarBlank,
-  ChatCircleDots,
-} from "@phosphor-icons/react";
-import { ScrollReveal, StaggerContainer, StaggerItem } from "./scroll-reveal";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-const problems = [
-  {
-    icon: ForkKnife,
-    quote:
-      "Elke avond staat ons personeel dezelfde gerechten uit te leggen aan toeristen die de taal niet spreken. Steeds opnieuw. Tafel na tafel.",
-  },
-  {
-    icon: CalendarBlank,
-    quote:
-      "Elke maandag zit ik twee uur aan het weekrooster. Appjes sturen, diensten schuiven, contracturen checken. Elke week dezelfde puzzel.",
-  },
-  {
-    icon: ChatCircleDots,
-    quote:
-      "Gasten sturen ons elke dag dezelfde 15 vragen. Hoe laat is uitchecken? Is er parkeerruimte? Kan ik later inchecken? We beantwoorden ze allemaal met de hand.",
-  },
+const sentences = [
+  "Je klantenservice loopt achter omdat één persoon alles handmatig afhandelt.",
+  "Je team besteedt uren aan data overtypen van het ene systeem naar het andere.",
+  "Je klanten verwachten 24/7 antwoord.\nMaar je hebt geen nachtdienst.",
+  "Elke week dezelfde e-mails.\nDezelfde vragen. Dezelfde antwoorden.",
+  "Je wéét dat het beter kan.\nMaar je weet niet waar je moet beginnen.",
 ];
 
 export function Problem() {
-  return (
-    <section id="problem" className="px-4 py-28 md:py-40">
-      <div className="max-w-5xl mx-auto">
-        <ScrollReveal>
-          <div className="text-center mb-16 md:mb-20">
-            <span className="inline-flex rounded-full px-4 py-1.5 text-[11px] uppercase tracking-[0.2em] font-medium text-warm-gray bg-charcoal/[0.03] ring-1 ring-charcoal/[0.06] mb-6">
-              Het probleem
-            </span>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-[-0.03em] leading-[1.1] text-charcoal">
-              Elk bedrijf heeft
-              <br />
-              dat ene ding.
-            </h2>
-          </div>
-        </ScrollReveal>
+  const sectionRef = useRef<HTMLElement>(null);
+  const sentenceRefs = useRef<(HTMLParagraphElement | null)[]>([]);
 
-        <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {problems.map((item, i) => (
-            <StaggerItem key={i}>
-              {/* Double-bezel card */}
-              <div className="rounded-[2rem] bg-charcoal/[0.03] ring-1 ring-charcoal/[0.05] p-1.5">
-                <div className="rounded-[calc(2rem-0.375rem)] bg-white/80 shadow-[inset_0_1px_1px_rgba(255,255,255,0.6)] p-8 md:p-10 h-full">
-                  <div className="flex items-center justify-center w-12 h-12 rounded-2xl bg-sage-light/60 mb-6">
-                    <item.icon size={24} weight="light" className="text-sage" />
-                  </div>
-                  <p className="text-base leading-relaxed text-charcoal-light/80 italic">
-                    &ldquo;{item.quote}&rdquo;
-                  </p>
-                </div>
-              </div>
-            </StaggerItem>
-          ))}
-        </StaggerContainer>
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top top",
+          end: `+=${sentences.length * 100}%`,
+          pin: true,
+          scrub: 1,
+        },
+      });
+
+      sentenceRefs.current.forEach((sentence, i) => {
+        if (!sentence) return;
+
+        if (i === 0) {
+          // First sentence: start visible, then fade out
+          tl.from(sentence, {
+            opacity: 0,
+            y: 30,
+            filter: "blur(6px)",
+            duration: 1,
+          })
+            .to(sentence, { opacity: 1, duration: 1.5 }) // hold
+            .to(sentence, { opacity: 0, y: -30, duration: 0.8 });
+        } else {
+          // Remaining sentences: fade in, hold, fade out
+          tl.from(sentence, {
+            opacity: 0,
+            y: 30,
+            filter: "blur(6px)",
+            duration: 1,
+          })
+            .to(sentence, { opacity: 1, duration: 1.5 }) // hold
+            .to(
+              sentence,
+              {
+                opacity: 0,
+                y: -30,
+                duration: i === sentenceRefs.current.length - 1 ? 0 : 0.8,
+              }
+            );
+        }
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <section
+      ref={sectionRef}
+      id="probleem"
+      className="section-full relative overflow-hidden"
+    >
+      <div className="section-content text-center relative h-full flex items-center justify-center">
+        {sentences.map((text, i) => (
+          <p
+            key={i}
+            ref={(el) => { sentenceRefs.current[i] = el; }}
+            className="text-problem text-text-primary absolute inset-x-0 px-6 gsap-reveal whitespace-pre-line"
+            style={{ opacity: 0 }}
+          >
+            {text}
+          </p>
+        ))}
       </div>
     </section>
   );
