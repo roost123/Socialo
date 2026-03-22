@@ -21,12 +21,13 @@
     "items": [
       "Seu funcionário gasta 3 horas por dia respondendo e-mails que sempre perguntam a mesma coisa.",
       "Pedidos chegam por e-mail, telefone e WhatsApp — e alguém precisa colocar tudo no sistema na mão.",
-      "Você tem informação de clientes no e-mail, no CRM e na cabeça de alguém — e em nenhum lugar está completo."
+      "Seu sistema acerta 80% — mas os últimos 20% custam frustração à sua equipe todos os dias."
     ],
     "turn": "Hoje em dia, dá pra fazer diferente."
   },
   "whatWeDo": {
     "heading": "A gente resolve, você empreende.",
+    "sub": "A gente descobre onde você perde tempo — e constrói exatamente o que é necessário. Não de um catálogo, mas sob medida. Estas são três áreas por onde costumamos começar:",
     "services": [
       {
         "number": "01",
@@ -46,10 +47,11 @@
         "description": "Um cliente manda um e-mail e a nota fiscal já está pronta. Porque o sistema reconhece o pedido, processa e encaminha — sem você precisar fazer nada.",
         "examples": "Menos etapas, menos erros, mais rápido"
       }
-    ]
+    ],
+    "footer": "A solução específica a gente descobre com cada cliente. Não vendemos uma lista pronta — resolvemos o que encontramos."
   },
   "voorbeelden": {
-    "heading": "É assim que funciona na prática.",
+    "heading": "Isto é o que construímos, por exemplo.",
     "cases": [
       {
         "client": "Dr. Worker",

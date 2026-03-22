@@ -23,18 +23,18 @@ Na elke oplevering: loop je eigen output na. Check responsive (375px, 768px, 128
 - Geen externe UI-libraries (geen shadcn, MUI, Radix). Alles custom.
 
 ## Typografie
-Font: Afacad Flux (Google Fonts), via next/font/google.
-- Display: 36px / 700 / -1.5px tracking
-- H1: 28px / 700 / -1px
-- H2: 22px / 700 / -0.5px
-- H3: 17px / 500 / -0.3px
-- Body: 16px / 400 / 0px / line-height 1.6
+Font: Outfit (Google Fonts), via next/font/google. Eén font voor alles (headings + body).
+- Display: clamp(30-64px) / 600 / -1.5px tracking
+- H1: clamp(24-38px) / 600 / -0.5px
+- H2: clamp(20-28px) / 600 / -0.3px
+- H3: clamp(17-20px) / 500 / -0.2px
+- Body: clamp(15-18px) / 400 / 0px / line-height 1.6
 - Label: 11px / 500 / uppercase / +2px tracking
 
 ## Kleuren
 Achtergrond: #FAFAFA. Tekst: #000000. Secondary: #737373. Muted: #A3A3A3. Borders: #E5E5E5. Surface: #F5F5F5.
 Gradient (dark sections): linear-gradient(135deg, #243748, #4B749F).
-Primary button: #7C5CFC solid, wit tekst. Secondary button: wit, border #E5E5E5. Ghost: #F5F5F5.
+Primary button: #1A1A1A solid, wit tekst (dark mode: #F0F0F0, zwarte tekst). Secondary button: wit, border #E5E5E5. Ghost: #F5F5F5.
 Badges — Sage: #E4EADB/#3A5A2A. Blue: #DBEAFE/#1D4ED8. Green: #D1FAE5/#065F46. Amber: #FEF3C7/#92400E.
 
 ## Layout

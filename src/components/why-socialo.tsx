@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { useTranslations } from "next-intl";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { NetworkBg } from "./network-bg";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -74,17 +75,18 @@ export function WhySocialo() {
   return (
     <section
       ref={sectionRef}
-      className="py-20 md:py-36 px-6 bg-gradient-to-br from-[var(--gradient-from)]/5 to-[var(--gradient-to)]/10"
+      className="relative py-20 md:py-36 px-6 bg-gradient-to-br from-[var(--gradient-from)]/5 to-[var(--gradient-to)]/10 overflow-hidden"
     >
-      <div className="max-w-[960px] mx-auto">
+      <NetworkBg triggerRef={sectionRef} className="absolute inset-0 z-0" />
+      <div className="relative z-10 max-w-[960px] mx-auto">
         <div className="text-center max-w-[700px] mx-auto">
-          <h2 className="text-display text-[var(--text-heading)] mb-8 overflow-hidden">
+          <h2 className="text-display text-[var(--text-heading)] mb-8">
             <span ref={heading1Ref} className="block">
               {t("heading1")}
             </span>
             <span
               ref={heading2Ref}
-              className="block bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent"
+              className="block pb-1 bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent"
             >
               {t("heading2")}
             </span>

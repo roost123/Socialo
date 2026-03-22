@@ -21,12 +21,13 @@
     "items": [
       "Your team spends 3 hours a day on emails that all ask the same thing.",
       "Orders come in through email, phone, and WhatsApp — and someone has to manually enter every single one into your system.",
-      "Your customer info lives in your inbox, your CRM, and someone's head — and nowhere is it complete."
+      "Your system does 80% right — but that last 20% costs your team frustration every day."
     ],
     "turn": "There's a better way now."
   },
   "whatWeDo": {
     "heading": "We handle it, you run your business.",
+    "sub": "We figure out where you're losing time — and build exactly what's needed. Not from a catalog, but tailor-made. These are three areas where we often start:",
     "services": [
       {
         "number": "01",
@@ -46,10 +47,11 @@
         "description": "A customer sends an email, and the invoice is already there. Because the system recognized the request, processed it, and forwarded it — without you having to do a thing.",
         "examples": "Fewer steps, fewer mistakes, done faster"
       }
-    ]
+    ],
+    "footer": "The specific solution is discovered per client. We don't sell a fixed list — we solve what we find."
   },
   "voorbeelden": {
-    "heading": "Here's what that looks like in practice.",
+    "heading": "Here's what we've built, for example.",
     "cases": [
       {
         "client": "Dr. Worker",

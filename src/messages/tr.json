@@ -21,12 +21,13 @@
     "items": [
       "Çalışanın günde 3 saatini hep aynı şeyi soran e-postalara cevap vererek geçiriyor.",
       "Siparişler e-posta, telefon ve WhatsApp'tan geliyor — ve birinin hepsini tek tek sisteme girmesi gerekiyor.",
-      "Müşteri bilgilerin e-postanda, CRM'inde ve birinin kafasında — hiçbir yerde eksiksiz değil."
+      "Sistemin %80'ini doğru yapıyor — ama o son %20, ekibine her gün hayal kırıklığı yaşatıyor."
     ],
     "turn": "Artık bunun başka yolları var."
   },
   "whatWeDo": {
     "heading": "Biz çözüyoruz, sen işine odaklan.",
+    "sub": "Nerede zaman kaybettiğini buluyoruz — ve tam olarak neye ihtiyaç varsa onu kuruyoruz. Bir katalogdan değil, sana özel. İşte sıkça başladığımız üç alan:",
     "services": [
       {
         "number": "01",
@@ -46,10 +47,11 @@
         "description": "Müşteri bir e-posta gönderiyor ve fatura çoktan hazır. Çünkü sistem talebi tanıyor, işliyor ve iletiyor — sen hiçbir şey yapmadan.",
         "examples": "Daha az adım, daha az hata, daha hızlı"
       }
-    ]
+    ],
+    "footer": "Spesifik çözümü her müşteriyle birlikte keşfediyoruz. Sabit bir liste satmıyoruz — bulduğumuz sorunu çözüyoruz."
   },
   "voorbeelden": {
-    "heading": "Pratikte böyle çalışıyor.",
+    "heading": "Örneğin bunları kurduk.",
     "cases": [
       {
         "client": "Dr. Worker",

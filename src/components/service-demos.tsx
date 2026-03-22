@@ -264,7 +264,7 @@ export function DemoChat() {
             </div>
             {/* Processing indicator */}
             <div className="flex items-center gap-2 px-1 transition-all duration-300" style={{ opacity: phase === 2 ? 1 : 0, maxHeight: phase === 2 ? "24px" : "0px", overflow: "hidden" }}>
-              <div className="w-3 h-3 rounded-full border-2 border-amber-400 border-t-transparent animate-spin" />
+              <div className="w-3 h-3 rounded-full border-2 border-[var(--badge-amber-text)] border-t-transparent animate-spin" />
               <span className="text-[9px] text-[var(--text-muted)]">Conceptantwoord opstellen...</span>
             </div>
             {/* AI draft reply */}
@@ -298,7 +298,7 @@ export function DemoChat() {
             </div>
             {/* AI analyzing */}
             <div className="flex items-center gap-2 px-1 transition-all duration-300" style={{ opacity: phase === 2 ? 1 : 0, maxHeight: phase === 2 ? "24px" : "0px", overflow: "hidden" }}>
-              <div className="w-3 h-3 rounded-full border-2 border-emerald-400 border-t-transparent animate-spin" />
+              <div className="w-3 h-3 rounded-full border-2 border-[var(--badge-green-text)] border-t-transparent animate-spin" />
               <span className="text-[9px] text-[var(--text-muted)]">Reactie genereren...</span>
             </div>
             {/* AI response */}
@@ -398,7 +398,7 @@ export function DemoData() {
       {/* Header */}
       <div className="px-4 py-2.5 border-b border-[var(--border-color)] flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <div className={`w-2 h-2 rounded-full transition-colors duration-500 ${phase >= 5 ? "bg-green-400" : phase >= 4 ? "bg-amber-400 animate-pulse" : "bg-[var(--text-muted)] opacity-40"}`} />
+          <div className={`w-2 h-2 rounded-full transition-colors duration-500 ${phase >= 5 ? "bg-[var(--badge-green-text)]" : phase >= 4 ? "bg-[var(--badge-amber-text)] animate-pulse" : "bg-[var(--text-muted)] opacity-40"}`} />
           <span className="text-[11px] font-medium text-[var(--text-muted)]">
             {phase >= 5 ? "Inzicht klaar" : phase >= 4 ? "Analyseren..." : "Databronnen"}
           </span>
@@ -433,7 +433,7 @@ export function DemoData() {
           style={{ opacity: phase >= 4 && phase < 5 ? 1 : phase >= 5 ? 0.3 : 0, maxHeight: phase >= 4 ? "28px" : "0px" }}
         >
           <div className="flex-1 h-px bg-gradient-to-r from-transparent via-[var(--border-color)] to-transparent" />
-          <div className={`w-4 h-4 rounded-full border-2 border-blue-400 border-t-transparent ${phase >= 4 && phase < 5 ? "animate-spin" : ""}`} />
+          <div className={`w-4 h-4 rounded-full border-2 border-[var(--badge-blue-text)] border-t-transparent ${phase >= 4 && phase < 5 ? "animate-spin" : ""}`} />
           <div className="flex-1 h-px bg-gradient-to-r from-transparent via-[var(--border-color)] to-transparent" />
         </div>
 
@@ -459,7 +459,7 @@ export function DemoData() {
 
           {/* Trend badge */}
           <div className="transition-all duration-500" style={{ opacity: phase >= 6 ? 1 : 0, transform: phase >= 6 ? "translateY(0)" : "translateY(4px)" }}>
-            <span className="text-[9px] font-medium text-green-600 bg-green-50 px-2 py-0.5 rounded-full inline-flex items-center gap-1">
+            <span className="text-[9px] font-medium text-[var(--badge-green-text)] bg-[var(--badge-green-bg)] px-2 py-0.5 rounded-full inline-flex items-center gap-1">
               <svg className="w-2.5 h-2.5" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
               {scenario.insight.trend}
             </span>
@@ -471,31 +471,38 @@ export function DemoData() {
 }
 
 /* ─── Service 3: Processen stroomlijnen ─── */
+const stepBadgeColors: Record<string, string> = {
+  amber: "bg-[var(--badge-amber-bg)] text-[var(--badge-amber-text)]",
+  blue: "bg-[var(--badge-blue-bg)] text-[var(--badge-blue-text)]",
+  green: "bg-[var(--badge-green-bg)] text-[var(--badge-green-text)]",
+  purple: "bg-[var(--badge-purple-bg)] text-[var(--badge-purple-text)]",
+};
+
 const processScenarios = [
   {
     trigger: { icon: "✉", label: "Nieuwe e-mail", sub: "klant@bedrijf.nl" },
     steps: [
-      { icon: "⚡", label: "Aanvraag herkend", sub: "Type: factuurverzoek", color: "bg-amber-100 text-amber-600" },
-      { icon: "📄", label: "Factuur aangemaakt", sub: "#INV-2024-0847", color: "bg-blue-100 text-blue-600" },
-      { icon: "📬", label: "Verstuurd naar klant", sub: "klant@bedrijf.nl", color: "bg-green-100 text-green-600" },
+      { icon: "⚡", label: "Aanvraag herkend", sub: "Type: factuurverzoek", badge: "amber" },
+      { icon: "📄", label: "Factuur aangemaakt", sub: "#INV-2024-0847", badge: "blue" },
+      { icon: "📬", label: "Verstuurd naar klant", sub: "klant@bedrijf.nl", badge: "green" },
     ],
     result: "Factuur verstuurd in 4s",
   },
   {
     trigger: { icon: "📦", label: "Nieuwe bestelling", sub: "Webshop #8834" },
     steps: [
-      { icon: "🔍", label: "Voorraad gecheckt", sub: "3x op voorraad", color: "bg-blue-100 text-blue-600" },
-      { icon: "🏷", label: "Verzendlabel gemaakt", sub: "PostNL — 3SDEVC028847", color: "bg-purple-100 text-purple-600" },
-      { icon: "📧", label: "Bevestiging verstuurd", sub: "Track & trace gedeeld", color: "bg-green-100 text-green-600" },
+      { icon: "🔍", label: "Voorraad gecheckt", sub: "3x op voorraad", badge: "blue" },
+      { icon: "🏷", label: "Verzendlabel gemaakt", sub: "PostNL — 3SDEVC028847", badge: "purple" },
+      { icon: "📧", label: "Bevestiging verstuurd", sub: "Track & trace gedeeld", badge: "green" },
     ],
     result: "Order verwerkt in 8s",
   },
   {
     trigger: { icon: "📅", label: "Nieuwe afspraak", sub: "Google Calendar" },
     steps: [
-      { icon: "📋", label: "Klantinfo opgehaald", sub: "CRM: Bakkerij Jansen", color: "bg-blue-100 text-blue-600" },
-      { icon: "📝", label: "Agenda-notitie gemaakt", sub: "Laatste gesprek + openstaande offerte", color: "bg-amber-100 text-amber-600" },
-      { icon: "🔔", label: "Herinnering gepland", sub: "30 min van tevoren", color: "bg-green-100 text-green-600" },
+      { icon: "📋", label: "Klantinfo opgehaald", sub: "CRM: Bakkerij Jansen", badge: "blue" },
+      { icon: "📝", label: "Agenda-notitie gemaakt", sub: "Laatste gesprek + openstaande offerte", badge: "amber" },
+      { icon: "🔔", label: "Herinnering gepland", sub: "30 min van tevoren", badge: "green" },
     ],
     result: "Voorbereiding klaar in 3s",
   },
@@ -543,7 +550,7 @@ export function DemoProcess() {
       {/* Header */}
       <div className="px-4 py-2.5 border-b border-[var(--border-color)] flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <div className={`w-2 h-2 rounded-full transition-colors duration-300 ${phase >= 5 ? "bg-green-400" : phase >= 2 ? "bg-blue-400 animate-pulse" : "bg-[var(--text-muted)] opacity-40"}`} />
+          <div className={`w-2 h-2 rounded-full transition-colors duration-300 ${phase >= 5 ? "bg-[var(--badge-green-text)]" : phase >= 2 ? "bg-[var(--badge-blue-text)] animate-pulse" : "bg-[var(--text-muted)] opacity-40"}`} />
           <span className="text-[11px] font-medium text-[var(--text-muted)]">
             {phase >= 5 ? "Afgerond" : phase >= 2 ? "Bezig..." : "Workflow"}
           </span>
@@ -557,12 +564,12 @@ export function DemoProcess() {
           className="flex items-center gap-3 p-2 rounded-lg border border-[var(--border-color)] bg-[var(--bg-surface-secondary)] transition-all duration-500 ease-out"
           style={{ opacity: phase >= 1 ? 1 : 0, transform: phase >= 1 ? "translateX(0)" : "translateX(-16px)" }}
         >
-          <div className="w-7 h-7 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center text-xs shrink-0">{scenario.trigger.icon}</div>
+          <div className="w-7 h-7 rounded-lg bg-[var(--badge-blue-bg)] text-[var(--badge-blue-text)] flex items-center justify-center text-xs shrink-0">{scenario.trigger.icon}</div>
           <div className="flex-1 min-w-0">
             <p className="text-[11px] font-medium text-[var(--text-heading)]">{scenario.trigger.label}</p>
             <p className="text-[9px] text-[var(--text-muted)]">{scenario.trigger.sub}</p>
           </div>
-          <span className="text-[8px] text-blue-500 font-medium shrink-0">TRIGGER</span>
+          <span className="text-[8px] text-[var(--badge-blue-text)] font-medium shrink-0">TRIGGER</span>
         </div>
 
         {/* Arrow */}
@@ -573,21 +580,21 @@ export function DemoProcess() {
         {/* Automated steps */}
         {scenario.steps.map((step, i) => (
           <div key={step.label} className="flex items-center gap-3 transition-all duration-500 ease-out" style={{ opacity: phase >= i + 2 ? 1 : 0.15, transform: phase >= i + 2 ? "translateX(0)" : "translateX(-12px)" }}>
-            <div className={`w-6 h-6 rounded-md flex items-center justify-center text-[10px] transition-colors duration-300 shrink-0 ${phase >= i + 2 ? step.color : "bg-[var(--bg-surface-secondary)] text-[var(--text-muted)]"}`}>
+            <div className={`w-6 h-6 rounded-md flex items-center justify-center text-[10px] transition-colors duration-300 shrink-0 ${phase >= i + 2 ? stepBadgeColors[step.badge] : "bg-[var(--bg-surface-secondary)] text-[var(--text-muted)]"}`}>
               {step.icon}
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-[10px] font-medium text-[var(--text-heading)]">{step.label}</p>
               <p className="text-[8px] text-[var(--text-muted)] truncate">{step.sub}</p>
             </div>
-            {phase >= i + 3 && <span className="text-[8px] text-green-500 font-medium shrink-0">&#10003;</span>}
-            {phase === i + 2 && <span className="text-[8px] text-amber-500 font-medium animate-pulse shrink-0">...</span>}
+            {phase >= i + 3 && <span className="text-[8px] text-[var(--badge-green-text)] font-medium shrink-0">&#10003;</span>}
+            {phase === i + 2 && <span className="text-[8px] text-[var(--badge-amber-text)] font-medium animate-pulse shrink-0">...</span>}
           </div>
         ))}
 
         {/* Result badge */}
         <div className="flex justify-center mt-1 transition-all duration-500 ease-out" style={{ opacity: phase >= 5 ? 1 : 0, transform: phase >= 5 ? "translateY(0)" : "translateY(6px)" }}>
-          <span className="text-[9px] font-medium text-green-600 bg-green-50 px-2.5 py-0.5 rounded-full inline-flex items-center gap-1">
+          <span className="text-[9px] font-medium text-[var(--badge-green-text)] bg-[var(--badge-green-bg)] px-2.5 py-0.5 rounded-full inline-flex items-center gap-1">
             <svg className="w-2.5 h-2.5" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
             {scenario.result}
           </span>
@@ -639,7 +646,7 @@ export function DemoChatbot() {
           </div>
           <div className="flex-1 bg-[var(--bg-surface-secondary)] rounded-lg px-2.5 py-1.5">
             <p className="text-[8px] text-[var(--text-muted)]">Gem. reactie</p>
-            <p className="text-[13px] font-bold text-green-500">3s</p>
+            <p className="text-[13px] font-bold text-[var(--badge-green-text)]">3s</p>
             <p className="text-[8px] text-[var(--text-muted)]">was 4 uur</p>
           </div>
         </div>
@@ -784,7 +791,7 @@ export function DemoMenuTranslator() {
         >
           <span className="text-[9px] font-medium text-[var(--text-muted)] bg-[var(--bg-surface-secondary)] px-2 py-0.5 rounded-full">🇳🇱 NL</span>
           <svg className="w-3 h-3 text-[var(--text-muted)]" viewBox="0 0 12 12" fill="none"><path d="M2 6h8m0 0L7.5 3.5M10 6L7.5 8.5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" /></svg>
-          <span className={`text-[9px] font-medium px-2 py-0.5 rounded-full transition-all duration-300 ${phase >= 3 ? "bg-green-50 text-green-600" : "bg-[var(--bg-surface-secondary)] text-[var(--text-muted)]"}`}>
+          <span className={`text-[9px] font-medium px-2 py-0.5 rounded-full transition-all duration-300 ${phase >= 3 ? "bg-[var(--badge-green-bg)] text-[var(--badge-green-text)]" : "bg-[var(--bg-surface-secondary)] text-[var(--text-muted)]"}`}>
             {targetLang.flag} {targetLang.code}
           </span>
         </div>
@@ -806,7 +813,7 @@ export function DemoMenuTranslator() {
                 </div>
                 {/* Arrow */}
                 <div className="transition-all duration-300 shrink-0" style={{ opacity: phase >= 2 && phase < 3 ? 1 : 0, width: phase >= 2 && phase < 3 ? "12px" : "0px" }}>
-                  <div className="w-3 h-3 rounded-full border-[1.5px] border-blue-400 border-t-transparent animate-spin" />
+                  <div className="w-3 h-3 rounded-full border-[1.5px] border-[var(--badge-blue-text)] border-t-transparent animate-spin" />
                 </div>
                 {/* Target (translated) */}
                 <div
@@ -826,7 +833,7 @@ export function DemoMenuTranslator() {
 
         {/* Success badge */}
         <div className="flex justify-center mt-1.5 transition-all duration-500 ease-out" style={{ opacity: phase >= 4 ? 1 : 0, transform: phase >= 4 ? "translateY(0)" : "translateY(6px)" }}>
-          <span className="text-[8px] font-medium text-green-600 bg-green-50 px-2 py-0.5 rounded-full inline-flex items-center gap-1">
+          <span className="text-[8px] font-medium text-[var(--badge-green-text)] bg-[var(--badge-green-bg)] px-2 py-0.5 rounded-full inline-flex items-center gap-1">
             <svg className="w-2.5 h-2.5" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
             Menu vertaald naar {targetLang.label}
           </span>
@@ -980,7 +987,7 @@ export function DemoConcierge() {
 
         {/* Action taken badge */}
         <div className="flex justify-center transition-all duration-500 ease-out" style={{ opacity: phase >= 5 ? 1 : 0, transform: phase >= 5 ? "translateY(0)" : "translateY(6px)" }}>
-          <span className="text-[8px] font-medium text-green-600 bg-green-50 px-2 py-0.5 rounded-full inline-flex items-center gap-1">
+          <span className="text-[8px] font-medium text-[var(--badge-green-text)] bg-[var(--badge-green-bg)] px-2 py-0.5 rounded-full inline-flex items-center gap-1">
             <svg className="w-2.5 h-2.5" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
             {conv.action}
           </span>

@@ -21,12 +21,13 @@
     "items": [
       "Tu empleado pasa 3 horas al día respondiendo correos que siempre preguntan lo mismo.",
       "Los pedidos llegan por correo, teléfono y WhatsApp — y alguien tiene que meterlos todos a mano en el sistema.",
-      "Tienes información de clientes en tu correo, en tu CRM y en la cabeza de alguien — y en ningún sitio está completa."
+      "Tu sistema hace bien el 80 % — pero ese último 20 % le cuesta frustración a tu equipo cada día."
     ],
     "turn": "Hoy en día, eso se puede hacer de otra forma."
   },
   "whatWeDo": {
     "heading": "Nosotros resolvemos, tú emprendes.",
+    "sub": "Descubrimos dónde pierdes tiempo — y construimos exactamente lo que hace falta. No de un catálogo, sino a medida. Estas son tres áreas donde solemos empezar:",
     "services": [
       {
         "number": "01",
@@ -46,10 +47,11 @@
         "description": "Un cliente envía un correo y la factura ya está lista. Porque el sistema reconoce la solicitud, la procesa y la reenvía — sin que tú tengas que hacer nada.",
         "examples": "Menos pasos, menos errores, más rápido"
       }
-    ]
+    ],
+    "footer": "La solución específica la descubrimos con cada cliente. No vendemos una lista fija — resolvemos lo que encontramos."
   },
   "voorbeelden": {
-    "heading": "Así funciona en la práctica.",
+    "heading": "Esto es lo que hemos construido, por ejemplo.",
     "cases": [
       {
         "client": "Dr. Worker",

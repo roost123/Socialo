@@ -79,7 +79,7 @@ export function Problem() {
 
         <div ref={turnRef} className="mt-14 md:mt-28">
           <div className="w-12 h-px bg-[var(--border-color)] mb-10" />
-          <p className="text-display bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
+          <p className="text-display pb-1 bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
             {t("turn")}
           </p>
         </div>

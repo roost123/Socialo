@@ -21,12 +21,13 @@
     "items": [
       "Ton équipe passe 3 heures par jour sur des e-mails qui posent tous la même question.",
       "Les commandes arrivent par mail, téléphone et WhatsApp — et quelqu'un doit tout saisir à la main dans le système.",
-      "Tes infos clients sont dans ta boîte mail, ton CRM et la tête de quelqu'un — et nulle part c'est complet."
+      "Ton système fait 80 % du boulot — mais les 20 % restants coûtent de la frustration à ton équipe chaque jour."
     ],
     "turn": "Aujourd'hui, on peut faire autrement."
   },
   "whatWeDo": {
     "heading": "On gère, tu entreprends.",
+    "sub": "On cherche où tu perds du temps — et on construit exactement ce qu'il faut. Pas dans un catalogue, mais sur mesure. Voici trois domaines par lesquels on commence souvent :",
     "services": [
       {
         "number": "01",
@@ -46,10 +47,11 @@
         "description": "Un client envoie un e-mail, et la facture est déjà prête. Parce que le système a reconnu la demande, l'a traitée et transmise — sans que tu aies à lever le petit doigt.",
         "examples": "Moins d'étapes, moins d'erreurs, plus vite bouclé"
       }
-    ]
+    ],
+    "footer": "La solution spécifique, on la découvre client par client. On ne vend pas une liste fixe — on résout ce qu'on trouve."
   },
   "voorbeelden": {
-    "heading": "Voilà ce que ça donne en vrai.",
+    "heading": "Voilà ce qu'on a construit, par exemple.",
     "cases": [
       {
         "client": "Dr. Worker",
