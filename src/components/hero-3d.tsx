@@ -428,15 +428,15 @@ export function Hero3D() {
   return (
     <div
       ref={containerRef}
-      className="relative w-full"
-      style={{ height: 500 }}
+      className="relative w-full pointer-events-none"
+      style={{ height: "100%" }}
       aria-hidden="true"
       role="presentation"
     >
       {mounted && (
         <canvas
           ref={canvasRef}
-          className="absolute inset-0"
+          className="absolute inset-0 pointer-events-none"
           style={{ width: "100%", height: "100%" }}
         />
       )}
