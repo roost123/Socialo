@@ -25,7 +25,7 @@
   --color-badge-amber-bg: #FEF3C7;
   --color-badge-amber-text: #92400E;
 
-  --font-sans: "Afacad Flux", system-ui, -apple-system, sans-serif;
+  --font-sans: "Outfit", system-ui, -apple-system, sans-serif;
 }
 
 /* ─── Semantic theme tokens ─── */
@@ -50,11 +50,18 @@
   --selection-bg: rgba(0, 0, 0, 0.08);
   --card-bezel-bg: rgba(0, 0, 0, 0.02);
   --card-bezel-border: rgba(0, 0, 0, 0.04);
+  --text-error: #DC2626;
   --thread-color: #D4D4D4;
   --gradient-from: #243748;
   --gradient-to: #4B749F;
   --badge-green-bg: #D1FAE5;
   --badge-green-text: #065F46;
+  --badge-blue-bg: #DBEAFE;
+  --badge-blue-text: #1D4ED8;
+  --badge-amber-bg: #FEF3C7;
+  --badge-amber-text: #92400E;
+  --badge-purple-bg: #EDE9FE;
+  --badge-purple-text: #6D28D9;
 }
 
 html.dark {
@@ -78,11 +85,18 @@ html.dark {
   --selection-bg: rgba(255, 255, 255, 0.12);
   --card-bezel-bg: rgba(255, 255, 255, 0.03);
   --card-bezel-border: rgba(255, 255, 255, 0.06);
+  --text-error: #F87171;
   --thread-color: #333333;
   --gradient-from: #6B9FD4;
   --gradient-to: #9BC4F0;
   --badge-green-bg: rgba(6, 95, 70, 0.15);
   --badge-green-text: #6EE7B7;
+  --badge-blue-bg: rgba(29, 78, 216, 0.15);
+  --badge-blue-text: #93C5FD;
+  --badge-amber-bg: rgba(146, 64, 14, 0.15);
+  --badge-amber-text: #FCD34D;
+  --badge-purple-bg: rgba(109, 40, 217, 0.15);
+  --badge-purple-text: #C4B5FD;
 }
 
 @layer base {
@@ -112,31 +126,31 @@ html.dark {
 
 /* ─── Typography scale ─── */
 .text-display {
-  font-size: clamp(36px, 6vw, 72px);
-  font-weight: 700;
-  line-height: 1.05;
-  letter-spacing: -2px;
+  font-size: clamp(30px, 5.5vw, 64px);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -1.5px;
 }
 
 .text-h1 {
   font-size: clamp(24px, 3.5vw, 38px);
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.15;
-  letter-spacing: -1px;
+  letter-spacing: -0.5px;
 }
 
 .text-h2 {
   font-size: clamp(20px, 2.8vw, 28px);
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.2;
-  letter-spacing: -0.5px;
+  letter-spacing: -0.3px;
 }
 
 .text-h3 {
   font-size: clamp(17px, 1.5vw, 20px);
   font-weight: 500;
   line-height: 1.4;
-  letter-spacing: -0.3px;
+  letter-spacing: -0.2px;
 }
 
 .text-body {
@@ -161,10 +175,10 @@ html.dark {
 }
 
 .text-problem {
-  font-size: clamp(26px, 4vw, 40px);
-  font-weight: 700;
-  line-height: 1.15;
-  letter-spacing: -1.2px;
+  font-size: clamp(22px, 3.5vw, 36px);
+  font-weight: 500;
+  line-height: 1.18;
+  letter-spacing: -0.5px;
 }
 
 /* ─── Buttons ─── */
@@ -217,6 +231,30 @@ html.dark {
   transform: scale(0.98) translateY(0);
 }
 
+/* ─── Focus states (accessibility) ─── */
+.btn-primary:focus-visible,
+.btn-secondary:focus-visible {
+  outline: 2px solid var(--gradient-to);
+  outline-offset: 2px;
+}
+
+@layer base {
+  a:focus-visible,
+  button:focus-visible,
+  [role="button"]:focus-visible {
+    outline: 2px solid var(--gradient-to);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline: 2px solid var(--gradient-to);
+    outline-offset: 0;
+  }
+}
+
 /* ─── Cards — Double-bezel architecture ─── */
 .card {
   border-radius: 16px;
@@ -252,11 +290,6 @@ html.dark {
   border-radius: 6px;
   font-size: 11px;
   font-weight: 500;
-}
-
-/* ─── GSAP helpers ─── */
-.gsap-reveal {
-  will-change: transform, opacity;
 }
 
 /* ─── Scrollbar hide ─── */
@@ -321,9 +354,6 @@ html.dark {
 
 /* ─── Reduced motion ─── */
 @media (prefers-reduced-motion: reduce) {
-  .gsap-reveal {
-    will-change: auto;
-  }
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;

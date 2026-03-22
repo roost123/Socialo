@@ -21,12 +21,13 @@
     "items": [
       "Je medewerker besteedt 3 uur per dag aan e-mails die allemaal hetzelfde vragen.",
       "Orders komen binnen via mail, telefoon en WhatsApp — en iemand moet ze allemaal handmatig in het systeem zetten.",
-      "Je hebt klantinformatie in je mail, in je CRM, en in iemands hoofd — en nergens is het compleet."
+      "Je systeem doet 80% goed — maar die laatste 20% kost je team elke dag frustratie."
     ],
     "turn": "Dat kan tegenwoordig ook anders."
   },
   "whatWeDo": {
     "heading": "Wij lossen op, jij onderneemt.",
+    "sub": "We zoeken uit waar jij tijd verliest — en bouwen precies wat nodig is. Niet uit een catalogus, maar op maat. Dit zijn drie gebieden waar we vaak beginnen:",
     "services": [
       {
         "number": "01",
@@ -46,10 +47,11 @@
         "description": "Een klant stuurt een e-mail, en de factuur staat er al. Omdat het systeem de aanvraag herkent, verwerkt en doorstuurt — zonder dat jij eraan te pas komt.",
         "examples": "Minder stappen, minder fouten, sneller klaar"
       }
-    ]
+    ],
+    "footer": "De specifieke oplossing ontdekken we per klant. We verkopen geen vaste lijst — we lossen op wat we vinden."
   },
   "voorbeelden": {
-    "heading": "Zo werkt dat in de praktijk.",
+    "heading": "Dit bouwden we bijvoorbeeld.",
     "cases": [
       {
         "client": "Dr. Worker",

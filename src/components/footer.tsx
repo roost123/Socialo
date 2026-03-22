@@ -34,13 +34,13 @@ export function Footer() {
           S O C I A L O
         </a>
 
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-2 sm:gap-6">
           {footerLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
               onClick={(e) => handleClick(e, link.href)}
-              className="text-small text-[var(--text-muted)] hover:text-[var(--text-heading)] transition-colors duration-300"
+              className="text-small text-[var(--text-muted)] hover:text-[var(--text-heading)] transition-colors duration-300 py-3 px-1.5"
             >
               {link.label}
             </a>

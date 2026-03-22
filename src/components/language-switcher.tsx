@@ -34,7 +34,7 @@ export function LanguageSwitcher() {
     <div ref={ref} className="relative">
       <button
         onClick={() => setOpen(!open)}
-        className="flex items-center gap-1 px-2 py-1.5 rounded-lg text-xs font-medium uppercase tracking-wider transition-colors duration-200 hover:bg-[var(--bg-surface-secondary)]"
+        className="flex items-center gap-1 min-w-[44px] min-h-[44px] px-2.5 justify-center rounded-lg text-xs font-medium uppercase tracking-wider transition-colors duration-200 hover:bg-[var(--bg-surface-secondary)]"
         aria-label="Kies taal"
       >
         {locale.toUpperCase()}
@@ -47,6 +47,7 @@ export function LanguageSwitcher() {
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
+          aria-hidden="true"
           className={`transition-transform duration-200 ${open ? "rotate-180" : ""}`}
         >
           <path d="m6 9 6 6 6-6" />
@@ -59,7 +60,7 @@ export function LanguageSwitcher() {
             <button
               key={l}
               onClick={() => switchLocale(l)}
-              className={`w-full text-left px-4 py-2 text-sm transition-colors duration-150 hover:bg-[var(--bg-surface-secondary)] ${
+              className={`w-full text-left px-4 py-2.5 min-h-[44px] flex items-center text-sm transition-colors duration-150 hover:bg-[var(--bg-surface-secondary)] ${
                 l === locale
                   ? "font-medium text-[var(--text-heading)]"
                   : "text-[var(--text-secondary)]"

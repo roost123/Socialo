@@ -1,11 +1,14 @@
-import { Afacad_Flux } from "next/font/google";
+import { Outfit } from "next/font/google";
 import "./globals.css";
 
-const afacadFlux = Afacad_Flux({
+const outfit = Outfit({
   subsets: ["latin"],
-  weight: ["400", "500", "700"],
+  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
+  variable: "--font-sans",
 });
+
+export const fontClasses = `${outfit.variable} ${outfit.className}`;
 
 export default function RootLayout({
   children,
@@ -14,5 +17,3 @@ export default function RootLayout({
 }) {
   return children;
 }
-
-export { afacadFlux };

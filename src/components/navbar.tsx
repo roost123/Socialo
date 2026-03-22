@@ -79,7 +79,7 @@ export function Navbar() {
               className="inline-flex items-center gap-1.5 py-2.5 px-5 text-[14px] font-medium rounded-[10px] bg-[var(--btn-primary-bg)] text-[var(--btn-primary-text)] transition-all duration-300 hover:bg-[var(--btn-primary-bg-hover)] shadow-sm"
             >
               {t("cta")}
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
             </a>
           </div>
 

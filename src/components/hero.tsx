@@ -91,16 +91,16 @@ export function Hero() {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen flex flex-col items-center justify-center pt-28 pb-8 md:pt-24 md:pb-12 px-6 overflow-hidden"
+      className="relative min-h-screen flex flex-col items-start lg:items-center justify-center pt-24 pb-8 md:pt-24 md:pb-12 px-6 overflow-hidden"
     >
-      <div className="relative z-10 w-full max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-2 items-center gap-6 lg:gap-8">
+      <div className="relative z-10 w-full max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-2 items-center gap-4 lg:gap-8 mt-[10vh] lg:mt-0">
         {/* Left column — text */}
         <div className="text-center lg:text-left">
           <h1
             ref={headingRef}
             className="text-display mb-5 md:mb-8 text-[var(--text-heading)]"
           >
-            <span className="inline-block bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
+            <span className="inline-block pb-1 bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
               {displayText}
               <span
                 className="inline-block w-[2px] h-[0.75em] bg-[var(--gradient-to)] ml-[2px] align-middle translate-y-[1px]"
@@ -133,11 +133,15 @@ export function Hero() {
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
+                aria-hidden="true"
               >
                 <path d="m9 18 6-6-6-6" />
               </svg>
             </a>
-            <a href="#probleem" className="btn-secondary">
+            <button
+              onClick={() => document.getElementById("probleem")?.scrollIntoView({ behavior: "smooth" })}
+              className="btn-secondary"
+            >
               {t("secondary")}
               <svg
                 width="14"
@@ -148,15 +152,16 @@ export function Hero() {
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
+                aria-hidden="true"
               >
                 <path d="m6 9 6 6 6-6" />
               </svg>
-            </a>
+            </button>
           </div>
         </div>
 
-        {/* Right column — 3D scene */}
-        <div className="flex items-center justify-center lg:justify-end h-[280px] sm:h-[400px] lg:h-[500px]">
+        {/* 3D scene — below text on mobile, beside on desktop */}
+        <div className="flex items-center justify-center lg:justify-end h-[250px] sm:h-[320px] lg:h-[500px]">
           <Hero3D />
         </div>
       </div>
