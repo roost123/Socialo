@@ -1,0 +1,134 @@
+{
+  "meta": {
+    "title": "Socialo — Bunun otomatik olması gerekmiyor mu?",
+    "description": "Socialo, KOBİ'ler için özel yapım AI otomasyonu kuruyor. Sen neyin canını sıktığını söyle — biz tam ihtiyacın olanı inşa edelim."
+  },
+  "nav": {
+    "whatWeDo": "Ne yapıyoruz",
+    "howItWorks": "Nasıl çalışır",
+    "contact": "İletişim",
+    "cta": "Bize ulaş"
+  },
+  "hero": {
+    "words": ["Müşteri hizmetleri", "Teklif hazırlama", "Ajanda planlama", "Stok yönetimi", "Fatura gönderme"],
+    "headline": "bunun otomatik olması gerekmiyor mu?",
+    "sub": "Sen neyin canını sıktığını söyle. Biz çözelim.",
+    "cta": "Ücretsiz görüşme planla",
+    "secondary": "Nasıl çalışır?"
+  },
+  "problem": {
+    "label": "Tanıdık geldi mi?",
+    "items": [
+      "Çalışanın günde 3 saatini hep aynı şeyi soran e-postalara cevap vererek geçiriyor.",
+      "Siparişler e-posta, telefon ve WhatsApp'tan geliyor — ve birinin hepsini tek tek sisteme girmesi gerekiyor.",
+      "Müşteri bilgilerin e-postanda, CRM'inde ve birinin kafasında — hiçbir yerde eksiksiz değil."
+    ],
+    "turn": "Artık bunun başka yolları var."
+  },
+  "whatWeDo": {
+    "heading": "Biz çözüyoruz, sen işine odaklan.",
+    "services": [
+      {
+        "number": "01",
+        "title": "Müşteri iletişimi",
+        "description": "Müşteri iletişimini otomatikleştiriyoruz — müşterilerin anında doğru cevabı alsın, 24/7, kimsenin takip etmesine gerek kalmadan. Günde 4 saat e-posta cevaplayan o çalışan? Sonunda asıl işini yapabilir.",
+        "examples": "Anında cevap, daha az manuel iş, her zaman ulaşılabilir"
+      },
+      {
+        "number": "02",
+        "title": "Verilerini kullanılır hale getir",
+        "description": "Bilgilerin her yere dağılmış durumda. Biz hepsini tek bir yerde topluyoruz — otomatik olarak, kimsenin uğraşmasına gerek kalmadan.",
+        "examples": "Kaos yerine düzen, her zaman güncel"
+      },
+      {
+        "number": "03",
+        "title": "Süreçleri sadeleştir",
+        "description": "Müşteri bir e-posta gönderiyor ve fatura çoktan hazır. Çünkü sistem talebi tanıyor, işliyor ve iletiyor — sen hiçbir şey yapmadan.",
+        "examples": "Daha az adım, daha az hata, daha hızlı"
+      }
+    ]
+  },
+  "voorbeelden": {
+    "heading": "Pratikte böyle çalışıyor.",
+    "cases": [
+      {
+        "client": "Dr. Worker",
+        "type": "E-ticaret",
+        "description": "Haftada yüzlerce müşteri sorusu alan bir e-ticaret sitesi. Soruların 80%'ini anında cevaplayan bir AI chatbot kurduk — insan müdahalesi olmadan.",
+        "stat": "80%",
+        "statLabel": "otomatik çözüldü"
+      },
+      {
+        "client": "Restoran",
+        "type": "Gastronomi",
+        "description": "Uluslararası misafirleri olan bir restoran. Menüyü otomatik çeviren ve 12'den fazla dilde güncel tutan bir sistem oluşturduk.",
+        "stat": "12+",
+        "statLabel": "dil, anlık güncelleme"
+      },
+      {
+        "client": "Otel",
+        "type": "Konaklama",
+        "description": "Misafirlerin her an soruları olan bir otel. Chat üzerinden 24/7 ulaşılabilen dijital bir concierge kurduk — oda servisinden restoran önerilerine kadar.",
+        "stat": "24/7",
+        "statLabel": "ulaşılabilir, bekleme yok"
+      }
+    ]
+  },
+  "howItWorks": {
+    "heading": "İlk sohbetten çalışan sisteme.",
+    "steps": [
+      {
+        "number": "1",
+        "title": "Tanışma",
+        "description": "Dinliyoruz. Nerede zaman kaybediyorsun? Ne enerji tüketiyor? Satış konuşması yok — sadece iyi bir sohbet."
+      },
+      {
+        "number": "2",
+        "title": "Analiz ve teklif",
+        "description": "Süreçlerini haritalandırıyoruz ve net bir planla dönüyoruz. Ne kuruyoruz, ne kazandırıyor, ne kadara mal oluyor. Sürpriz yok."
+      },
+      {
+        "number": "3",
+        "title": "Kurulum",
+        "description": "Senin gerçek verilerinle kuruyoruz ve test ediyoruz. Süreç boyunca neler olduğunu görüyorsun."
+      },
+      {
+        "number": "4",
+        "title": "Canlıda ve destek",
+        "description": "Çalışıyor. Biz takip ediyoruz ve gerektiğinde iyileştiriyoruz."
+      }
+    ]
+  },
+  "whySocialo": {
+    "heading1": "Hazır paket yok.",
+    "heading2": "Senin işletmen için özel yapım.",
+    "body": "Teknik kısmı biz hallediyoruz. Sen sadece çalıştığını fark ediyorsun. Tam ihtiyacın olanı yapan bir şey — senin durumuna özel üretilmiş."
+  },
+  "persoonlijk": {
+    "heading": "Merhaba, ben Terence.",
+    "body": "İşletmeni otomatikleştirmene yardımcı olmak isterim. Bilgilerini doldur, asistanımız sana yardımcı olsun.",
+    "formName": "İsim",
+    "formNamePlaceholder": "Adınız nedir?",
+    "formEmail": "E-posta adresi",
+    "formEmailPlaceholder": "isim@sirket.com",
+    "formSubmit": "Sohbeti başlat",
+    "formErrorName": "Lütfen adınızı girin.",
+    "formErrorEmail": "Lütfen geçerli bir e-posta adresi girin.",
+    "chatTitle": "Socialo Asistan",
+    "chatStatus": "Çevrimiçi",
+    "chatTyping": "yazıyor...",
+    "chatWelcome": "Merhaba {name}! Burada olman harika. Anlat bakalım, ne tür bir işletmen var ve nerelerde zorlanıyorsun?",
+    "chatWelcomeBack": "Tekrar hoş geldin, {name}! Kaldığımız yerden devam edelim.",
+    "chatPlaceholder": "Mesajını yaz...",
+    "chatFinished": "Mesajın için teşekkürler! Terence en kısa sürede seninle iletişime geçecek.",
+    "errorRateLimit": "Çok fazla mesaj gönderildi. Daha sonra tekrar dene.",
+    "errorGeneral": "Bir şeyler ters gitti. Tekrar dene."
+  },
+  "footer": {
+    "copyright": "© {year} Socialo"
+  },
+  "theme": {
+    "light": "Açık temaya geç",
+    "dark": "Koyu temaya geç"
+  }
+}

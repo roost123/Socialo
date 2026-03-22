@@ -1,0 +1,134 @@
+{
+  "meta": {
+    "title": "Socialo — Eso debería estar automatizado, ¿no?",
+    "description": "Socialo construye automatización con IA a medida para pymes. Tú nos dices qué te frustra — nosotros construimos exactamente lo que necesitas."
+  },
+  "nav": {
+    "whatWeDo": "Qué hacemos",
+    "howItWorks": "Cómo funciona",
+    "contact": "Contacto",
+    "cta": "Contáctanos"
+  },
+  "hero": {
+    "words": ["Atención al cliente", "Preparar presupuestos", "Organizar agendas", "Gestión de inventario", "Enviar facturas"],
+    "headline": "eso debería estar automatizado, ¿no?",
+    "sub": "Tú nos dices qué te frustra. Nosotros lo resolvemos.",
+    "cta": "Agenda una llamada gratis",
+    "secondary": "¿Cómo funciona?"
+  },
+  "problem": {
+    "label": "¿Te suena?",
+    "items": [
+      "Tu empleado pasa 3 horas al día respondiendo correos que siempre preguntan lo mismo.",
+      "Los pedidos llegan por correo, teléfono y WhatsApp — y alguien tiene que meterlos todos a mano en el sistema.",
+      "Tienes información de clientes en tu correo, en tu CRM y en la cabeza de alguien — y en ningún sitio está completa."
+    ],
+    "turn": "Hoy en día, eso se puede hacer de otra forma."
+  },
+  "whatWeDo": {
+    "heading": "Nosotros resolvemos, tú emprendes.",
+    "services": [
+      {
+        "number": "01",
+        "title": "Comunicación con clientes",
+        "description": "Automatizamos tu comunicación con clientes para que reciban una buena respuesta al instante — 24/7, sin que nadie tenga que estar pendiente. ¿Ese empleado que pasa 4 horas al día respondiendo correos? Por fin puede dedicarse a lo que realmente lo contrataste.",
+        "examples": "Respuesta inmediata, menos trabajo manual, siempre disponible"
+      },
+      {
+        "number": "02",
+        "title": "Hacer que tus datos sirvan",
+        "description": "Tu información está repartida por todos lados. Nosotros hacemos que llegue a un solo lugar — automáticamente, sin que nadie tenga que ocuparse.",
+        "examples": "Orden en vez de caos, siempre actualizado"
+      },
+      {
+        "number": "03",
+        "title": "Optimizar procesos",
+        "description": "Un cliente envía un correo y la factura ya está lista. Porque el sistema reconoce la solicitud, la procesa y la reenvía — sin que tú tengas que hacer nada.",
+        "examples": "Menos pasos, menos errores, más rápido"
+      }
+    ]
+  },
+  "voorbeelden": {
+    "heading": "Así funciona en la práctica.",
+    "cases": [
+      {
+        "client": "Dr. Worker",
+        "type": "Tienda online",
+        "description": "Una tienda online con cientos de consultas de clientes por semana. Construimos un chatbot con IA que responde el 80% de las preguntas al instante — sin intervención humana.",
+        "stat": "80%",
+        "statLabel": "resuelto automáticamente"
+      },
+      {
+        "client": "Restaurante",
+        "type": "Hostelería",
+        "description": "Un restaurante con clientes internacionales. Creamos un sistema que traduce el menú automáticamente y lo mantiene actualizado en más de 12 idiomas.",
+        "stat": "12+",
+        "statLabel": "idiomas, en tiempo real"
+      },
+      {
+        "client": "Hotel",
+        "type": "Hospitalidad",
+        "description": "Un hotel donde los huéspedes tienen preguntas a cualquier hora. Construimos un conserje digital disponible 24/7 por chat — desde servicio a habitación hasta recomendaciones de restaurantes.",
+        "stat": "24/7",
+        "statLabel": "disponible, sin esperas"
+      }
+    ]
+  },
+  "howItWorks": {
+    "heading": "De la primera charla al sistema funcionando.",
+    "steps": [
+      {
+        "number": "1",
+        "title": "Conversación inicial",
+        "description": "Escuchamos. ¿Dónde pierdes tiempo? ¿Qué te quita energía? Sin discurso de ventas — solo una buena conversación."
+      },
+      {
+        "number": "2",
+        "title": "Análisis y propuesta",
+        "description": "Mapeamos tus procesos y volvemos con un plan claro. Qué construimos, qué te aporta, cuánto cuesta. Sin sorpresas."
+      },
+      {
+        "number": "3",
+        "title": "Construcción",
+        "description": "Construimos y probamos con tus datos reales. Vas viendo cómo avanza."
+      },
+      {
+        "number": "4",
+        "title": "En marcha y soporte",
+        "description": "Ya funciona. Nosotros lo vigilamos y optimizamos lo que haga falta."
+      }
+    ]
+  },
+  "whySocialo": {
+    "heading1": "Nada de paquetes estándar.",
+    "heading2": "Hecho a medida para tu negocio.",
+    "body": "Nosotros nos encargamos de la tecnología. Tú solo notas que funciona. Algo que hace exactamente lo que necesitas — construido a medida para tu situación."
+  },
+  "persoonlijk": {
+    "heading": "Hola, soy Terence.",
+    "body": "Me encanta ayudarte a automatizar tu negocio. Rellena tus datos y nuestro asistente te ayuda a empezar.",
+    "formName": "Nombre",
+    "formNamePlaceholder": "¿Cómo te llamas?",
+    "formEmail": "Correo electrónico",
+    "formEmailPlaceholder": "nombre@empresa.es",
+    "formSubmit": "Iniciar conversación",
+    "formErrorName": "Por favor, introduce tu nombre.",
+    "formErrorEmail": "Por favor, introduce un correo electrónico válido.",
+    "chatTitle": "Asistente Socialo",
+    "chatStatus": "En línea",
+    "chatTyping": "escribiendo...",
+    "chatWelcome": "¡Hola {name}! Qué bueno tenerte aquí. Cuéntame, ¿qué tipo de negocio tienes y con qué estás luchando?",
+    "chatWelcomeBack": "¡Bienvenido de vuelta, {name}! Retomemos donde lo dejamos.",
+    "chatPlaceholder": "Escribe tu mensaje...",
+    "chatFinished": "¡Gracias por tu mensaje! Terence se pondrá en contacto contigo lo antes posible.",
+    "errorRateLimit": "Demasiados mensajes. Inténtalo más tarde.",
+    "errorGeneral": "Algo salió mal. Inténtalo de nuevo."
+  },
+  "footer": {
+    "copyright": "© {year} Socialo"
+  },
+  "theme": {
+    "light": "Cambiar a tema claro",
+    "dark": "Cambiar a tema oscuro"
+  }
+}

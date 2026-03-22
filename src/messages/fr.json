@@ -1,0 +1,134 @@
+{
+  "meta": {
+    "title": "Socialo — Ça devrait pouvoir se faire tout seul, non ?",
+    "description": "Socialo construit de l'automatisation IA sur mesure pour les PME. Tu nous dis ce qui te prend la tête — on construit exactement ce qu'il te faut."
+  },
+  "nav": {
+    "whatWeDo": "Ce qu'on fait",
+    "howItWorks": "Comment ça marche",
+    "contact": "Contact",
+    "cta": "Nous contacter"
+  },
+  "hero": {
+    "words": ["Service client", "Rédiger des devis", "Planifier les rendez-vous", "Gestion des stocks", "Envoyer des factures"],
+    "headline": "ça devrait pouvoir se faire tout seul, non ?",
+    "sub": "Tu nous dis ce qui te prend la tête. On s'en occupe.",
+    "cta": "Réserver un appel gratuit",
+    "secondary": "Comment ça marche ?"
+  },
+  "problem": {
+    "label": "Ça vous parle?",
+    "items": [
+      "Ton équipe passe 3 heures par jour sur des e-mails qui posent tous la même question.",
+      "Les commandes arrivent par mail, téléphone et WhatsApp — et quelqu'un doit tout saisir à la main dans le système.",
+      "Tes infos clients sont dans ta boîte mail, ton CRM et la tête de quelqu'un — et nulle part c'est complet."
+    ],
+    "turn": "Aujourd'hui, on peut faire autrement."
+  },
+  "whatWeDo": {
+    "heading": "On gère, tu entreprends.",
+    "services": [
+      {
+        "number": "01",
+        "title": "Communication client",
+        "description": "On automatise ta communication client pour que tes clients reçoivent une bonne réponse immédiatement — 24/7, sans que personne n'ait besoin d'intervenir. L'employé qui passe 4 heures par jour à répondre aux mails ? Il peut enfin faire ce pour quoi tu l'as embauché.",
+        "examples": "Réponses instantanées, moins de tâches manuelles, toujours disponible"
+      },
+      {
+        "number": "02",
+        "title": "Rendre les données exploitables",
+        "description": "Tes infos sont éparpillées partout. On rassemble tout au même endroit — automatiquement, sans que personne n'ait à s'en occuper.",
+        "examples": "De la clarté au lieu du chaos, toujours à jour"
+      },
+      {
+        "number": "03",
+        "title": "Fluidifier les processus",
+        "description": "Un client envoie un e-mail, et la facture est déjà prête. Parce que le système a reconnu la demande, l'a traitée et transmise — sans que tu aies à lever le petit doigt.",
+        "examples": "Moins d'étapes, moins d'erreurs, plus vite bouclé"
+      }
+    ]
+  },
+  "voorbeelden": {
+    "heading": "Voilà ce que ça donne en vrai.",
+    "cases": [
+      {
+        "client": "Dr. Worker",
+        "type": "E-commerce",
+        "description": "Une boutique en ligne avec des centaines de questions clients par semaine. On a construit un chatbot IA qui répond à 80% des questions instantanément — sans intervention humaine.",
+        "stat": "80%",
+        "statLabel": "traité automatiquement"
+      },
+      {
+        "client": "Restaurant",
+        "type": "Restauration",
+        "description": "Un restaurant avec des clients internationaux. On a créé un système qui traduit et met à jour le menu automatiquement dans plus de 12 langues.",
+        "stat": "12+",
+        "statLabel": "langues, en temps réel"
+      },
+      {
+        "client": "Hotel",
+        "type": "Hôtellerie",
+        "description": "Un hôtel où les clients ont des questions à toute heure. On a construit un concierge digital disponible 24/7 par chat — du room service aux bonnes adresses de restos.",
+        "stat": "24/7",
+        "statLabel": "disponible, zéro attente"
+      }
+    ]
+  },
+  "howItWorks": {
+    "heading": "Du premier échange au système qui tourne.",
+    "steps": [
+      {
+        "number": "1",
+        "title": "Prise de contact",
+        "description": "On écoute. Où tu perds du temps ? Qu'est-ce qui te pompe de l'énergie ? Pas de baratin commercial — juste une bonne conversation."
+      },
+      {
+        "number": "2",
+        "title": "Analyse & proposition",
+        "description": "On cartographie tes processus et on revient avec un plan clair. Ce qu'on construit, ce que ça t'apporte, ce que ça coûte. Pas de surprises."
+      },
+      {
+        "number": "3",
+        "title": "Construction",
+        "description": "On construit et on teste avec tes vraies données. Tu vois ce qui se passe au fur et à mesure."
+      },
+      {
+        "number": "4",
+        "title": "En prod & support",
+        "description": "Ça tourne. On garde un œil dessus et on optimise là où c'est nécessaire."
+      }
+    ]
+  },
+  "whySocialo": {
+    "heading1": "Pas de solution toute faite.",
+    "heading2": "Construit sur mesure pour ton entreprise.",
+    "body": "On gère la technique. Toi, tu remarques juste que ça marche. Quelque chose qui fait exactement ce dont tu as besoin — taillé pour ta situation."
+  },
+  "persoonlijk": {
+    "heading": "Salut, moi c'est Terence.",
+    "body": "Je serais ravi de t'aider à automatiser ton entreprise. Remplis tes coordonnées et notre assistant t'aide à avancer.",
+    "formName": "Nom",
+    "formNamePlaceholder": "Comment vous appelez-vous ?",
+    "formEmail": "Adresse e-mail",
+    "formEmailPlaceholder": "nom@entreprise.fr",
+    "formSubmit": "Démarrer la conversation",
+    "formErrorName": "Veuillez entrer votre nom.",
+    "formErrorEmail": "Veuillez entrer une adresse e-mail valide.",
+    "chatTitle": "Assistant Socialo",
+    "chatStatus": "En ligne",
+    "chatTyping": "en train d'écrire...",
+    "chatWelcome": "Salut {name} ! Ravi de vous avoir ici. Dites-moi, quel type d'entreprise avez-vous et quels sont vos défis ?",
+    "chatWelcomeBack": "Content de vous revoir, {name} ! Reprenons là où nous nous sommes arrêtés.",
+    "chatPlaceholder": "Écris ton message...",
+    "chatFinished": "Merci pour ton message ! Terence te recontactera le plus vite possible.",
+    "errorRateLimit": "Trop de messages envoyés. Réessaie plus tard.",
+    "errorGeneral": "Quelque chose s'est mal passé. Réessaie."
+  },
+  "footer": {
+    "copyright": "© {year} Socialo"
+  },
+  "theme": {
+    "light": "Passer au thème clair",
+    "dark": "Passer au thème sombre"
+  }
+}

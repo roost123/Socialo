@@ -1,0 +1,60 @@
+import type { Metadata } from "next";
+import { NextIntlClientProvider, useMessages } from "next-intl";
+import { getTranslations } from "next-intl/server";
+import { notFound } from "next/navigation";
+import { LenisProvider } from "@/components/lenis-provider";
+import { routing } from "@/i18n/routing";
+import { rtlLocales, type Locale } from "@/i18n/config";
+import { afacadFlux } from "../layout";
+
+type Props = {
+  children: React.ReactNode;
+  params: Promise<{ locale: string }>;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "meta" });
+
+  return {
+    title: t("title"),
+    description: t("description"),
+  };
+}
+
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
+
+export default async function LocaleLayout({ children, params }: Props) {
+  const { locale } = await params;
+
+  if (!routing.locales.includes(locale as any)) {
+    notFound();
+  }
+
+  const isRtl = rtlLocales.includes(locale as Locale);
+  const messages = (await import(`../../messages/${locale}.json`)).default;
+
+  return (
+    <html
+      lang={locale}
+      dir={isRtl ? "rtl" : "ltr"}
+      className={afacadFlux.className}
+      suppressHydrationWarning
+    >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches)){document.documentElement.classList.add('dark')}}catch(e){}})()`,
+          }}
+        />
+      </head>
+      <body>
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          <LenisProvider>{children}</LenisProvider>
+        </NextIntlClientProvider>
+      </body>
+    </html>
+  );
+}

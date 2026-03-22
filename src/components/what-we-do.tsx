@@ -1,180 +1,125 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
+import { useTranslations } from "next-intl";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { DemoChat, DemoData, DemoProcess } from "./service-demos";
 
-const services = [
-  {
-    title: "Klantcommunicatie",
-    body: "Je klanten sneller en beter helpen — zonder dat er iemand achter een scherm hoeft te zitten. Van klantenservice tot meertalige communicatie, automatisch.",
-  },
-  {
-    title: "Data verwerken",
-    body: "Ruwe data omzetten naar iets bruikbaars. Geen handmatig overtypen meer — van spreadsheet naar inzicht, automatisch.",
-  },
-  {
-    title: "Interne processen",
-    body: "Offertes, orders, planning — alles waar iemand nu handmatig stappen doorloopt die ook automatisch kunnen.",
-  },
-];
+gsap.registerPlugin(ScrollTrigger);
+
+const demos: ReactNode[] = [<DemoChat key="chat" />, <DemoData key="data" />, <DemoProcess key="process" />];
 
 export function WhatWeDo() {
+  const t = useTranslations("whatWeDo");
+  const services = t.raw("services") as Array<{ number: string; title: string; description: string; examples: string }>;
   const sectionRef = useRef<HTMLElement>(null);
-  const headerRef = useRef<HTMLDivElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
-  const closingRef = useRef<HTMLDivElement>(null);
-  const dotsRef = useRef<(HTMLDivElement | null)[]>([]);
-  const isMobileRef = useRef(false);
+  const headingRef = useRef<HTMLDivElement>(null);
+  const itemsRef = useRef<HTMLDivElement[]>([]);
+  const demosRef = useRef<HTMLDivElement[]>([]);
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-
-    const mm = gsap.matchMedia();
+    const prefersReduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    if (prefersReduced) return;
 
     const ctx = gsap.context(() => {
-      // Header reveal
-      gsap.from(headerRef.current, {
-        y: 40,
-        opacity: 0,
-        duration: 1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: headerRef.current,
-          start: "top 85%",
-          toggleActions: "play none none none",
-        },
+      if (headingRef.current) {
+        gsap.from(headingRef.current, {
+          scrollTrigger: {
+            trigger: headingRef.current,
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+          opacity: 0,
+          y: 20,
+          duration: 0.7,
+          ease: "power2.out",
+        });
+      }
+
+      itemsRef.current.forEach((el, i) => {
+        if (!el) return;
+        // Text slides in from left
+        gsap.from(el, {
+          scrollTrigger: {
+            trigger: el,
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+          opacity: 0,
+          x: -30,
+          duration: 0.7,
+          delay: i * 0.1,
+          ease: "power2.out",
+        });
       });
 
-      // Desktop: horizontal scroll
-      mm.add("(min-width: 768px)", () => {
-        isMobileRef.current = false;
-        const items = gsap.utils.toArray<HTMLElement>(".service-item");
-
-        const scrollTween = gsap.to(items, {
-          xPercent: -100 * (items.length - 1),
+      // Parallax on demo elements — they move slower than content
+      demosRef.current.forEach((el) => {
+        if (!el) return;
+        gsap.to(el, {
+          y: -40,
           ease: "none",
           scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top top",
-            end: () => "+=" + (trackRef.current?.scrollWidth || 0),
-            pin: true,
-            scrub: 1,
-            snap: 1 / (items.length - 1),
-            onUpdate: (self) => {
-              const progress = self.progress;
-              const activeIndex = Math.round(progress * (items.length - 1));
-              dotsRef.current.forEach((dot, i) => {
-                if (dot) {
-                  dot.style.opacity = i === activeIndex ? "1" : "0.3";
-                  dot.style.transform = i === activeIndex ? "scale(1.5)" : "scale(1)";
-                }
-              });
-            },
+            trigger: el,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 0.5,
           },
         });
-
-        return () => {
-          scrollTween.kill();
-        };
-      });
-
-      // Mobile: vertical scroll with stagger
-      mm.add("(max-width: 767px)", () => {
-        isMobileRef.current = true;
-        const items = gsap.utils.toArray<HTMLElement>(".service-item");
-
-        items.forEach((item) => {
-          gsap.from(item, {
-            y: 40,
-            opacity: 0,
-            duration: 1,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: item,
-              start: "top 85%",
-              toggleActions: "play none none none",
-            },
-          });
-        });
-      });
-
-      // Closing statement
-      gsap.from(closingRef.current, {
-        y: 40,
-        opacity: 0,
-        duration: 1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: closingRef.current,
-          start: "top 85%",
-          toggleActions: "play none none none",
-        },
       });
     }, sectionRef);
 
-    return () => {
-      ctx.revert();
-      mm.revert();
-    };
+    return () => ctx.revert();
   }, []);
 
   return (
-    <section ref={sectionRef} id="wat-we-doen">
-      {/* Header */}
-      <div className="section-full px-6">
-        <div ref={headerRef} className="section-content text-center gsap-reveal">
-          <p className="text-label mb-6">Wat we doen</p>
-          <h2 className="text-h2 text-text-primary mb-6">
-            Wij zoeken uit waar je tijd verliest.
-            <br />
-            En bouwen precies wat jij nodig hebt.
+    <section ref={sectionRef} id="wat-we-doen" className="py-28 md:py-36 px-6">
+      <div className="max-w-[960px] mx-auto">
+        <div ref={headingRef} className="mb-16">
+          <h2 className="text-display text-[var(--text-heading)]">
+            {t("heading")}
           </h2>
         </div>
-      </div>
 
-      {/* Horizontal scroll container (desktop) / Vertical stack (mobile) */}
-      <div ref={containerRef} className="relative overflow-hidden">
-        <div
-          ref={trackRef}
-          className="flex flex-col md:flex-row md:flex-nowrap"
-        >
+        <div className="space-y-16">
           {services.map((service, i) => (
             <div
               key={i}
-              className="service-item w-full md:w-screen flex-shrink-0 flex items-center justify-center min-h-[60vh] md:min-h-screen px-6 gsap-reveal"
+              ref={(el) => {
+                if (el) itemsRef.current[i] = el;
+              }}
+              className="grid grid-cols-1 md:grid-cols-[1fr_300px] gap-8 md:gap-12 items-center"
             >
-              <div className="section-content">
-                <h3 className="text-h3 text-text-primary mb-6">{service.title}</h3>
-                <p className="text-body-lg text-text-secondary max-w-lg">
-                  {service.body}
-                </p>
+              <div className="flex items-start gap-6 md:gap-8">
+                <span className="text-[32px] font-bold leading-none bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent shrink-0 w-10">
+                  {service.number}
+                </span>
+                <div>
+                  <h3 className="text-h2 text-[var(--text-heading)] mb-3">
+                    {service.title}
+                  </h3>
+                  <p className="text-body text-[var(--text-secondary)] mb-3 max-w-[500px]">
+                    {service.description}
+                  </p>
+                  <p className="text-small text-[var(--text-muted)] tracking-wide">
+                    {service.examples}
+                  </p>
+                </div>
+              </div>
+
+              {/* Animated demo with parallax wrapper */}
+              <div
+                ref={(el) => {
+                  if (el) demosRef.current[i] = el;
+                }}
+              >
+                {demos[i]}
               </div>
             </div>
           ))}
-        </div>
-
-        {/* Progress dots (desktop only) */}
-        <div className="hidden md:flex absolute bottom-12 left-1/2 -translate-x-1/2 gap-3 z-10">
-          {services.map((_, i) => (
-            <div
-              key={i}
-              ref={(el) => { dotsRef.current[i] = el; }}
-              className="w-2 h-2 rounded-full bg-accent transition-all duration-300"
-              style={{ opacity: i === 0 ? 1 : 0.3 }}
-            />
-          ))}
-        </div>
-      </div>
-
-      {/* Closing statement */}
-      <div className="py-32 px-6">
-        <div ref={closingRef} className="section-content text-center gsap-reveal">
-          <p className="text-body-lg text-text-secondary italic max-w-lg mx-auto">
-            &ldquo;De specifieke oplossing ontdekken we per klant.
-            Wij verkopen geen vaste lijst.&rdquo;
-          </p>
         </div>
       </div>
     </section>

@@ -1,70 +1,57 @@
-# SOCIALO
+# Socialo.nl — Website
 
-> "Dat moet toch automatisch kunnen!"
+## Project
+Marketing website voor Socialo, een MKB AI-automatiseringsbedrijf. Eén lange scrollpagina, verticaal verhaal. Premium, minimalistisch, Apple/Linear-achtig.
 
-## Wat is Socialo?
+## Kwaliteitsstandaard
+Elk component dat je oplevert moet production-ready zijn. Geen skelet, geen basis die "later nog afgemaakt wordt". Als je een sectie bouwt, is die af.
 
-Socialo lost de repetitieve irritaties op van MKB-ondernemers. Dat ding waar je elke week tijd aan kwijtraakt, waarvan je denkt: "Dit is 2026, waarom doe ik dit nog handmatig?" — daar bouwen wij de oplossing voor.
+Concreet:
+- Geen TODO-comments, geen placeholder-logica, geen lege functies
+- Geen "simpele versie eerst" — bouw het goed in één keer
+- Alle styling, hover states, responsive gedrag, en animaties zitten erin
+- Als je iets bouwt, test het visueel voordat je zegt dat je klaar bent
+- Als je twijfelt of iets er goed uitziet: fix het, vraag niet of ik het wil
 
-We verkopen geen AI. We verkopen geen "digitale medewerkers." We pakken een concreet, herkenbaar probleem en maken het weg.
+Na elke oplevering: loop je eigen output na. Check responsive (375px, 768px, 1280px), check of animaties smooth zijn, check of kleuren en spacing kloppen met de specs hieronder. Als iets niet klopt, fix het voordat je rapporteert.
 
-## Positionering
+## Tech Stack
+- Next.js 14+ (App Router, TypeScript)
+- Tailwind CSS
+- GSAP + ScrollTrigger (scroll-animaties)
+- Vercel deployment
+- Geen externe UI-libraries (geen shadcn, MUI, Radix). Alles custom.
 
-- **Startpunt is altijd de irritatie** — niet de technologie
-- De klant hoeft niet te weten hoe het werkt, alleen dát het werkt
-- Klein en concreet > groot en abstract
-- "Nooit meer X" is ons format
+## Typografie
+Font: Afacad Flux (Google Fonts), via next/font/google.
+- Display: 36px / 700 / -1.5px tracking
+- H1: 28px / 700 / -1px
+- H2: 22px / 700 / -0.5px
+- H3: 17px / 500 / -0.3px
+- Body: 16px / 400 / 0px / line-height 1.6
+- Label: 11px / 500 / uppercase / +2px tracking
 
-## Doelgroep
+## Kleuren
+Achtergrond: #FAFAFA. Tekst: #000000. Secondary: #737373. Muted: #A3A3A3. Borders: #E5E5E5. Surface: #F5F5F5.
+Gradient (dark sections): linear-gradient(135deg, #243748, #4B749F).
+Primary button: #7C5CFC solid, wit tekst. Secondary button: wit, border #E5E5E5. Ghost: #F5F5F5.
+Badges — Sage: #E4EADB/#3A5A2A. Blue: #DBEAFE/#1D4ED8. Green: #D1FAE5/#065F46. Amber: #FEF3C7/#92400E.
 
-- MKB-bedrijven, 5–50 medewerkers
-- West-Europa, Dubai, welvarende regio's
-- Mensen die dagelijks tijd verspillen aan herhaalbaar werk
+## Layout
+- Border-radius: 10px buttons, 14-16px cards, 6px badges
+- Spacing tussen secties: 100-120px
+- Max-width container: ~1200px centered
+- Responsief: Tailwind breakpoints (sm/md/lg/xl)
+- Monochrome UI als podium, foto/video brengt kleur
 
-## Demo's
+## Animaties
+- GSAP ScrollTrigger voor alle scroll-animaties
+- Fade-in: opacity 0→1, translateY 20→0, duration 0.6-0.8s, ease power2.out
+- Stagger: 0.1-0.15s
+- Cleanup in useEffect returns
+- Respecteer prefers-reduced-motion
 
-Drie demo's die we willen bouwen om het concept tastbaar te maken. Elk lost een andere irritatie op, met andere technologie.
-
-### Demo 1: Menu QR Vertaler
-**Irritatie:** Toeristisch restaurant, menukaart alleen in het Nederlands. Gasten snappen het niet, personeel staat elke avond gerechten uit te leggen.
-**Oplossing:** Restaurant maakt foto van hun menu. Socialo maakt er een meertalige webpagina van. QR-code op tafel → gast kiest taal → leest het menu in hun eigen taal. Elke taal ter wereld.
-
-### Demo 2: Zelf-makend Rooster
-**Irritatie:** Horeca-eigenaar zit elke week 2-4 uur te puzzelen met het rooster. Parttime, studenten, wisselende beschikbaarheid, contracturen, rusttijden.
-**Oplossing:** Medewerkers geven beschikbaarheid op via simpele link. Systeem maakt automatisch het weekrooster op basis van regels, contracten en voorkeuren. Bij ziekmelding: automatisch vervanging zoeken.
-
-### Demo 3: Hotel WhatsApp Concierge
-**Irritatie:** Hotelgasten bellen of mailen constant met dezelfde vragen. Receptie is druk, telefoon wordt niet opgenomen, gasten raken gefrustreerd.
-**Oplossing:** WhatsApp-bot waarmee gasten vragen kunnen stellen, kamerfoto's bekijken, boeken, roomservice bestellen en betalen. Alles in één gesprek. Verdere scope bepalen we later.
-
-## Waar staan we nu?
-
-We zijn klaar met de voorbereiding en beginnen aan de **one-pager** — een landingspagina die het verhaal van Socialo vertelt.
-
-### Wat er al is:
-- **Content voor de one-pager** staat klaar in `docs/onepager-content.md` (alle secties uitgeschreven)
-- **Ideeën backlog** met branche-onderzoek in `docs/ideeen-backlog.md`
-- **Design skills** in `.claude/skills/` (soft-premium-design, scroll-animations, output-complete)
-
-### Volgende stap:
-1. **One-pager bouwen** — de content staat klaar, nu moet het een werkende website worden
-2. **3 demo's bouwen** — werkend, indrukwekkend, laat het probleem én de oplossing zien
-3. **Valideren** — kloppen onze aannames? Willen mensen dit?
-
-## Jouw rol, Claude
-
-Je bent een partner in dit project, niet alleen een uitvoerder. Dat betekent:
-
-- **Denk mee** — kom met ideeën, suggesties en alternatieven. Wees eerlijk als iets niet sterk is.
-- **Wees kritisch** — als een richting niet klopt, zeg het. Liever nu bijsturen dan later vastlopen.
-- **Praat in feiten** — als je iets beweert, moet het kloppen. Geen verzonnen statistieken, geen neppe bronnen. Als je iets niet weet, zeg dat.
-- **Geef context** — als je een keuze maakt, leg uit waarom. Niet zomaar doen.
-- **Houd het simpel** — geen buzzwords, geen over-engineering. We bouwen demo's, geen enterprise platform.
-
-## Development richtlijnen
-
-- Code in het Engels, docs mogen Nederlands
-- Commit messages in het Engels
-- TypeScript waar mogelijk
-- Pragmatisch — werkend > mooi
-- Geen over-engineering, we zitten in de demofase
+## Conventies
+- Alle copy en sectie-specs staan in docs/WEBSITE_SPEC.md
+- Beelden zijn placeholders (div met achtergrondkleur #E5E5E5, correcte aspect ratio, beschrijvende class)
+- Elk component moet visueel af zijn op desktop én mobiel

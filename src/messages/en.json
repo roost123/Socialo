@@ -1,0 +1,134 @@
+{
+  "meta": {
+    "title": "Socialo — There's gotta be a way to automate that.",
+    "description": "Socialo builds custom AI automation for small and mid-sized businesses. You tell us what's bugging you — we build exactly what you need."
+  },
+  "nav": {
+    "whatWeDo": "What we do",
+    "howItWorks": "How it works",
+    "contact": "Contact",
+    "cta": "Get in touch"
+  },
+  "hero": {
+    "words": ["Customer support", "Writing quotes", "Scheduling meetings", "Inventory tracking", "Sending invoices"],
+    "headline": "there's gotta be a way to automate that.",
+    "sub": "You tell us what's bugging you. We fix it.",
+    "cta": "Book a free call",
+    "secondary": "How does it work?"
+  },
+  "problem": {
+    "label": "Sound familiar?",
+    "items": [
+      "Your team spends 3 hours a day on emails that all ask the same thing.",
+      "Orders come in through email, phone, and WhatsApp — and someone has to manually enter every single one into your system.",
+      "Your customer info lives in your inbox, your CRM, and someone's head — and nowhere is it complete."
+    ],
+    "turn": "There's a better way now."
+  },
+  "whatWeDo": {
+    "heading": "We handle it, you run your business.",
+    "services": [
+      {
+        "number": "01",
+        "title": "Customer communication",
+        "description": "We automate your customer communication so your clients get a solid answer right away — 24/7, without anyone needing to check. That employee who spends 4 hours a day answering emails? They can finally do what you actually hired them for.",
+        "examples": "Instant responses, less manual work, always available"
+      },
+      {
+        "number": "02",
+        "title": "Making data usable",
+        "description": "Your info is scattered everywhere. We bring it all together in one place — automatically, without anyone needing to lift a finger.",
+        "examples": "Clarity instead of chaos, always up to date"
+      },
+      {
+        "number": "03",
+        "title": "Streamlining processes",
+        "description": "A customer sends an email, and the invoice is already there. Because the system recognized the request, processed it, and forwarded it — without you having to do a thing.",
+        "examples": "Fewer steps, fewer mistakes, done faster"
+      }
+    ]
+  },
+  "voorbeelden": {
+    "heading": "Here's what that looks like in practice.",
+    "cases": [
+      {
+        "client": "Dr. Worker",
+        "type": "E-commerce",
+        "description": "An online store with hundreds of customer questions per week. We built an AI chatbot that answers 80% of all questions instantly — no human needed.",
+        "stat": "80%",
+        "statLabel": "handled automatically"
+      },
+      {
+        "client": "Restaurant",
+        "type": "Hospitality",
+        "description": "A restaurant with international guests. We built a system that automatically translates and keeps the menu up to date in more than 12 languages.",
+        "stat": "12+",
+        "statLabel": "languages, real-time"
+      },
+      {
+        "client": "Hotel",
+        "type": "Hospitality",
+        "description": "A hotel where guests have questions around the clock. We built a digital concierge available 24/7 via chat — from room service to restaurant tips.",
+        "stat": "24/7",
+        "statLabel": "available, zero wait time"
+      }
+    ]
+  },
+  "howItWorks": {
+    "heading": "From first chat to running system.",
+    "steps": [
+      {
+        "number": "1",
+        "title": "Getting to know you",
+        "description": "We listen. Where are you losing time? What drains your energy? No sales pitch — just a good conversation."
+      },
+      {
+        "number": "2",
+        "title": "Analysis & proposal",
+        "description": "We map out your processes and come back with a clear plan. What we'll build, what it'll save you, what it costs. No surprises."
+      },
+      {
+        "number": "3",
+        "title": "Build",
+        "description": "We build and test with your real data. You see what's happening along the way."
+      },
+      {
+        "number": "4",
+        "title": "Live & support",
+        "description": "It's running. We keep an eye on things and optimize where needed."
+      }
+    ]
+  },
+  "whySocialo": {
+    "heading1": "No off-the-shelf package.",
+    "heading2": "Custom-built for your business.",
+    "body": "We handle the tech. You just notice that it works. Something that does exactly what you need — tailor-made for your situation."
+  },
+  "persoonlijk": {
+    "heading": "Hey, I'm Terence.",
+    "body": "I'd love to help you automate your business. Leave your details and our assistant will get you started.",
+    "formName": "Name",
+    "formNamePlaceholder": "What's your name?",
+    "formEmail": "Email address",
+    "formEmailPlaceholder": "name@company.com",
+    "formSubmit": "Start conversation",
+    "formErrorName": "Please enter your name.",
+    "formErrorEmail": "Please enter a valid email address.",
+    "chatTitle": "Socialo Assistant",
+    "chatStatus": "Online",
+    "chatTyping": "typing...",
+    "chatWelcome": "Hey {name}! Great to have you here. Tell me, what kind of business do you run and what are you struggling with?",
+    "chatWelcomeBack": "Welcome back, {name}! Let's pick up where we left off. Where were we?",
+    "chatPlaceholder": "Type your message...",
+    "chatFinished": "Thanks for your message! Terence will get back to you as soon as possible.",
+    "errorRateLimit": "You've sent too many messages. Please try again later.",
+    "errorGeneral": "Something went wrong. Please try again."
+  },
+  "footer": {
+    "copyright": "© {year} Socialo"
+  },
+  "theme": {
+    "light": "Switch to light theme",
+    "dark": "Switch to dark theme"
+  }
+}

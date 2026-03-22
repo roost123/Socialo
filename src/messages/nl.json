@@ -1,0 +1,134 @@
+{
+  "meta": {
+    "title": "Socialo — Dat moet toch automatisch kunnen?",
+    "description": "Socialo bouwt maatwerk AI-automatisering voor het MKB. Jij vertelt wat je dwarszit — wij bouwen precies wat jij nodig hebt."
+  },
+  "nav": {
+    "whatWeDo": "Wat we doen",
+    "howItWorks": "Hoe het werkt",
+    "contact": "Contact",
+    "cta": "Neem contact op"
+  },
+  "hero": {
+    "words": ["Klantenservice", "Offertes opmaken", "Agenda's plannen", "Voorraadbeheer", "Facturen versturen"],
+    "headline": "dat moet toch automatisch kunnen?",
+    "sub": "Jij vertelt wat je dwarszit. Wij lossen het op.",
+    "cta": "Gratis gesprek inplannen",
+    "secondary": "Hoe werkt het?"
+  },
+  "problem": {
+    "label": "Herkenbaar?",
+    "items": [
+      "Je medewerker besteedt 3 uur per dag aan e-mails die allemaal hetzelfde vragen.",
+      "Orders komen binnen via mail, telefoon en WhatsApp — en iemand moet ze allemaal handmatig in het systeem zetten.",
+      "Je hebt klantinformatie in je mail, in je CRM, en in iemands hoofd — en nergens is het compleet."
+    ],
+    "turn": "Dat kan tegenwoordig ook anders."
+  },
+  "whatWeDo": {
+    "heading": "Wij lossen op, jij onderneemt.",
+    "services": [
+      {
+        "number": "01",
+        "title": "Klantcommunicatie",
+        "description": "Wij automatiseren je klantcommunicatie zodat jouw klanten direct een goed antwoord krijgen — 24/7, zonder dat iemand er naar hoeft om te kijken. Die medewerker die nu 4 uur per dag e-mails beantwoordt? Die kan eindelijk doen waar je hem voor hebt aangenomen.",
+        "examples": "Direct antwoord, minder handwerk, altijd bereikbaar"
+      },
+      {
+        "number": "02",
+        "title": "Data bruikbaar maken",
+        "description": "Je informatie staat overal verspreid. Wij zorgen dat het op één plek samenkomt — automatisch, zonder dat iemand er naar hoeft om te kijken.",
+        "examples": "Overzicht in plaats van chaos, altijd actueel"
+      },
+      {
+        "number": "03",
+        "title": "Processen stroomlijnen",
+        "description": "Een klant stuurt een e-mail, en de factuur staat er al. Omdat het systeem de aanvraag herkent, verwerkt en doorstuurt — zonder dat jij eraan te pas komt.",
+        "examples": "Minder stappen, minder fouten, sneller klaar"
+      }
+    ]
+  },
+  "voorbeelden": {
+    "heading": "Zo werkt dat in de praktijk.",
+    "cases": [
+      {
+        "client": "Dr. Worker",
+        "type": "Webshop",
+        "description": "Een webshop met honderden klantvragen per week. We bouwden een AI-chatbot die 80% van alle vragen direct beantwoordt — zonder menselijke tussenkomst.",
+        "stat": "80%",
+        "statLabel": "automatisch afgehandeld"
+      },
+      {
+        "client": "Restaurant",
+        "type": "Horeca",
+        "description": "Een restaurant met internationale gasten. We maakten een systeem dat het menu automatisch vertaalt en up-to-date houdt in meer dan 12 talen.",
+        "stat": "12+",
+        "statLabel": "talen, realtime"
+      },
+      {
+        "client": "Hotel",
+        "type": "Hospitality",
+        "description": "Een hotel waar gasten op elk moment vragen hebben. We bouwden een digitale conciërge die 24/7 bereikbaar is via chat — van roomservice tot restauranttips.",
+        "stat": "24/7",
+        "statLabel": "bereikbaar, geen wachttijd"
+      }
+    ]
+  },
+  "howItWorks": {
+    "heading": "Van eerste gesprek tot draaiend systeem.",
+    "steps": [
+      {
+        "number": "1",
+        "title": "Kennismaking",
+        "description": "We luisteren. Waar verlies je tijd? Wat kost energie? Geen verkooppraatje — gewoon een goed gesprek."
+      },
+      {
+        "number": "2",
+        "title": "Analyse & voorstel",
+        "description": "We brengen je processen in kaart en komen terug met een helder plan. Wat we bouwen, wat het oplevert, wat het kost. Geen verrassingen."
+      },
+      {
+        "number": "3",
+        "title": "Bouw",
+        "description": "We bouwen en testen met jouw echte data. Je ziet tussentijds wat er gebeurt."
+      },
+      {
+        "number": "4",
+        "title": "Live & support",
+        "description": "Het draait. Wij houden het in de gaten en optimaliseren waar nodig."
+      }
+    ]
+  },
+  "whySocialo": {
+    "heading1": "Geen standaard pakket.",
+    "heading2": "Op maat gebouwd voor jouw bedrijf.",
+    "body": "Wij regelen de techniek. Jij merkt alleen dat het werkt. Gewoon iets dat doet wat jij nodig hebt — op maat gemaakt voor jouw situatie."
+  },
+  "persoonlijk": {
+    "heading": "Hoi, ik ben Terence.",
+    "body": "Ik help je graag met het automatiseren van jouw bedrijf. Vul je gegevens in en onze assistent helpt je op weg.",
+    "formName": "Naam",
+    "formNamePlaceholder": "Hoe heet je?",
+    "formEmail": "E-mailadres",
+    "formEmailPlaceholder": "naam@bedrijf.nl",
+    "formSubmit": "Start gesprek",
+    "formErrorName": "Vul je naam in.",
+    "formErrorEmail": "Vul een geldig e-mailadres in.",
+    "chatTitle": "Socialo Assistent",
+    "chatStatus": "Online",
+    "chatTyping": "aan het typen...",
+    "chatWelcome": "Hoi {name}! Leuk dat je er bent. Vertel, wat voor bedrijf heb je en waar loop je tegenaan?",
+    "chatWelcomeBack": "Welkom terug, {name}! We waren gebleven bij ons gesprek. Waar waren we?",
+    "chatPlaceholder": "Typ je bericht...",
+    "chatFinished": "Bedankt voor je bericht! Terence neemt zo snel mogelijk contact met je op.",
+    "errorRateLimit": "Je hebt te veel berichten gestuurd. Probeer het later opnieuw.",
+    "errorGeneral": "Er ging iets mis. Probeer het opnieuw."
+  },
+  "footer": {
+    "copyright": "© {year} Socialo"
+  },
+  "theme": {
+    "light": "Schakel naar licht thema",
+    "dark": "Schakel naar donker thema"
+  }
+}

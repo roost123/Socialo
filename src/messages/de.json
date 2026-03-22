@@ -1,0 +1,134 @@
+{
+  "meta": {
+    "title": "Socialo — Das muss doch auch automatisch gehen?",
+    "description": "Socialo baut maßgeschneiderte KI-Automatisierung für den Mittelstand. Du sagst uns, was dich nervt — wir bauen genau das, was du brauchst."
+  },
+  "nav": {
+    "whatWeDo": "Was wir machen",
+    "howItWorks": "So funktioniert's",
+    "contact": "Kontakt",
+    "cta": "Kontakt aufnehmen"
+  },
+  "hero": {
+    "words": ["Kundenservice", "Angebote erstellen", "Termine planen", "Lagerverwaltung", "Rechnungen versenden"],
+    "headline": "das muss doch auch automatisch gehen?",
+    "sub": "Du sagst uns, was dich nervt. Wir lösen das.",
+    "cta": "Kostenloses Gespräch buchen",
+    "secondary": "Wie funktioniert das?"
+  },
+  "problem": {
+    "label": "Kommt Ihnen bekannt vor?",
+    "items": [
+      "Dein Mitarbeiter verbringt 3 Stunden am Tag mit E-Mails, die alle dasselbe fragen.",
+      "Bestellungen kommen per Mail, Telefon und WhatsApp rein — und jemand muss jede einzelne von Hand ins System eintragen.",
+      "Deine Kundeninfos stecken in deinem Postfach, deinem CRM und im Kopf von irgendwem — und nirgends ist alles komplett."
+    ],
+    "turn": "Das geht heutzutage auch anders."
+  },
+  "whatWeDo": {
+    "heading": "Wir kümmern uns drum, du machst dein Ding.",
+    "services": [
+      {
+        "number": "01",
+        "title": "Kundenkommunikation",
+        "description": "Wir automatisieren deine Kundenkommunikation, damit deine Kunden sofort eine gute Antwort bekommen — 24/7, ohne dass jemand draufschauen muss. Der Mitarbeiter, der gerade 4 Stunden am Tag E-Mails beantwortet? Der kann endlich das tun, wofür du ihn eigentlich eingestellt hast.",
+        "examples": "Sofortige Antworten, weniger Handarbeit, immer erreichbar"
+      },
+      {
+        "number": "02",
+        "title": "Daten nutzbar machen",
+        "description": "Deine Infos sind überall verstreut. Wir bringen alles an einem Ort zusammen — automatisch, ohne dass sich jemand drum kümmern muss.",
+        "examples": "Überblick statt Chaos, immer aktuell"
+      },
+      {
+        "number": "03",
+        "title": "Prozesse verschlanken",
+        "description": "Ein Kunde schickt eine E-Mail, und die Rechnung steht schon. Weil das System die Anfrage erkennt, verarbeitet und weiterleitet — ganz ohne dein Zutun.",
+        "examples": "Weniger Schritte, weniger Fehler, schneller fertig"
+      }
+    ]
+  },
+  "voorbeelden": {
+    "heading": "So sieht das in der Praxis aus.",
+    "cases": [
+      {
+        "client": "Dr. Worker",
+        "type": "Onlineshop",
+        "description": "Ein Onlineshop mit hunderten Kundenanfragen pro Woche. Wir haben einen KI-Chatbot gebaut, der 80% aller Fragen sofort beantwortet — ganz ohne menschliches Eingreifen.",
+        "stat": "80%",
+        "statLabel": "automatisch erledigt"
+      },
+      {
+        "client": "Restaurant",
+        "type": "Gastronomie",
+        "description": "Ein Restaurant mit internationalen Gästen. Wir haben ein System gebaut, das die Speisekarte automatisch übersetzt und in über 12 Sprachen aktuell hält.",
+        "stat": "12+",
+        "statLabel": "Sprachen, in Echtzeit"
+      },
+      {
+        "client": "Hotel",
+        "type": "Hotellerie",
+        "description": "Ein Hotel, in dem Gäste rund um die Uhr Fragen haben. Wir haben einen digitalen Concierge gebaut, der 24/7 per Chat erreichbar ist — von Zimmerservice bis Restauranttipps.",
+        "stat": "24/7",
+        "statLabel": "erreichbar, keine Wartezeit"
+      }
+    ]
+  },
+  "howItWorks": {
+    "heading": "Vom ersten Gespräch zum laufenden System.",
+    "steps": [
+      {
+        "number": "1",
+        "title": "Kennenlernen",
+        "description": "Wir hören zu. Wo verlierst du Zeit? Was kostet dich Energie? Kein Verkaufsgespräch — einfach ein gutes Gespräch."
+      },
+      {
+        "number": "2",
+        "title": "Analyse & Vorschlag",
+        "description": "Wir schauen uns deine Prozesse an und kommen mit einem klaren Plan zurück. Was wir bauen, was es bringt, was es kostet. Keine Überraschungen."
+      },
+      {
+        "number": "3",
+        "title": "Umsetzung",
+        "description": "Wir bauen und testen mit deinen echten Daten. Du siehst zwischendurch, was passiert."
+      },
+      {
+        "number": "4",
+        "title": "Live & Support",
+        "description": "Es läuft. Wir behalten alles im Blick und optimieren, wo nötig."
+      }
+    ]
+  },
+  "whySocialo": {
+    "heading1": "Kein Standardpaket.",
+    "heading2": "Maßgeschneidert für dein Unternehmen.",
+    "body": "Wir kümmern uns um die Technik. Du merkst nur, dass es funktioniert. Einfach etwas, das tut, was du brauchst — gebaut für deine Situation."
+  },
+  "persoonlijk": {
+    "heading": "Hi, ich bin Terence.",
+    "body": "Ich helfe dir gerne bei der Automatisierung deines Unternehmens. Gib deine Daten ein und unser Assistent hilft dir weiter.",
+    "formName": "Name",
+    "formNamePlaceholder": "Wie heißt du?",
+    "formEmail": "E-Mail-Adresse",
+    "formEmailPlaceholder": "name@firma.de",
+    "formSubmit": "Gespräch starten",
+    "formErrorName": "Bitte gib deinen Namen ein.",
+    "formErrorEmail": "Bitte gib eine gültige E-Mail-Adresse ein.",
+    "chatTitle": "Socialo Assistent",
+    "chatStatus": "Online",
+    "chatTyping": "tippt...",
+    "chatWelcome": "Hallo {name}! Schön, dass du da bist. Erzähl mal, was für ein Unternehmen hast du und wo drückt der Schuh?",
+    "chatWelcomeBack": "Willkommen zurück, {name}! Lass uns da weitermachen, wo wir aufgehört haben.",
+    "chatPlaceholder": "Schreib deine Nachricht...",
+    "chatFinished": "Danke für deine Nachricht! Terence meldet sich so schnell wie möglich bei dir.",
+    "errorRateLimit": "Zu viele Nachrichten. Versuch es später nochmal.",
+    "errorGeneral": "Etwas ist schiefgelaufen. Versuch es nochmal."
+  },
+  "footer": {
+    "copyright": "© {year} Socialo"
+  },
+  "theme": {
+    "light": "Zum hellen Design wechseln",
+    "dark": "Zum dunklen Design wechseln"
+  }
+}
