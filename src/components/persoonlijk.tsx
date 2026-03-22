@@ -7,6 +7,7 @@ import {
   useCallback,
   type FormEvent,
 } from "react";
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -149,6 +150,13 @@ export function Persoonlijk() {
 
     return () => ctx.revert();
   }, []);
+
+  // Focus chat input after form submit (without autoFocus which hijacks scroll)
+  useEffect(() => {
+    if (contactInfo && inputRef.current && !restored) {
+      inputRef.current.focus({ preventScroll: true });
+    }
+  }, [contactInfo, restored]);
 
   // Auto-scroll to latest message
   useEffect(() => {
@@ -294,9 +302,11 @@ export function Persoonlijk() {
           {/* Intro met foto */}
           <div className="p-6 md:p-10 flex flex-col md:flex-row-reverse items-center gap-6 md:gap-10">
             <div className="w-32 h-32 md:w-40 md:h-40 shrink-0 rounded-2xl overflow-hidden">
-              <img
+              <Image
                 src="/fotos/terence.png"
                 alt="Terence"
+                width={160}
+                height={160}
                 className="w-full h-full object-cover"
               />
             </div>
@@ -319,7 +329,7 @@ export function Persoonlijk() {
                 <div>
                   <label
                     htmlFor="intake-name"
-                    className="block text-[11px] font-medium uppercase tracking-[2px] text-[var(--text-muted)] mb-2"
+                    className="block text-label mb-2"
                   >
                     {t("formName")}
                   </label>
@@ -337,7 +347,7 @@ export function Persoonlijk() {
                 <div>
                   <label
                     htmlFor="intake-email"
-                    className="block text-[11px] font-medium uppercase tracking-[2px] text-[var(--text-muted)] mb-2"
+                    className="block text-label mb-2"
                   >
                     {t("formEmail")}
                   </label>
@@ -353,7 +363,7 @@ export function Persoonlijk() {
                 </div>
 
                 {formError && (
-                  <p className="text-xs text-red-500 text-center">
+                  <p className="text-xs text-[var(--text-error)] text-center">
                     {formError}
                   </p>
                 )}
@@ -462,7 +472,7 @@ export function Persoonlijk() {
               {/* Error message */}
               {error && (
                 <div className="px-6 md:px-10 pb-2">
-                  <p className="text-xs text-red-500 text-center">{error}</p>
+                  <p className="text-xs text-[var(--text-error)] text-center">{error}</p>
                 </div>
               )}
 
@@ -484,7 +494,6 @@ export function Persoonlijk() {
                         onChange={(e) => setInput(e.target.value)}
                         placeholder={t("chatPlaceholder")}
                         disabled={sending}
-                        autoFocus
                         className="flex-1 bg-transparent text-sm text-[var(--text-heading)] outline-none placeholder:text-[var(--text-muted)] disabled:opacity-50"
                       />
                       <button
@@ -501,6 +510,7 @@ export function Persoonlijk() {
                           strokeWidth="2"
                           strokeLinecap="round"
                           strokeLinejoin="round"
+                          aria-hidden="true"
                         >
                           <path d="m5 12 7-7 7 7" />
                           <path d="M12 19V5" />

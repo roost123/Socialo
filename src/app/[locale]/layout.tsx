@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import { LenisProvider } from "@/components/lenis-provider";
 import { routing } from "@/i18n/routing";
 import { rtlLocales, type Locale } from "@/i18n/config";
-import { afacadFlux } from "../layout";
+import { fontClasses } from "../layout";
 
 type Props = {
   children: React.ReactNode;
@@ -19,6 +19,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: t("title"),
     description: t("description"),
+    icons: {
+      icon: [
+        { url: "/favicon.svg", type: "image/svg+xml" },
+      ],
+    },
   };
 }
 
@@ -40,7 +45,7 @@ export default async function LocaleLayout({ children, params }: Props) {
     <html
       lang={locale}
       dir={isRtl ? "rtl" : "ltr"}
-      className={afacadFlux.className}
+      className={fontClasses}
       suppressHydrationWarning
     >
       <head>

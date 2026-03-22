@@ -19,7 +19,7 @@ export function Voorbeelden() {
   const cases = t.raw("cases") as Array<{ client: string; type: string; description: string; stat: string; statLabel: string }>;
   const sectionRef = useRef<HTMLElement>(null);
   const headingRef = useRef<HTMLDivElement>(null);
-  const cardsRef = useRef<HTMLDivElement[]>([]);
+  const cardsRef = useRef<HTMLElement[]>([]);
 
   useEffect(() => {
     const prefersReduced = window.matchMedia(
@@ -74,7 +74,7 @@ export function Voorbeelden() {
 
         <div className="space-y-12">
           {cases.map((c, i) => (
-            <div
+            <article
               key={i}
               ref={(el) => {
                 if (el) cardsRef.current[i] = el;
@@ -110,7 +110,7 @@ export function Voorbeelden() {
                   {c.description}
                 </p>
               </div>
-            </div>
+            </article>
           ))}
         </div>
       </div>

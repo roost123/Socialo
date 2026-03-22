@@ -1,43 +1,7 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
-
-/* ─── Simplex-inspired noise (compact, no dependencies) ─── */
-function createNoise() {
-  const perm = new Uint8Array(512);
-  const p = new Uint8Array(256);
-  for (let i = 0; i < 256; i++) p[i] = i;
-  for (let i = 255; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [p[i], p[j]] = [p[j], p[i]];
-  }
-  for (let i = 0; i < 512; i++) perm[i] = p[i & 255];
-
-  function fade(t: number) { return t * t * t * (t * (t * 6 - 15) + 10); }
-  function lerp(a: number, b: number, t: number) { return a + t * (b - a); }
-  function grad(hash: number, x: number, y: number) {
-    const h = hash & 3;
-    const u = h < 2 ? x : y;
-    const v = h < 2 ? y : x;
-    return ((h & 1) ? -u : u) + ((h & 2) ? -v : v);
-  }
-
-  return function noise2d(x: number, y: number): number {
-    const X = Math.floor(x) & 255;
-    const Y = Math.floor(y) & 255;
-    const xf = x - Math.floor(x);
-    const yf = y - Math.floor(y);
-    const u = fade(xf);
-    const v = fade(yf);
-    const a = perm[X] + Y;
-    const b = perm[X + 1] + Y;
-    return lerp(
-      lerp(grad(perm[a], xf, yf), grad(perm[b], xf - 1, yf), u),
-      lerp(grad(perm[a + 1], xf, yf - 1), grad(perm[b + 1], xf - 1, yf - 1), u),
-      v
-    );
-  };
-}
+import { createNoise } from "@/lib/noise";
 
 /* ─── Easing ─── */
 function smoothstep(t: number): number {
@@ -182,8 +146,8 @@ export function Hero3D() {
     for (let i = 0; i < NODE_COUNT; i++) {
       const [orderX, orderY, radius] = flowPositions[i];
       const seed = i * 7 + 3;
-      const chaosX = 0.02 + (Math.sin(seed * 127.1) * 0.5 + 0.5) * 0.96;
-      const chaosY = 0.02 + (Math.cos(seed * 311.7) * 0.5 + 0.5) * 0.96;
+      const chaosX = 0.06 + (Math.sin(seed * 127.1) * 0.5 + 0.5) * 0.88;
+      const chaosY = 0.06 + (Math.cos(seed * 311.7) * 0.5 + 0.5) * 0.88;
 
       nodes.push({
         x: chaosX, y: chaosY,
@@ -260,6 +224,14 @@ export function Hero3D() {
       return smoothstep(dist / SWEEP_WIDTH);
     }
 
+    /* ─── Visibility: pause when off-screen ─── */
+    const isVisible = { current: true };
+    const visObserver = new IntersectionObserver(
+      ([entry]) => { isVisible.current = entry.isIntersecting; },
+      { threshold: 0 },
+    );
+    visObserver.observe(container);
+
     /* ─── Animation ─── */
     let animId: number;
     let startTime = performance.now();
@@ -267,6 +239,7 @@ export function Hero3D() {
 
     function animate(now: number) {
       animId = requestAnimationFrame(animate);
+      if (!isVisible.current) return;
       const elapsed = (now - startTime) / 1000;
       const loopTime = elapsed % LOOP_DURATION;
       const dark = isDark();
@@ -302,8 +275,11 @@ export function Hero3D() {
         globalBlend = 1;
       } else {
         // Reverse: order dissolves back to chaos (uniform, no sweep)
+        // Double smoothstep for extra-gentle ease-out (no snapping)
         reverseActive = true;
-        globalBlend = 1 - smoothstep((loopTime - ORDER_END) / (LOOP_DURATION - ORDER_END));
+        const t = (loopTime - ORDER_END) / (LOOP_DURATION - ORDER_END);
+        const s = smoothstep(t);
+        globalBlend = 1 - smoothstep(s);
         sweepX = 1.3;
       }
 
@@ -323,13 +299,16 @@ export function Hero3D() {
 
         const chaosIntensity = 1 - blend;
 
-        // Perlin noise drift — gentler jitter
+        // Perlin noise drift — constant speed so the noise input never jumps
+        const jitterSpeed = node.speed * 0.5;
+        const nxRaw = noise(node.noiseOffsetX + elapsed * jitterSpeed, i * 10);
+        const nyRaw = noise(node.noiseOffsetY + elapsed * jitterSpeed, i * 10 + 5);
+        // Scale amplitude by chaosIntensity (input stays continuous, only output scales)
         const noiseScale = 0.04 + chaosIntensity * 0.14;
-        const jitterSpeed = node.speed * (0.3 + chaosIntensity * 0.5);
-        const nx = noise(node.noiseOffsetX + elapsed * jitterSpeed, i * 10) * noiseScale;
-        const ny = noise(node.noiseOffsetY + elapsed * jitterSpeed, i * 10 + 5) * noiseScale;
+        const nx = nxRaw * noiseScale;
+        const ny = nyRaw * noiseScale;
 
-        // Soft high-frequency wobble (reduced from 0.008 to 0.003)
+        // Soft high-frequency wobble
         const jitterX = chaosIntensity * Math.sin(elapsed * 8 + i * 2.7) * 0.003;
         const jitterY = chaosIntensity * Math.cos(elapsed * 9 + i * 3.1) * 0.003;
 
@@ -355,6 +334,11 @@ export function Hero3D() {
         node.glowIntensity = dist < MOUSE_REPULSION_RADIUS * 1.5
           ? (1 - dist / (MOUSE_REPULSION_RADIUS * 1.5)) * 0.8
           : 0;
+
+        // Clamp — keep nodes inside canvas with padding
+        const pad = 0.03;
+        node.x = Math.max(pad, Math.min(1 - pad, node.x));
+        node.y = Math.max(pad, Math.min(1 - pad, node.y));
       });
 
       /* ── Update debris positions ── */
@@ -363,8 +347,8 @@ export function Hero3D() {
         const ny = noise(d.noiseOffsetY + elapsed * d.speed * 0.5, i * 7 + 3) * 0.15;
         d.x = 0.5 + nx + Math.sin(elapsed * 0.3 + i) * 0.3;
         d.y = 0.5 + ny + Math.cos(elapsed * 0.25 + i * 1.3) * 0.3;
-        d.x = Math.max(0, Math.min(1, d.x));
-        d.y = Math.max(0, Math.min(1, d.y));
+        d.x = Math.max(0.02, Math.min(0.98, d.x));
+        d.y = Math.max(0.02, Math.min(0.98, d.y));
       });
 
       /* ── Clear ── */
@@ -520,7 +504,7 @@ export function Hero3D() {
 
         // Floating "Socialo" text — large, bold, centered vertically
         const fontSize = Math.max(22, Math.min(width * 0.045, 42));
-        ctx.font = `700 ${fontSize}px "Afacad Flux", system-ui, sans-serif`;
+        ctx.font = `600 ${fontSize}px "Outfit", system-ui, sans-serif`;
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
 
@@ -671,6 +655,7 @@ export function Hero3D() {
 
     return () => {
       cancelAnimationFrame(animId);
+      visObserver.disconnect();
       container.removeEventListener("mousemove", onMouseMove);
       container.removeEventListener("touchmove", onTouchMove);
       container.removeEventListener("mouseleave", onLeave);

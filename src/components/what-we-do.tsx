@@ -79,9 +79,12 @@ export function WhatWeDo() {
     <section ref={sectionRef} id="wat-we-doen" className="py-20 md:py-36 px-6">
       <div className="max-w-[960px] mx-auto">
         <div ref={headingRef} className="mb-16">
-          <h2 className="text-display text-[var(--text-heading)]">
+          <h2 className="text-display text-[var(--text-heading)] mb-5">
             {t("heading")}
           </h2>
+          <p className="text-h3 text-[var(--text-secondary)] max-w-[600px] font-normal leading-relaxed">
+            {t("sub")}
+          </p>
         </div>
 
         <div className="space-y-16">
@@ -115,12 +118,18 @@ export function WhatWeDo() {
                 ref={(el) => {
                   if (el) demosRef.current[i] = el;
                 }}
-                className="max-w-[320px] mx-auto md:max-w-none md:mx-0"
+                className="max-w-full sm:max-w-[320px] mx-auto md:max-w-none md:mx-0"
               >
                 {demos[i]}
               </div>
             </div>
           ))}
+        </div>
+
+        <div className="mt-16 pt-10 border-t border-[var(--border-color)]">
+          <p className="text-body text-[var(--text-secondary)] italic max-w-[600px]">
+            {t("footer")}
+          </p>
         </div>
       </div>
     </section>
