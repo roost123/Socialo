@@ -1,9 +1,33 @@
 import { NextRequest, NextResponse } from "next/server";
 import Anthropic from "@anthropic-ai/sdk";
 import { Resend } from "resend";
+import { escapeHtml } from "@/lib/sanitize";
 
 const anthropic = new Anthropic();
 const resend = new Resend(process.env.RESEND_API_KEY || "dummy");
+
+// Rate limiter: max 10 send requests per IP per 2 hours
+const sendRateLimitMap = new Map<string, { count: number; resetAt: number }>();
+
+function checkSendRateLimit(ip: string): boolean {
+  const now = Date.now();
+  const entry = sendRateLimitMap.get(ip);
+
+  if (sendRateLimitMap.size > 100) {
+    for (const [key, val] of sendRateLimitMap.entries()) {
+      if (now > val.resetAt) sendRateLimitMap.delete(key);
+    }
+  }
+
+  if (!entry || now > entry.resetAt) {
+    sendRateLimitMap.set(ip, { count: 1, resetAt: now + 2 * 60 * 60 * 1000 });
+    return true;
+  }
+
+  if (entry.count >= 10) return false;
+  entry.count++;
+  return true;
+}
 
 interface ChatMessage {
   role: "user" | "assistant";
@@ -90,8 +114,8 @@ function buildEmailHtml(
         Contactgegevens
       </h2>
       <table style="font-size: 14px; line-height: 1.7;">
-        <tr><td style="color: #737373; padding-right: 16px;">Naam</td><td style="font-weight: 500;">${contactInfo.name}</td></tr>
-        <tr><td style="color: #737373; padding-right: 16px;">E-mail</td><td><a href="mailto:${contactInfo.email}" style="color: #4B749F; text-decoration: none;">${contactInfo.email}</a></td></tr>
+        <tr><td style="color: #737373; padding-right: 16px;">Naam</td><td style="font-weight: 500;">${escapeHtml(contactInfo.name)}</td></tr>
+        <tr><td style="color: #737373; padding-right: 16px;">E-mail</td><td><a href="mailto:${encodeURIComponent(contactInfo.email)}" style="color: #4B749F; text-decoration: none;">${escapeHtml(contactInfo.email)}</a></td></tr>
       </table>
     </div>`
     : "";
@@ -106,7 +130,7 @@ function buildEmailHtml(
         ${statusLabel}
       </div>
       <h1 style="margin: 0; font-size: 20px; font-weight: 700; letter-spacing: -0.5px;">
-        Nieuw intake-gesprek${contactInfo ? ` — ${contactInfo.name}` : ""}
+        Nieuw intake-gesprek${contactInfo ? ` — ${escapeHtml(contactInfo.name)}` : ""}
       </h1>
       <p style="margin: 6px 0 0; font-size: 13px; color: #737373;">
         ${new Date().toLocaleString("nl-NL", { dateStyle: "long", timeStyle: "short" })}
@@ -118,14 +142,14 @@ function buildEmailHtml(
       <h2 style="margin: 0 0 12px; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: #737373;">
         Samenvatting
       </h2>
-      <pre style="margin: 0; font-family: inherit; font-size: 14px; line-height: 1.7; white-space: pre-wrap;">${summary}</pre>
+      <pre style="margin: 0; font-family: inherit; font-size: 14px; line-height: 1.7; white-space: pre-wrap;">${escapeHtml(summary)}</pre>
     </div>
 
     <div style="padding: 24px 28px;">
       <h2 style="margin: 0 0 12px; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: #737373;">
         Volledig transcript
       </h2>
-      <pre style="margin: 0; font-family: inherit; font-size: 13px; line-height: 1.6; white-space: pre-wrap; color: #404040;">${transcript}</pre>
+      <pre style="margin: 0; font-family: inherit; font-size: 13px; line-height: 1.6; white-space: pre-wrap; color: #404040;">${escapeHtml(transcript)}</pre>
     </div>
   </div>
 
@@ -137,6 +161,18 @@ function buildEmailHtml(
 }
 
 export async function POST(request: NextRequest) {
+  const ip =
+    request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+    request.headers.get("x-real-ip") ||
+    "unknown";
+
+  if (!checkSendRateLimit(ip)) {
+    return NextResponse.json(
+      { error: "Te veel verzoeken. Probeer het later opnieuw." },
+      { status: 429 }
+    );
+  }
+
   try {
     const { messages, status, contactInfo } = (await request.json()) as {
       messages: ChatMessage[];

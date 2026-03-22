@@ -4,7 +4,7 @@ import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { LenisProvider } from "@/components/lenis-provider";
 import { routing } from "@/i18n/routing";
-import { rtlLocales, type Locale } from "@/i18n/config";
+import { locales, defaultLocale, rtlLocales, type Locale } from "@/i18n/config";
 import { fontClasses } from "../layout";
 
 type Props = {
@@ -17,12 +17,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const t = await getTranslations({ locale, namespace: "meta" });
 
   return {
+    metadataBase: new URL("https://socialo.nl"),
     title: t("title"),
     description: t("description"),
     icons: {
-      icon: [
-        { url: "/favicon.svg", type: "image/svg+xml" },
-      ],
+      icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
+    },
+    alternates: {
+      canonical: locale === defaultLocale ? "/" : `/${locale}`,
+      languages: Object.fromEntries(
+        locales.map((l) => [l, l === defaultLocale ? "/" : `/${l}`])
+      ),
     },
   };
 }
