@@ -74,7 +74,7 @@ export function WhySocialo() {
   return (
     <section
       ref={sectionRef}
-      className="py-28 md:py-36 px-6 bg-gradient-to-br from-[var(--gradient-from)]/5 to-[var(--gradient-to)]/10"
+      className="py-20 md:py-36 px-6 bg-gradient-to-br from-[var(--gradient-from)]/5 to-[var(--gradient-to)]/10"
     >
       <div className="max-w-[960px] mx-auto">
         <div className="text-center max-w-[700px] mx-auto">

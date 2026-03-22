@@ -78,7 +78,7 @@ export function HowItWorks() {
     <section
       ref={sectionRef}
       id="hoe-het-werkt"
-      className="py-28 md:py-36 px-6"
+      className="py-20 md:py-36 px-6"
     >
       <div className="max-w-[960px] mx-auto">
         <div ref={headingRef} className="mb-16">
@@ -107,7 +107,7 @@ export function HowItWorks() {
                 ref={(el) => {
                   if (el) stepsRef.current[i] = el;
                 }}
-                className="flex items-start gap-6 md:gap-10 py-10 relative"
+                className="flex items-start gap-4 md:gap-10 py-8 md:py-10 relative"
               >
                 {/* Step number with dot */}
                 <div className="relative z-10 shrink-0 w-9 h-9 rounded-full bg-[var(--bg-page)] border-2 border-[var(--border-color)] flex items-center justify-center">

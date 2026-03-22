@@ -25,7 +25,7 @@ export function Footer() {
 
   return (
     <footer className="py-12 px-6 border-t border-[var(--border-color)]">
-      <div className="max-w-[960px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div className="max-w-[960px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6">
         <a
           href="#"
           onClick={(e) => handleClick(e, "#")}

@@ -98,7 +98,7 @@ export function Hero() {
         <div className="text-center lg:text-left">
           <h1
             ref={headingRef}
-            className="text-display mb-8 text-[var(--text-heading)]"
+            className="text-display mb-5 md:mb-8 text-[var(--text-heading)]"
           >
             <span className="inline-block bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
               {displayText}
@@ -113,7 +113,7 @@ export function Hero() {
 
           <p
             ref={subRef}
-            className="text-h3 text-[var(--text-secondary)] max-w-[540px] mx-auto lg:mx-0 mb-12 leading-relaxed font-normal"
+            className="text-h3 text-[var(--text-secondary)] max-w-[540px] mx-auto lg:mx-0 mb-8 md:mb-12 leading-relaxed font-normal"
           >
             {t("sub")}
           </p>
@@ -144,7 +144,7 @@ export function Hero() {
         </div>
 
         {/* Right column — 3D scene */}
-        <div className="flex items-center justify-center lg:justify-end h-[350px] sm:h-[400px] lg:h-[500px]">
+        <div className="flex items-center justify-center lg:justify-end h-[280px] sm:h-[400px] lg:h-[500px]">
           <Hero3D />
         </div>
       </div>
