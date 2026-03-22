@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, useCallback } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -121,7 +121,7 @@ const commsConversations: {
   { channel: "trustpilot", q: "Goede producten maar verzending duurde lang.", a: "Dank voor uw feedback! We hebben ons verzendproces verbeterd — nu standaard binnen 24 uur.", meta: "Lisa M.", time: "38s", stars: 3 },
 ];
 
-const channelConfig: Record<Channel, { label: string; icon: JSX.Element; color: string; dotColor: string }> = {
+const channelConfig: Record<Channel, { label: string; icon: React.ReactNode; color: string; dotColor: string }> = {
   chat: {
     label: "Live chat",
     icon: <svg className="w-3 h-3" viewBox="0 0 16 16" fill="none"><path d="M2 3a1 1 0 011-1h10a1 1 0 011 1v7a1 1 0 01-1 1H5l-3 3V3z" stroke="currentColor" strokeWidth="1.3" strokeLinejoin="round" /></svg>,

@@ -118,6 +118,7 @@ export function Hero3D() {
 
     /* ─── Resize ─── */
     function resize() {
+      if (!container || !canvas) return;
       dpr = Math.min(window.devicePixelRatio, 2);
       width = container.clientWidth;
       height = container.clientHeight;
@@ -213,16 +214,16 @@ export function Hero3D() {
     /* ─── Mouse ─── */
     const mouse = { x: -1000, y: -1000 };
     function onMouseMove(e: MouseEvent) {
+      if (!container) return;
       const rect = container.getBoundingClientRect();
       mouse.x = e.clientX - rect.left;
       mouse.y = e.clientY - rect.top;
     }
     function onTouchMove(e: TouchEvent) {
-      if (e.touches.length > 0) {
-        const rect = container.getBoundingClientRect();
-        mouse.x = e.touches[0].clientX - rect.left;
-        mouse.y = e.touches[0].clientY - rect.top;
-      }
+      if (!container || e.touches.length === 0) return;
+      const rect = container.getBoundingClientRect();
+      mouse.x = e.touches[0].clientX - rect.left;
+      mouse.y = e.touches[0].clientY - rect.top;
     }
     function onLeave() { mouse.x = -1000; mouse.y = -1000; }
 
