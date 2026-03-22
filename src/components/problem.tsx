@@ -56,7 +56,7 @@ export function Problem() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-20 md:py-36 px-6">
+    <section ref={sectionRef} id="probleem" className="py-20 md:py-36 px-6">
       <div className="max-w-[960px] mx-auto">
         <div className="space-y-10 md:space-y-14">
           {problems.map((text, i) => (

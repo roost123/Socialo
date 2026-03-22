@@ -13,8 +13,8 @@
     "words": ["Service client", "Rédiger des devis", "Planifier les rendez-vous", "Gestion des stocks", "Envoyer des factures"],
     "headline": "ça devrait pouvoir se faire tout seul, non ?",
     "sub": "Tu nous dis ce qui te prend la tête. On s'en occupe.",
-    "cta": "Réserver un appel gratuit",
-    "secondary": "Comment ça marche ?"
+    "cta": "Nous contacter",
+    "secondary": "En savoir plus"
   },
   "problem": {
     "label": "Ça vous parle?",
