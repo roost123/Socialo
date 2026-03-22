@@ -492,46 +492,52 @@ export function Hero3D() {
         }
       }
 
-      /* ── Draw the sweep line (Socialo "cleaning" wave) ── */
-      if (sweepActive && sweepX > -0.1 && sweepX < 1.1) {
+      /* ── Draw the floating "Socialo" text sweep ── */
+      if (sweepActive && sweepX > -0.15 && sweepX < 1.15) {
         const sx = sweepX * width;
         const sweepColor = dark ? SWEEP_COLOR_DARK : SWEEP_COLOR_LIGHT;
 
-        // Vertical gradient line with glow
         ctx.save();
 
-        // Wide soft glow behind the line
-        const glowGrad = ctx.createLinearGradient(sx - 60, 0, sx + 30, 0);
+        // Soft wide glow field trailing behind the text
+        const trailWidth = 120;
+        const glowGrad = ctx.createLinearGradient(sx - trailWidth, 0, sx + 20, 0);
         glowGrad.addColorStop(0, "transparent");
-        glowGrad.addColorStop(0.4, (dark ? "rgba(94, 234, 212, 0.04)" : "rgba(75, 116, 159, 0.03)"));
-        glowGrad.addColorStop(0.7, (dark ? "rgba(94, 234, 212, 0.08)" : "rgba(75, 116, 159, 0.06)"));
+        glowGrad.addColorStop(0.3, dark ? "rgba(94, 234, 212, 0.03)" : "rgba(75, 116, 159, 0.025)");
+        glowGrad.addColorStop(0.8, dark ? "rgba(94, 234, 212, 0.06)" : "rgba(75, 116, 159, 0.04)");
         glowGrad.addColorStop(1, "transparent");
         ctx.fillStyle = glowGrad;
-        ctx.fillRect(sx - 60, 0, 90, height);
+        ctx.fillRect(sx - trailWidth, 0, trailWidth + 20, height);
 
-        // Main sweep line
+        // Thin sweep line ahead of text
         ctx.beginPath();
-        ctx.moveTo(sx, 0);
-        ctx.lineTo(sx, height);
+        ctx.moveTo(sx + 10, 0);
+        ctx.lineTo(sx + 10, height);
         ctx.strokeStyle = sweepColor;
-        ctx.lineWidth = 1.5;
-        ctx.globalAlpha = 0.3;
-        ctx.shadowColor = sweepColor;
-        ctx.shadowBlur = dark ? 15 : 8;
+        ctx.lineWidth = 1;
+        ctx.globalAlpha = 0.15;
         ctx.stroke();
 
-        // Small "S" indicator on the sweep line
-        const sy = height * 0.5;
-        const sSize = 10;
-        ctx.globalAlpha = 0.5;
-        ctx.font = `bold ${sSize * 2}px "Afacad Flux", system-ui, sans-serif`;
+        // Floating "Socialo" text — large, bold, centered vertically
+        const fontSize = Math.max(22, Math.min(width * 0.045, 42));
+        ctx.font = `700 ${fontSize}px "Afacad Flux", system-ui, sans-serif`;
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
+
+        // Text glow (behind)
         ctx.fillStyle = sweepColor;
         ctx.shadowColor = sweepColor;
-        ctx.shadowBlur = dark ? 20 : 10;
-        ctx.fillText("S", sx, sy);
+        ctx.shadowBlur = dark ? 30 : 16;
+        ctx.globalAlpha = dark ? 0.25 : 0.15;
+        ctx.fillText("socialo", sx, height * 0.5);
 
+        // Text body
+        ctx.shadowBlur = 0;
+        ctx.globalAlpha = dark ? 0.55 : 0.4;
+        ctx.fillStyle = sweepColor;
+        ctx.fillText("socialo", sx, height * 0.5);
+
+        // Letter-spacing simulated via tracking attribute
         ctx.restore();
       }
 
