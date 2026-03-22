@@ -91,9 +91,9 @@ export function Hero() {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden"
+      className="relative min-h-screen flex flex-col items-center justify-center pt-20 pb-8 md:pt-24 md:pb-12 px-6 overflow-hidden"
     >
-      <div className="relative z-10 w-full max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-2 items-center gap-12 lg:gap-8">
+      <div className="relative z-10 w-full max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-2 items-center gap-6 lg:gap-8">
         {/* Left column — text */}
         <div className="text-center lg:text-left">
           <h1
