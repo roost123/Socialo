@@ -91,14 +91,14 @@ export function Hero() {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden"
+      className="relative min-h-screen flex flex-col items-center justify-center pt-20 pb-8 md:pt-24 md:pb-12 px-6 overflow-hidden"
     >
-      <div className="relative z-10 w-full max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-2 items-center gap-12 lg:gap-8">
+      <div className="relative z-10 w-full max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-2 items-center gap-6 lg:gap-8">
         {/* Left column — text */}
         <div className="text-center lg:text-left">
           <h1
             ref={headingRef}
-            className="text-display mb-8 text-[var(--text-heading)]"
+            className="text-display mb-5 md:mb-8 text-[var(--text-heading)]"
           >
             <span className="inline-block bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
               {displayText}
@@ -113,7 +113,7 @@ export function Hero() {
 
           <p
             ref={subRef}
-            className="text-h3 text-[var(--text-secondary)] max-w-[540px] mx-auto lg:mx-0 mb-12 leading-relaxed font-normal"
+            className="text-h3 text-[var(--text-secondary)] max-w-[540px] mx-auto lg:mx-0 mb-8 md:mb-12 leading-relaxed font-normal"
           >
             {t("sub")}
           </p>
@@ -144,7 +144,7 @@ export function Hero() {
         </div>
 
         {/* Right column — 3D scene */}
-        <div className="flex items-center justify-center lg:justify-end h-[350px] sm:h-[400px] lg:h-[500px]">
+        <div className="flex items-center justify-center lg:justify-end h-[280px] sm:h-[400px] lg:h-[500px]">
           <Hero3D />
         </div>
       </div>

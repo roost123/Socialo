@@ -76,7 +76,7 @@ export function WhatWeDo() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="wat-we-doen" className="py-28 md:py-36 px-6">
+    <section ref={sectionRef} id="wat-we-doen" className="py-20 md:py-36 px-6">
       <div className="max-w-[960px] mx-auto">
         <div ref={headingRef} className="mb-16">
           <h2 className="text-display text-[var(--text-heading)]">
@@ -91,10 +91,10 @@ export function WhatWeDo() {
               ref={(el) => {
                 if (el) itemsRef.current[i] = el;
               }}
-              className="grid grid-cols-1 md:grid-cols-[1fr_300px] gap-8 md:gap-12 items-center"
+              className="grid grid-cols-1 md:grid-cols-[1fr_300px] gap-6 md:gap-12 items-center"
             >
-              <div className="flex items-start gap-6 md:gap-8">
-                <span className="text-[32px] font-bold leading-none bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent shrink-0 w-10">
+              <div className="flex items-start gap-4 md:gap-8">
+                <span className="text-[24px] md:text-[32px] font-bold leading-none bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent shrink-0 w-8 md:w-10">
                   {service.number}
                 </span>
                 <div>
@@ -115,6 +115,7 @@ export function WhatWeDo() {
                 ref={(el) => {
                   if (el) demosRef.current[i] = el;
                 }}
+                className="max-w-[320px] mx-auto md:max-w-none md:mx-0"
               >
                 {demos[i]}
               </div>

@@ -56,7 +56,7 @@ export function Problem() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-28 md:py-36 px-6">
+    <section ref={sectionRef} className="py-20 md:py-36 px-6">
       <div className="max-w-[960px] mx-auto">
         <div className="space-y-10 md:space-y-14">
           {problems.map((text, i) => (
@@ -77,7 +77,7 @@ export function Problem() {
           ))}
         </div>
 
-        <div ref={turnRef} className="mt-20 md:mt-28">
+        <div ref={turnRef} className="mt-14 md:mt-28">
           <div className="w-12 h-px bg-[var(--border-color)] mb-10" />
           <p className="text-display bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
             {t("turn")}

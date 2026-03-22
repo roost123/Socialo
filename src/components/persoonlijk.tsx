@@ -285,14 +285,14 @@ export function Persoonlijk() {
     status === "complete" || status === "escalate" || status === "sent";
 
   return (
-    <section ref={sectionRef} id="contact" className="py-28 md:py-36 px-6">
+    <section ref={sectionRef} id="contact" className="py-20 md:py-36 px-6">
       <div className="max-w-[680px] mx-auto">
         <div
           ref={cardRef}
           className="rounded-2xl border border-[var(--border-color)] bg-[var(--bg-surface)] overflow-hidden"
         >
           {/* Intro met foto */}
-          <div className="p-8 md:p-10 flex flex-col md:flex-row-reverse items-center gap-6 md:gap-10">
+          <div className="p-6 md:p-10 flex flex-col md:flex-row-reverse items-center gap-6 md:gap-10">
             <div className="w-32 h-32 md:w-40 md:h-40 shrink-0 rounded-2xl overflow-hidden">
               <img
                 src="/fotos/terence.png"
@@ -314,7 +314,7 @@ export function Persoonlijk() {
 
           {/* === STAP 1: Naam + Email formulier === */}
           {!contactInfo && (
-            <div className="px-8 md:px-10 py-8">
+            <div className="px-6 md:px-10 py-8">
               <form onSubmit={handleStartChat} className="space-y-4">
                 <div>
                   <label
@@ -372,7 +372,7 @@ export function Persoonlijk() {
           {contactInfo && (
             <>
               {/* Chat header */}
-              <div className="px-8 md:px-10 py-4 flex items-center gap-3">
+              <div className="px-6 md:px-10 py-4 flex items-center gap-3">
                 <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[var(--gradient-from)] to-[var(--gradient-to)] flex items-center justify-center">
                   <span className="text-white text-[10px] font-bold">S</span>
                 </div>
@@ -389,7 +389,7 @@ export function Persoonlijk() {
               {/* Chat messages */}
               <div
                 ref={messagesContainerRef}
-                className="px-8 md:px-10 pb-4 space-y-4 max-h-[400px] overflow-y-auto scroll-smooth"
+                className="px-6 md:px-10 pb-4 space-y-4 max-h-[400px] overflow-y-auto scroll-smooth"
               >
                 {/* Personalized welcome message */}
                 <div className="flex gap-3">
@@ -461,13 +461,13 @@ export function Persoonlijk() {
 
               {/* Error message */}
               {error && (
-                <div className="px-8 md:px-10 pb-2">
+                <div className="px-6 md:px-10 pb-2">
                   <p className="text-xs text-red-500 text-center">{error}</p>
                 </div>
               )}
 
               {/* Chat input */}
-              <div className="px-6 md:px-8 py-4 border-t border-[var(--border-color)]">
+              <div className="px-6 md:px-10 py-4 border-t border-[var(--border-color)]">
                 {isFinished ? (
                   <div className="text-center py-2">
                     <p className="text-sm text-[var(--text-secondary)]">

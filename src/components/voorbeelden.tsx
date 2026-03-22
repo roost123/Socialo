@@ -64,7 +64,7 @@ export function Voorbeelden() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-28 md:py-36 px-6 bg-[var(--bg-surface-secondary)]">
+    <section ref={sectionRef} className="py-20 md:py-36 px-6 bg-[var(--bg-surface-secondary)]">
       <div className="max-w-[960px] mx-auto">
         <div ref={headingRef} className="mb-16">
           <h2 className="text-display text-[var(--text-heading)]">
@@ -87,18 +87,18 @@ export function Voorbeelden() {
               </div>
 
               {/* Text content */}
-              <div className="p-6 md:p-8">
-                <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
-                  <div className="flex items-center gap-3 min-w-0">
+              <div className="p-5 md:p-8">
+                <div className="flex items-center justify-between gap-3 mb-3">
+                  <div className="flex items-center gap-2 md:gap-3 min-w-0">
                     <span className="text-h3 text-[var(--text-heading)] font-bold truncate">
                       {c.client}
                     </span>
-                    <span className="text-small text-[var(--text-muted)] tracking-wider uppercase shrink-0">
+                    <span className="text-small text-[var(--text-muted)] tracking-wider uppercase shrink-0 hidden sm:inline">
                       {c.type}
                     </span>
                   </div>
                   <div className="text-right shrink-0">
-                    <span className="text-[28px] md:text-[32px] font-bold leading-none bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
+                    <span className="text-[24px] md:text-[32px] font-bold leading-none bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
                       {c.stat}
                     </span>
                     <span className="text-[10px] text-[var(--text-muted)] tracking-wide block mt-0.5">
