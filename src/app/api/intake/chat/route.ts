@@ -4,6 +4,11 @@ import { buildIntakeSystemPrompt } from "@/lib/intake-prompt";
 
 const anthropic = new Anthropic();
 
+const MAX_MESSAGE_LENGTH = 2000;
+const MAX_MESSAGES = 50;
+const MAX_NAME_LENGTH = 100;
+const MAX_EMAIL_LENGTH = 254;
+
 interface ChatMessage {
   role: "user" | "assistant";
   content: string;
@@ -33,6 +38,22 @@ function checkRateLimit(ip: string): boolean {
   return true;
 }
 
+function getClientIp(request: NextRequest): string {
+  return (
+    request.headers.get("cf-connecting-ip") ||
+    request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+    request.headers.get("x-real-ip") ||
+    "unknown"
+  );
+}
+
+function checkOrigin(request: NextRequest): boolean {
+  const origin = request.headers.get("origin");
+  const allowed = process.env.ALLOWED_ORIGIN || "https://socialo.nl";
+  if (!origin) return true; // same-origin requests may not send Origin
+  return origin === allowed || origin === "http://localhost:3000";
+}
+
 function parseStatusFromResponse(text: string): {
   message: string;
   status: "ongoing" | "complete" | "escalate";
@@ -45,10 +66,11 @@ function parseStatusFromResponse(text: string): {
 
 export async function POST(request: NextRequest) {
   try {
-    const ip =
-      request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
-      request.headers.get("x-real-ip") ||
-      "unknown";
+    if (!checkOrigin(request)) {
+      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+    }
+
+    const ip = getClientIp(request);
 
     if (!checkRateLimit(ip)) {
       return NextResponse.json(
@@ -57,7 +79,8 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const { messages, contactInfo } = (await request.json()) as {
+    const body = await request.json();
+    const { messages, contactInfo } = body as {
       messages: ChatMessage[];
       contactInfo?: { name: string; email: string };
     };
@@ -69,11 +92,33 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    if (messages.length > MAX_MESSAGES) {
+      return NextResponse.json(
+        { error: "Te veel berichten." },
+        { status: 400 }
+      );
+    }
+
+    // Validate and sanitize each message
+    const validRoles = new Set(["user", "assistant"]);
+    const sanitizedMessages = messages.map((m) => ({
+      role: validRoles.has(m.role) ? m.role : ("user" as const),
+      content: typeof m.content === "string" ? m.content.slice(0, MAX_MESSAGE_LENGTH) : "",
+    }));
+
+    // Sanitize contact info
+    const sanitizedContact = contactInfo
+      ? {
+          name: typeof contactInfo.name === "string" ? contactInfo.name.slice(0, MAX_NAME_LENGTH) : "",
+          email: typeof contactInfo.email === "string" ? contactInfo.email.slice(0, MAX_EMAIL_LENGTH) : "",
+        }
+      : undefined;
+
     const response = await anthropic.messages.create({
       model: "claude-sonnet-4-20250514",
       max_tokens: 700,
-      system: buildIntakeSystemPrompt(contactInfo?.name, contactInfo?.email),
-      messages: messages.map((m) => ({
+      system: buildIntakeSystemPrompt(sanitizedContact?.name, sanitizedContact?.email),
+      messages: sanitizedMessages.map((m) => ({
         role: m.role,
         content: m.content,
       })),

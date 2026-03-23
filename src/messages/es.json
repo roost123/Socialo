@@ -127,7 +127,76 @@
     "errorGeneral": "Algo salió mal. Inténtalo de nuevo."
   },
   "footer": {
-    "copyright": "© {year} Socialo"
+    "copyright": "© {year} Socialo",
+    "privacy": "Política de privacidad"
+  },
+  "privacy": {
+    "title": "Política de privacidad",
+    "metaDescription": "Cómo Socialo maneja tus datos personales — conforme al RGPD.",
+    "backToHome": "Volver al inicio",
+    "lastUpdated": "Última actualización: marzo 2026",
+    "sections": {
+      "controller": {
+        "heading": "Responsable del tratamiento",
+        "body": "Socialo es responsable del tratamiento de datos personales tal como se describe en esta política de privacidad. ¿Preguntas? Contáctanos en info@socialo.nl."
+      },
+      "whatData": {
+        "heading": "Qué datos recopilamos",
+        "intro": "Cuando utilizas nuestro formulario de contacto, recopilamos:",
+        "items": {
+          "name": "Tu nombre",
+          "email": "Tu dirección de correo electrónico",
+          "chat": "El contenido de tu conversación con nuestro asistente",
+          "technical": "Datos técnicos como la dirección IP (para seguridad y limitación de solicitudes)"
+        }
+      },
+      "purpose": {
+        "heading": "Por qué usamos tus datos",
+        "items": {
+          "contact": "Para contactarte respecto a tu consulta",
+          "improve": "Para mejorar nuestros servicios",
+          "security": "Para garantizar la seguridad de nuestro sitio web"
+        }
+      },
+      "legal": {
+        "heading": "Base legal",
+        "body": "Procesamos tus datos basándonos en el interés legítimo (formulario de contacto para consultas comerciales) y tu consentimiento al enviar el formulario."
+      },
+      "thirdParties": {
+        "heading": "Terceros",
+        "intro": "Solo compartimos tus datos con las partes necesarias para nuestros servicios:",
+        "items": {
+          "cloudflare": "Cloudflare — alojamiento, CDN y servicios de seguridad (EE. UU., cláusulas contractuales tipo de la UE)",
+          "vercel": "Vercel — plataforma de alojamiento (EE. UU., cláusulas contractuales tipo de la UE)",
+          "resend": "Resend — para el envío de notificaciones por correo electrónico (EE. UU., cláusulas contractuales tipo de la UE)"
+        },
+        "noTracking": "No utilizamos cookies de seguimiento, análisis ni marketing. No se venden datos a terceros."
+      },
+      "cookies": {
+        "heading": "Cookies",
+        "body": "Solo utilizamos cookies estrictamente necesarias: una cookie de preferencia de idioma (NEXT_LOCALE) y una preferencia de tema en localStorage. Cloudflare puede colocar una cookie de seguridad (__cf_bm) para la protección contra bots. No se utilizan cookies de seguimiento ni de marketing."
+      },
+      "retention": {
+        "heading": "Período de conservación",
+        "body": "Los datos del formulario de contacto se conservan mientras sea necesario para gestionar tu consulta, con un máximo de 12 meses. Después se eliminan."
+      },
+      "rights": {
+        "heading": "Tus derechos",
+        "intro": "Según el RGPD, tienes los siguientes derechos:",
+        "items": {
+          "access": "Derecho de acceso — puedes solicitar qué datos tenemos sobre ti",
+          "rectification": "Derecho de rectificación — puedes corregir datos incorrectos",
+          "erasure": "Derecho de supresión — puedes solicitar la eliminación de tus datos",
+          "objection": "Derecho de oposición — puedes oponerte al tratamiento",
+          "portability": "Derecho a la portabilidad — puedes solicitar tus datos en un formato estándar"
+        },
+        "contact": "Contacta a info@socialo.nl para ejercer cualquiera de estos derechos. Responderemos en un plazo de 30 días. También tienes derecho a presentar una queja ante la Autoridad Neerlandesa de Protección de Datos (Autoriteit Persoonsgegevens)."
+      },
+      "changes": {
+        "heading": "Cambios",
+        "body": "Podemos actualizar esta política de privacidad. La versión más reciente siempre está disponible en esta página."
+      }
+    }
   },
   "theme": {
     "light": "Cambiar a tema claro",

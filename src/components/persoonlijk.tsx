@@ -103,6 +103,7 @@ export function Persoonlijk() {
   const [sending, setSending] = useState(false);
   const [status, setStatus] = useState<ConversationStatus>("idle");
   const [error, setError] = useState<string | null>(null);
+  const [honeypot, setHoneypot] = useState("");
 
   // Restore conversation from localStorage on mount
   useEffect(() => {
@@ -210,8 +211,15 @@ export function Persoonlijk() {
 
   const handleStartChat = (e: FormEvent) => {
     e.preventDefault();
-    const name = nameInput.trim();
-    const email = emailInput.trim();
+
+    // Honeypot: if filled, silently "succeed" without actually doing anything
+    if (honeypot) {
+      setFormError(null);
+      return;
+    }
+
+    const name = nameInput.trim().slice(0, 100);
+    const email = emailInput.trim().slice(0, 254);
 
     if (!name) {
       setFormError(t("formErrorName"));
@@ -359,6 +367,20 @@ export function Persoonlijk() {
                     placeholder={t("formEmailPlaceholder")}
                     className="w-full bg-[var(--bg-surface-secondary)] rounded-[10px] px-4 py-3 text-sm text-[var(--text-heading)] outline-none placeholder:text-[var(--text-muted)] border border-transparent focus:border-[var(--border-color)] transition-colors"
                     autoComplete="email"
+                  />
+                </div>
+
+                {/* Honeypot field — hidden from real users, catches bots */}
+                <div className="absolute opacity-0 -z-10 h-0 overflow-hidden" aria-hidden="true">
+                  <label htmlFor="intake-website">Website</label>
+                  <input
+                    id="intake-website"
+                    type="text"
+                    name="website"
+                    value={honeypot}
+                    onChange={(e) => setHoneypot(e.target.value)}
+                    tabIndex={-1}
+                    autoComplete="off"
                   />
                 </div>
 

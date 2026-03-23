@@ -127,7 +127,76 @@
     "errorGeneral": "Quelque chose s'est mal passé. Réessaie."
   },
   "footer": {
-    "copyright": "© {year} Socialo"
+    "copyright": "© {year} Socialo",
+    "privacy": "Politique de confidentialité"
+  },
+  "privacy": {
+    "title": "Politique de confidentialité",
+    "metaDescription": "Comment Socialo traite vos données personnelles — conforme au RGPD.",
+    "backToHome": "Retour à l'accueil",
+    "lastUpdated": "Dernière mise à jour : mars 2026",
+    "sections": {
+      "controller": {
+        "heading": "Responsable du traitement",
+        "body": "Socialo est responsable du traitement des données personnelles tel que décrit dans cette politique de confidentialité. Des questions ? Contactez-nous à info@socialo.nl."
+      },
+      "whatData": {
+        "heading": "Quelles données nous collectons",
+        "intro": "Lorsque vous utilisez notre formulaire de contact, nous collectons :",
+        "items": {
+          "name": "Votre nom",
+          "email": "Votre adresse e-mail",
+          "chat": "Le contenu de votre conversation avec notre assistant",
+          "technical": "Des données techniques telles que l'adresse IP (pour la sécurité et la limitation de débit)"
+        }
+      },
+      "purpose": {
+        "heading": "Pourquoi nous utilisons vos données",
+        "items": {
+          "contact": "Pour vous contacter au sujet de votre demande",
+          "improve": "Pour améliorer nos services",
+          "security": "Pour assurer la sécurité de notre site web"
+        }
+      },
+      "legal": {
+        "heading": "Base juridique",
+        "body": "Nous traitons vos données sur la base de l'intérêt légitime (formulaire de contact pour les demandes commerciales) et de votre consentement lors de l'envoi du formulaire."
+      },
+      "thirdParties": {
+        "heading": "Tiers",
+        "intro": "Nous ne partageons vos données qu'avec les parties nécessaires à nos services :",
+        "items": {
+          "cloudflare": "Cloudflare — hébergement, CDN et services de sécurité (États-Unis, clauses contractuelles types de l'UE)",
+          "vercel": "Vercel — plateforme d'hébergement (États-Unis, clauses contractuelles types de l'UE)",
+          "resend": "Resend — pour l'envoi de notifications par e-mail (États-Unis, clauses contractuelles types de l'UE)"
+        },
+        "noTracking": "Nous n'utilisons pas de cookies de suivi, d'analyse ou de marketing. Aucune donnée n'est vendue à des tiers."
+      },
+      "cookies": {
+        "heading": "Cookies",
+        "body": "Nous n'utilisons que des cookies strictement nécessaires : un cookie de préférence linguistique (NEXT_LOCALE) et une préférence de thème dans le localStorage. Cloudflare peut placer un cookie de sécurité (__cf_bm) pour la protection contre les bots. Aucun cookie de suivi ou de marketing n'est utilisé."
+      },
+      "retention": {
+        "heading": "Durée de conservation",
+        "body": "Les données du formulaire de contact sont conservées aussi longtemps que nécessaire pour traiter votre demande, avec un maximum de 12 mois. Après cela, elles sont supprimées."
+      },
+      "rights": {
+        "heading": "Vos droits",
+        "intro": "En vertu du RGPD, vous disposez des droits suivants :",
+        "items": {
+          "access": "Droit d'accès — vous pouvez demander quelles données nous détenons à votre sujet",
+          "rectification": "Droit de rectification — vous pouvez faire corriger des données inexactes",
+          "erasure": "Droit à l'effacement — vous pouvez demander la suppression de vos données",
+          "objection": "Droit d'opposition — vous pouvez vous opposer au traitement",
+          "portability": "Droit à la portabilité — vous pouvez demander vos données dans un format standard"
+        },
+        "contact": "Contactez info@socialo.nl pour exercer l'un de ces droits. Nous répondrons dans un délai de 30 jours. Vous avez également le droit de déposer une plainte auprès de l'autorité néerlandaise de protection des données (Autoriteit Persoonsgegevens)."
+      },
+      "changes": {
+        "heading": "Modifications",
+        "body": "Nous pouvons mettre à jour cette politique de confidentialité. La version la plus récente est toujours disponible sur cette page."
+      }
+    }
   },
   "theme": {
     "light": "Passer au thème clair",

@@ -127,7 +127,76 @@
     "errorGeneral": "Something went wrong. Please try again."
   },
   "footer": {
-    "copyright": "© {year} Socialo"
+    "copyright": "© {year} Socialo",
+    "privacy": "Privacy Policy"
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "metaDescription": "How Socialo handles your personal data — GDPR compliant.",
+    "backToHome": "Back to home",
+    "lastUpdated": "Last updated: March 2026",
+    "sections": {
+      "controller": {
+        "heading": "Data Controller",
+        "body": "Socialo is responsible for processing personal data as described in this privacy policy. Questions? Contact us at info@socialo.nl."
+      },
+      "whatData": {
+        "heading": "What data we collect",
+        "intro": "When you use our contact form, we collect:",
+        "items": {
+          "name": "Your name",
+          "email": "Your email address",
+          "chat": "The content of your chat conversation with our assistant",
+          "technical": "Technical data such as IP address (for security and rate limiting)"
+        }
+      },
+      "purpose": {
+        "heading": "Why we use your data",
+        "items": {
+          "contact": "To contact you about your inquiry",
+          "improve": "To improve our services",
+          "security": "To ensure the security of our website"
+        }
+      },
+      "legal": {
+        "heading": "Legal basis",
+        "body": "We process your data based on legitimate interest (contact form for business inquiries) and your consent when you submit the form."
+      },
+      "thirdParties": {
+        "heading": "Third parties",
+        "intro": "We only share your data with parties necessary for our services:",
+        "items": {
+          "cloudflare": "Cloudflare — hosting, CDN and security services (US, EU Standard Contractual Clauses)",
+          "vercel": "Vercel — hosting platform (US, EU Standard Contractual Clauses)",
+          "resend": "Resend — for sending email notifications (US, EU Standard Contractual Clauses)"
+        },
+        "noTracking": "We do not use tracking, analytics or marketing cookies. No data is sold to third parties."
+      },
+      "cookies": {
+        "heading": "Cookies",
+        "body": "We only use strictly necessary cookies: a language preference cookie (NEXT_LOCALE) and a theme preference in localStorage. Cloudflare may place a security cookie (__cf_bm) for bot protection. No tracking or marketing cookies are used."
+      },
+      "retention": {
+        "heading": "Retention period",
+        "body": "Contact form data is retained as long as necessary to handle your inquiry, with a maximum of 12 months. After that, it is deleted."
+      },
+      "rights": {
+        "heading": "Your rights",
+        "intro": "Under GDPR, you have the following rights:",
+        "items": {
+          "access": "Right of access — you may request which data we hold about you",
+          "rectification": "Right to rectification — you may have incorrect data corrected",
+          "erasure": "Right to erasure — you may request deletion of your data",
+          "objection": "Right to object — you may object to the processing",
+          "portability": "Right to data portability — you may request your data in a standard format"
+        },
+        "contact": "Contact info@socialo.nl to exercise any of these rights. We will respond within 30 days. You also have the right to file a complaint with the Dutch Data Protection Authority (Autoriteit Persoonsgegevens)."
+      },
+      "changes": {
+        "heading": "Changes",
+        "body": "We may update this privacy policy. The most recent version is always available on this page."
+      }
+    }
   },
   "theme": {
     "light": "Switch to light theme",
