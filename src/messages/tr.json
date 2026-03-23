@@ -127,7 +127,76 @@
     "errorGeneral": "Bir şeyler ters gitti. Tekrar dene."
   },
   "footer": {
-    "copyright": "© {year} Socialo"
+    "copyright": "© {year} Socialo",
+    "privacy": "Gizlilik Politikası"
+  },
+  "privacy": {
+    "title": "Gizlilik Politikası",
+    "metaDescription": "Socialo kişisel verilerinizi nasıl işliyor — GDPR uyumlu.",
+    "backToHome": "Ana sayfaya dön",
+    "lastUpdated": "Son güncelleme: Mart 2026",
+    "sections": {
+      "controller": {
+        "heading": "Veri Sorumlusu",
+        "body": "Socialo, bu gizlilik politikasında açıklandığı şekilde kişisel verilerin işlenmesinden sorumludur. Sorularınız mı var? info@socialo.nl adresinden bize ulaşın."
+      },
+      "whatData": {
+        "heading": "Hangi verileri topluyoruz",
+        "intro": "İletişim formumuzu kullandığınızda şunları topluyoruz:",
+        "items": {
+          "name": "Adınız",
+          "email": "E-posta adresiniz",
+          "chat": "Asistanımızla yaptığınız sohbetin içeriği",
+          "technical": "IP adresi gibi teknik veriler (güvenlik ve istek sınırlama için)"
+        }
+      },
+      "purpose": {
+        "heading": "Verilerinizi neden kullanıyoruz",
+        "items": {
+          "contact": "Sorgunuzla ilgili sizinle iletişime geçmek için",
+          "improve": "Hizmetlerimizi iyileştirmek için",
+          "security": "Web sitemizin güvenliğini sağlamak için"
+        }
+      },
+      "legal": {
+        "heading": "Hukuki dayanak",
+        "body": "Verilerinizi meşru menfaat (ticari sorgular için iletişim formu) ve formu gönderdiğinizde verdiğiniz onay temelinde işliyoruz."
+      },
+      "thirdParties": {
+        "heading": "Üçüncü taraflar",
+        "intro": "Verilerinizi yalnızca hizmetlerimiz için gerekli olan taraflarla paylaşıyoruz:",
+        "items": {
+          "cloudflare": "Cloudflare — barındırma, CDN ve güvenlik hizmetleri (ABD, AB Standart Sözleşme Maddeleri)",
+          "vercel": "Vercel — barındırma platformu (ABD, AB Standart Sözleşme Maddeleri)",
+          "resend": "Resend — e-posta bildirimleri göndermek için (ABD, AB Standart Sözleşme Maddeleri)"
+        },
+        "noTracking": "İzleme, analiz veya pazarlama çerezleri kullanmıyoruz. Hiçbir veri üçüncü taraflara satılmaz."
+      },
+      "cookies": {
+        "heading": "Çerezler",
+        "body": "Yalnızca kesinlikle gerekli çerezler kullanıyoruz: bir dil tercihi çerezi (NEXT_LOCALE) ve localStorage'da bir tema tercihi. Cloudflare, bot koruması için bir güvenlik çerezi (__cf_bm) yerleştirebilir. İzleme veya pazarlama çerezleri kullanılmaz."
+      },
+      "retention": {
+        "heading": "Saklama süresi",
+        "body": "İletişim formu verileri, sorgunuzu işlemek için gerekli olduğu sürece, en fazla 12 ay saklanır. Ardından silinir."
+      },
+      "rights": {
+        "heading": "Haklarınız",
+        "intro": "GDPR kapsamında aşağıdaki haklara sahipsiniz:",
+        "items": {
+          "access": "Erişim hakkı — hakkınızda hangi verileri tuttuğumuzu sorabilirsiniz",
+          "rectification": "Düzeltme hakkı — yanlış verileri düzelttirmenizi isteyebilirsiniz",
+          "erasure": "Silme hakkı — verilerinizin silinmesini talep edebilirsiniz",
+          "objection": "İtiraz hakkı — işlemeye itiraz edebilirsiniz",
+          "portability": "Veri taşınabilirliği hakkı — verilerinizi standart bir formatta talep edebilirsiniz"
+        },
+        "contact": "Bu haklardan herhangi birini kullanmak için info@socialo.nl adresine ulaşın. 30 gün içinde yanıt vereceğiz. Ayrıca Hollanda Veri Koruma Kurumu'na (Autoriteit Persoonsgegevens) şikayette bulunma hakkınız da vardır."
+      },
+      "changes": {
+        "heading": "Değişiklikler",
+        "body": "Bu gizlilik politikasını güncelleyebiliriz. En güncel sürüm her zaman bu sayfada mevcuttur."
+      }
+    }
   },
   "theme": {
     "light": "Açık temaya geç",

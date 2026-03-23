@@ -127,7 +127,76 @@
     "errorGeneral": "Algo deu errado. Tente novamente."
   },
   "footer": {
-    "copyright": "© {year} Socialo"
+    "copyright": "© {year} Socialo",
+    "privacy": "Política de Privacidade"
+  },
+  "privacy": {
+    "title": "Política de Privacidade",
+    "metaDescription": "Como a Socialo trata os seus dados pessoais — em conformidade com o RGPD.",
+    "backToHome": "Voltar à página inicial",
+    "lastUpdated": "Última atualização: março de 2026",
+    "sections": {
+      "controller": {
+        "heading": "Responsável pelo tratamento",
+        "body": "A Socialo é responsável pelo tratamento de dados pessoais conforme descrito nesta política de privacidade. Dúvidas? Entre em contato pelo info@socialo.nl."
+      },
+      "whatData": {
+        "heading": "Quais dados coletamos",
+        "intro": "Ao usar nosso formulário de contato, coletamos:",
+        "items": {
+          "name": "Seu nome",
+          "email": "Seu endereço de e-mail",
+          "chat": "O conteúdo da sua conversa com nosso assistente",
+          "technical": "Dados técnicos como endereço IP (para segurança e limitação de requisições)"
+        }
+      },
+      "purpose": {
+        "heading": "Por que usamos seus dados",
+        "items": {
+          "contact": "Para entrar em contato sobre sua consulta",
+          "improve": "Para melhorar nossos serviços",
+          "security": "Para garantir a segurança do nosso site"
+        }
+      },
+      "legal": {
+        "heading": "Base legal",
+        "body": "Processamos seus dados com base no interesse legítimo (formulário de contato para consultas comerciais) e no seu consentimento ao enviar o formulário."
+      },
+      "thirdParties": {
+        "heading": "Terceiros",
+        "intro": "Compartilhamos seus dados apenas com as partes necessárias para nossos serviços:",
+        "items": {
+          "cloudflare": "Cloudflare — hospedagem, CDN e serviços de segurança (EUA, Cláusulas Contratuais Padrão da UE)",
+          "vercel": "Vercel — plataforma de hospedagem (EUA, Cláusulas Contratuais Padrão da UE)",
+          "resend": "Resend — para envio de notificações por e-mail (EUA, Cláusulas Contratuais Padrão da UE)"
+        },
+        "noTracking": "Não utilizamos cookies de rastreamento, análise ou marketing. Nenhum dado é vendido a terceiros."
+      },
+      "cookies": {
+        "heading": "Cookies",
+        "body": "Utilizamos apenas cookies estritamente necessários: um cookie de preferência de idioma (NEXT_LOCALE) e uma preferência de tema no localStorage. A Cloudflare pode colocar um cookie de segurança (__cf_bm) para proteção contra bots. Nenhum cookie de rastreamento ou marketing é utilizado."
+      },
+      "retention": {
+        "heading": "Período de retenção",
+        "body": "Os dados do formulário de contato são mantidos pelo tempo necessário para tratar sua consulta, com um máximo de 12 meses. Após isso, são excluídos."
+      },
+      "rights": {
+        "heading": "Seus direitos",
+        "intro": "De acordo com o RGPD, você tem os seguintes direitos:",
+        "items": {
+          "access": "Direito de acesso — você pode solicitar quais dados temos sobre você",
+          "rectification": "Direito de retificação — você pode corrigir dados incorretos",
+          "erasure": "Direito ao apagamento — você pode solicitar a exclusão dos seus dados",
+          "objection": "Direito de oposição — você pode se opor ao tratamento",
+          "portability": "Direito à portabilidade — você pode solicitar seus dados em formato padrão"
+        },
+        "contact": "Entre em contato com info@socialo.nl para exercer qualquer um desses direitos. Responderemos em até 30 dias. Você também tem o direito de registrar uma reclamação junto à Autoridade Neerlandesa de Proteção de Dados (Autoriteit Persoonsgegevens)."
+      },
+      "changes": {
+        "heading": "Alterações",
+        "body": "Podemos atualizar esta política de privacidade. A versão mais recente está sempre disponível nesta página."
+      }
+    }
   },
   "theme": {
     "light": "Mudar para tema claro",

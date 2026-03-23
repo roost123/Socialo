@@ -127,7 +127,76 @@
     "errorGeneral": "Er ging iets mis. Probeer het opnieuw."
   },
   "footer": {
-    "copyright": "© {year} Socialo"
+    "copyright": "© {year} Socialo",
+    "privacy": "Privacybeleid"
+  },
+  "privacy": {
+    "title": "Privacybeleid",
+    "metaDescription": "Hoe Socialo omgaat met je persoonsgegevens — AVG/GDPR-compliant.",
+    "backToHome": "Terug naar home",
+    "lastUpdated": "Laatst bijgewerkt: maart 2026",
+    "sections": {
+      "controller": {
+        "heading": "Verwerkingsverantwoordelijke",
+        "body": "Socialo is verantwoordelijk voor de verwerking van persoonsgegevens zoals beschreven in dit privacybeleid. Heb je vragen? Neem contact op via info@socialo.nl."
+      },
+      "whatData": {
+        "heading": "Welke gegevens verzamelen we",
+        "intro": "Wanneer je ons contactformulier gebruikt, verzamelen we:",
+        "items": {
+          "name": "Je naam",
+          "email": "Je e-mailadres",
+          "chat": "De inhoud van het chatgesprek met onze assistent",
+          "technical": "Technische gegevens zoals IP-adres (voor beveiliging en rate limiting)"
+        }
+      },
+      "purpose": {
+        "heading": "Waarvoor gebruiken we je gegevens",
+        "items": {
+          "contact": "Om contact met je op te nemen naar aanleiding van je aanvraag",
+          "improve": "Om onze dienstverlening te verbeteren",
+          "security": "Om de veiligheid van onze website te waarborgen"
+        }
+      },
+      "legal": {
+        "heading": "Grondslag",
+        "body": "We verwerken je gegevens op basis van gerechtvaardigd belang (contactformulier voor zakelijke aanvragen) en jouw toestemming wanneer je het formulier invult."
+      },
+      "thirdParties": {
+        "heading": "Derde partijen",
+        "intro": "We delen je gegevens alleen met partijen die nodig zijn voor onze dienstverlening:",
+        "items": {
+          "cloudflare": "Cloudflare — hosting, CDN en beveiligingsdiensten (VS, EU Standard Contractual Clauses)",
+          "vercel": "Vercel — hosting platform (VS, EU Standard Contractual Clauses)",
+          "resend": "Resend — voor het verzenden van e-mailnotificaties (VS, EU Standard Contractual Clauses)"
+        },
+        "noTracking": "We gebruiken geen tracking, analytics of marketing cookies. Er worden geen gegevens verkocht aan derden."
+      },
+      "cookies": {
+        "heading": "Cookies",
+        "body": "We gebruiken alleen strikt noodzakelijke cookies: een taalvoorkeur-cookie (NEXT_LOCALE) en een thema-voorkeur in localStorage. Cloudflare kan een beveiligingscookie (__cf_bm) plaatsen voor botbescherming. Er worden geen tracking- of marketingcookies gebruikt."
+      },
+      "retention": {
+        "heading": "Bewaartermijn",
+        "body": "Contactformuliergegevens worden bewaard zolang nodig is voor de afhandeling van je aanvraag, met een maximum van 12 maanden. Daarna worden ze verwijderd."
+      },
+      "rights": {
+        "heading": "Jouw rechten",
+        "intro": "Op grond van de AVG heb je de volgende rechten:",
+        "items": {
+          "access": "Recht op inzage — je mag opvragen welke gegevens we van je hebben",
+          "rectification": "Recht op rectificatie — je mag onjuiste gegevens laten corrigeren",
+          "erasure": "Recht op vergetelheid — je mag vragen je gegevens te verwijderen",
+          "objection": "Recht van bezwaar — je mag bezwaar maken tegen de verwerking",
+          "portability": "Recht op overdraagbaarheid — je mag je gegevens in een standaardformaat opvragen"
+        },
+        "contact": "Neem contact op via info@socialo.nl om een van deze rechten uit te oefenen. We reageren binnen 30 dagen. Je hebt ook het recht om een klacht in te dienen bij de Autoriteit Persoonsgegevens."
+      },
+      "changes": {
+        "heading": "Wijzigingen",
+        "body": "We kunnen dit privacybeleid aanpassen. De meest recente versie is altijd beschikbaar op deze pagina."
+      }
+    }
   },
   "theme": {
     "light": "Schakel naar licht thema",

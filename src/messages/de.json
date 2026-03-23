@@ -127,7 +127,76 @@
     "errorGeneral": "Etwas ist schiefgelaufen. Versuch es nochmal."
   },
   "footer": {
-    "copyright": "© {year} Socialo"
+    "copyright": "© {year} Socialo",
+    "privacy": "Datenschutz"
+  },
+  "privacy": {
+    "title": "Datenschutzerklärung",
+    "metaDescription": "Wie Socialo mit Ihren personenbezogenen Daten umgeht — DSGVO-konform.",
+    "backToHome": "Zurück zur Startseite",
+    "lastUpdated": "Zuletzt aktualisiert: März 2026",
+    "sections": {
+      "controller": {
+        "heading": "Verantwortlicher",
+        "body": "Socialo ist verantwortlich für die Verarbeitung personenbezogener Daten wie in dieser Datenschutzerklärung beschrieben. Fragen? Kontaktiere uns unter info@socialo.nl."
+      },
+      "whatData": {
+        "heading": "Welche Daten wir erheben",
+        "intro": "Wenn du unser Kontaktformular nutzt, erheben wir:",
+        "items": {
+          "name": "Deinen Namen",
+          "email": "Deine E-Mail-Adresse",
+          "chat": "Den Inhalt deines Chat-Gesprächs mit unserem Assistenten",
+          "technical": "Technische Daten wie IP-Adresse (für Sicherheit und Ratenbegrenzung)"
+        }
+      },
+      "purpose": {
+        "heading": "Warum wir deine Daten verwenden",
+        "items": {
+          "contact": "Um dich bezüglich deiner Anfrage zu kontaktieren",
+          "improve": "Um unsere Dienstleistungen zu verbessern",
+          "security": "Um die Sicherheit unserer Website zu gewährleisten"
+        }
+      },
+      "legal": {
+        "heading": "Rechtsgrundlage",
+        "body": "Wir verarbeiten deine Daten auf Grundlage des berechtigten Interesses (Kontaktformular für Geschäftsanfragen) und deiner Einwilligung beim Absenden des Formulars."
+      },
+      "thirdParties": {
+        "heading": "Drittparteien",
+        "intro": "Wir teilen deine Daten nur mit Parteien, die für unsere Dienstleistungen notwendig sind:",
+        "items": {
+          "cloudflare": "Cloudflare — Hosting, CDN und Sicherheitsdienste (USA, EU-Standardvertragsklauseln)",
+          "vercel": "Vercel — Hosting-Plattform (USA, EU-Standardvertragsklauseln)",
+          "resend": "Resend — für den Versand von E-Mail-Benachrichtigungen (USA, EU-Standardvertragsklauseln)"
+        },
+        "noTracking": "Wir verwenden keine Tracking-, Analyse- oder Marketing-Cookies. Keine Daten werden an Dritte verkauft."
+      },
+      "cookies": {
+        "heading": "Cookies",
+        "body": "Wir verwenden nur unbedingt notwendige Cookies: ein Sprachpräferenz-Cookie (NEXT_LOCALE) und eine Designpräferenz im localStorage. Cloudflare kann ein Sicherheits-Cookie (__cf_bm) zum Bot-Schutz setzen. Es werden keine Tracking- oder Marketing-Cookies verwendet."
+      },
+      "retention": {
+        "heading": "Aufbewahrungsfrist",
+        "body": "Kontaktformulardaten werden so lange aufbewahrt, wie für die Bearbeitung deiner Anfrage notwendig, maximal 12 Monate. Danach werden sie gelöscht."
+      },
+      "rights": {
+        "heading": "Deine Rechte",
+        "intro": "Gemäß der DSGVO hast du folgende Rechte:",
+        "items": {
+          "access": "Auskunftsrecht — du kannst erfahren, welche Daten wir über dich gespeichert haben",
+          "rectification": "Recht auf Berichtigung — du kannst fehlerhafte Daten korrigieren lassen",
+          "erasure": "Recht auf Löschung — du kannst die Löschung deiner Daten verlangen",
+          "objection": "Widerspruchsrecht — du kannst der Verarbeitung widersprechen",
+          "portability": "Recht auf Datenübertragbarkeit — du kannst deine Daten in einem Standardformat anfordern"
+        },
+        "contact": "Kontaktiere info@socialo.nl, um eines dieser Rechte auszuüben. Wir antworten innerhalb von 30 Tagen. Du hast auch das Recht, eine Beschwerde bei der niederländischen Datenschutzbehörde (Autoriteit Persoonsgegevens) einzureichen."
+      },
+      "changes": {
+        "heading": "Änderungen",
+        "body": "Wir können diese Datenschutzerklärung aktualisieren. Die neueste Version ist immer auf dieser Seite verfügbar."
+      }
+    }
   },
   "theme": {
     "light": "Zum hellen Design wechseln",

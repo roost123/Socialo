@@ -127,7 +127,76 @@
     "errorGeneral": "出了点问题，请重试。"
   },
   "footer": {
-    "copyright": "© {year} Socialo"
+    "copyright": "© {year} Socialo",
+    "privacy": "隐私政策"
+  },
+  "privacy": {
+    "title": "隐私政策",
+    "metaDescription": "Socialo 如何处理您的个人数据——符合 GDPR 规定。",
+    "backToHome": "返回首页",
+    "lastUpdated": "最后更新：2026 年 3 月",
+    "sections": {
+      "controller": {
+        "heading": "数据控制者",
+        "body": "Socialo 负责本隐私政策中所述的个人数据处理。有疑问？请通过 info@socialo.nl 联系我们。"
+      },
+      "whatData": {
+        "heading": "我们收集哪些数据",
+        "intro": "当您使用我们的联系表单时，我们会收集：",
+        "items": {
+          "name": "您的姓名",
+          "email": "您的电子邮箱地址",
+          "chat": "您与我们助手的聊天内容",
+          "technical": "技术数据，如 IP 地址（用于安全和请求频率限制）"
+        }
+      },
+      "purpose": {
+        "heading": "我们为什么使用您的数据",
+        "items": {
+          "contact": "就您的咨询与您联系",
+          "improve": "改善我们的服务",
+          "security": "确保我们网站的安全"
+        }
+      },
+      "legal": {
+        "heading": "法律依据",
+        "body": "我们基于合法利益（用于商业咨询的联系表单）和您提交表单时的同意来处理您的数据。"
+      },
+      "thirdParties": {
+        "heading": "第三方",
+        "intro": "我们仅与提供服务所必需的第三方共享您的数据：",
+        "items": {
+          "cloudflare": "Cloudflare——托管、CDN 和安全服务（美国，欧盟标准合同条款）",
+          "vercel": "Vercel——托管平台（美国，欧盟标准合同条款）",
+          "resend": "Resend——用于发送电子邮件通知（美国，欧盟标准合同条款）"
+        },
+        "noTracking": "我们不使用跟踪、分析或营销 Cookie。不会将任何数据出售给第三方。"
+      },
+      "cookies": {
+        "heading": "Cookie",
+        "body": "我们仅使用严格必要的 Cookie：语言偏好 Cookie（NEXT_LOCALE）和存储在 localStorage 中的主题偏好。Cloudflare 可能会放置安全 Cookie（__cf_bm）用于机器人防护。不使用任何跟踪或营销 Cookie。"
+      },
+      "retention": {
+        "heading": "保留期限",
+        "body": "联系表单数据在处理您的咨询所需的期间内保留，最长不超过 12 个月。之后将被删除。"
+      },
+      "rights": {
+        "heading": "您的权利",
+        "intro": "根据 GDPR，您拥有以下权利：",
+        "items": {
+          "access": "访问权——您可以查询我们持有的关于您的数据",
+          "rectification": "更正权——您可以要求更正不正确的数据",
+          "erasure": "删除权——您可以要求删除您的数据",
+          "objection": "反对权——您可以反对数据处理",
+          "portability": "数据可携带权——您可以要求以标准格式获取您的数据"
+        },
+        "contact": "请联系 info@socialo.nl 行使上述任何权利。我们将在 30 天内回复。您还有权向荷兰数据保护局（Autoriteit Persoonsgegevens）提出投诉。"
+      },
+      "changes": {
+        "heading": "变更",
+        "body": "我们可能会更新本隐私政策。最新版本始终可在本页面获取。"
+      }
+    }
   },
   "theme": {
     "light": "切换到浅色模式",

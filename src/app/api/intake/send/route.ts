@@ -6,6 +6,27 @@ import { escapeHtml } from "@/lib/sanitize";
 const anthropic = new Anthropic();
 const resend = new Resend(process.env.RESEND_API_KEY || "dummy");
 
+const MAX_MESSAGE_LENGTH = 2000;
+const MAX_MESSAGES = 50;
+const MAX_NAME_LENGTH = 100;
+const MAX_EMAIL_LENGTH = 254;
+
+function getClientIp(request: NextRequest): string {
+  return (
+    request.headers.get("cf-connecting-ip") ||
+    request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+    request.headers.get("x-real-ip") ||
+    "unknown"
+  );
+}
+
+function checkOrigin(request: NextRequest): boolean {
+  const origin = request.headers.get("origin");
+  const allowed = process.env.ALLOWED_ORIGIN || "https://socialo.nl";
+  if (!origin) return true;
+  return origin === allowed || origin === "http://localhost:3000";
+}
+
 // Rate limiter: max 10 send requests per IP per 2 hours
 const sendRateLimitMap = new Map<string, { count: number; resetAt: number }>();
 
@@ -161,10 +182,11 @@ function buildEmailHtml(
 }
 
 export async function POST(request: NextRequest) {
-  const ip =
-    request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
-    request.headers.get("x-real-ip") ||
-    "unknown";
+  if (!checkOrigin(request)) {
+    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+  }
+
+  const ip = getClientIp(request);
 
   if (!checkSendRateLimit(ip)) {
     return NextResponse.json(
@@ -174,19 +196,40 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    const { messages, status, contactInfo } = (await request.json()) as {
+    const body = await request.json();
+    const { messages: rawMessages, status, contactInfo: rawContact } = body as {
       messages: ChatMessage[];
       status: ConversationStatus;
       contactInfo?: ContactInfo;
     };
 
     // Allow sending even without messages if we have contact info
-    if ((!messages || messages.length === 0) && !contactInfo) {
+    if ((!rawMessages || rawMessages.length === 0) && !rawContact) {
       return NextResponse.json(
         { error: "Geen berichten ontvangen." },
         { status: 400 }
       );
     }
+
+    // Validate status
+    const validStatuses = new Set(["complete", "incomplete", "escalate"]);
+    const sanitizedStatus: ConversationStatus = validStatuses.has(status) ? status : "incomplete";
+
+    // Sanitize messages
+    const messages = rawMessages
+      ? rawMessages.slice(0, MAX_MESSAGES).map((m) => ({
+          role: (m.role === "user" || m.role === "assistant" ? m.role : "user") as "user" | "assistant",
+          content: typeof m.content === "string" ? m.content.slice(0, MAX_MESSAGE_LENGTH) : "",
+        }))
+      : [];
+
+    // Sanitize contact info
+    const contactInfo = rawContact
+      ? {
+          name: typeof rawContact.name === "string" ? rawContact.name.slice(0, MAX_NAME_LENGTH) : "",
+          email: typeof rawContact.email === "string" ? rawContact.email.slice(0, MAX_EMAIL_LENGTH) : "",
+        }
+      : undefined;
 
     const transcript =
       messages && messages.length > 0
@@ -209,20 +252,23 @@ export async function POST(request: NextRequest) {
     const company = companyMatch?.[1]?.trim();
 
     let subject: string;
-    if (status === "escalate") {
+    if (sanitizedStatus === "escalate") {
       subject = `Persoonlijk contact gewenst${name ? ` — ${name}` : ""}`;
-    } else if (status === "complete" && name) {
+    } else if (sanitizedStatus === "complete" && name) {
       subject = `Nieuw intake-gesprek: ${name}${company && company !== "Onbekend" ? ` — ${company}` : ""}`;
     } else {
       subject = `Onvolledig gesprek${name ? ` — ${name}` : ""} — ${new Date().toLocaleDateString("nl-NL")}`;
     }
 
-    const html = buildEmailHtml(summary, transcript, status, contactInfo);
+    const html = buildEmailHtml(summary, transcript, sanitizedStatus, contactInfo);
+
+    // Strip newlines from subject to prevent email header injection
+    const safeSubject = subject.replace(/[\r\n]/g, " ").slice(0, 200);
 
     await resend.emails.send({
       from: process.env.EMAIL_FROM || "Socialo Intake <onboarding@resend.dev>",
-      to: "nrterence@gmail.com",
-      subject,
+      to: process.env.INTAKE_EMAIL_TO || "nrterence@gmail.com",
+      subject: safeSubject,
       html,
     });
 

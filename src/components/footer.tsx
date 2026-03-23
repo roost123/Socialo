@@ -1,10 +1,13 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
+import Link from "next/link";
 
 export function Footer() {
   const t = useTranslations("nav");
   const tFooter = useTranslations("footer");
+  const locale = useLocale();
+
   const footerLinks = [
     { label: t("whatWeDo"), href: "#wat-we-doen" },
     { label: t("howItWorks"), href: "#hoe-het-werkt" },
@@ -45,6 +48,12 @@ export function Footer() {
               {link.label}
             </a>
           ))}
+          <Link
+            href={`/${locale}/privacy`}
+            className="text-small text-[var(--text-muted)] hover:text-[var(--text-heading)] transition-colors duration-300 py-3 px-1.5"
+          >
+            {tFooter("privacy")}
+          </Link>
         </div>
 
         <p className="text-small text-[var(--text-muted)]">
